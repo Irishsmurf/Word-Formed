@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="hello">Hello World, WordFormedActivity!</string>
+    <string name="title">WordFormed!</string>
     <string name="app_name">WordFormed</string>
-
+	<string name="new_game">Single Player</string>
+	<string name="multiplayer">Multiplayer</string>
+	<string name="exit">Exit Game</string>
+	<string name="hiscores">High Scores</string>
 </resources>
