@@ -13,4 +13,8 @@
         <item name="android:focusable">true</item>
         <item name="android:clickable">true</item>
         </style>
+    	
+    	<style name="CustomButton" parent="android:style/Theme.NoTitleBar">
+    	    <item name="android:buttonStyle">@style/Button</item>
+    	</style>
 </resources>

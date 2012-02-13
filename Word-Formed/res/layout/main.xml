@@ -28,7 +28,11 @@
 	        android:id="@+id/multiplayer_button"
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
-	        android:text="@string/multiplayer_label"/>
+	        android:text="@string/multiplayer_label"
+	        
+	        
+	        />
+	    	
 	    
 	    <Button
 	        android:id="@+id/high_scores_button"
