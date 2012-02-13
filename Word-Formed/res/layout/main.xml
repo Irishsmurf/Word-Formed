@@ -28,22 +28,18 @@
 	        android:id="@+id/multiplayer_button"
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
-	        android:text="@string/multiplayer_label"
-	        
-	        
-	        />
+	        android:text="@string/multiplayer_label"/>
 	    	
+	    <Button 
+	        android:id="@+id/how_to_play_button"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:text="@string/how_to_play_label"/>
 	    
 	    <Button
 	        android:id="@+id/high_scores_button"
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
 	        android:text="@string/high_scores_label"/>
-	    
-	    <Button
-	        android:id="@+id/quit_button"
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:text="@string/quit_label"/>
 	</LinearLayout>
 </LinearLayout>
