@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title">WordFormed!</string>
+    <string name="app_name">WordFormed</string>
+	<string name="main_title">WordFormed</string>
+	<string name="new_game_label">New Game</string>
+	<string name="multiplayer_label">Start multiplayer game</string>
+	<string name="high_scores_label">High scores</string>
+	<string name="quit_label">Quit game</string>
+	<string name="new_game">Single Player</string>
+	<string name="multiplayer">Multiplayer</string>
+	<string name="exit">Exit Game</string>
+	<string name="hiscores">High Scores</string>
+</resources>
