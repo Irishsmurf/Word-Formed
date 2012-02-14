@@ -10,4 +10,5 @@
 	<string name="single_player_title">Single Player Game</string>
 	<string name="how_to_play_title">How to play</string>
 	<string name="multiplayer_game_title">Multiplayer Game</string>
+	<string name="how_to_play_text">This game is based on the popular scrabble game.\n(More text here) \n\n\n<b>Developers:</b> Owen Corrigan and David Kernan.</string>
 </resources>

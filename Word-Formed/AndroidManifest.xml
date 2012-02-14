@@ -22,7 +22,8 @@
             android:label="@string/high_score_title"/>
         <activity
             android:name=".HowToPlay"
-            android:label="@string/how_to_play_title"/>
+            android:label="@string/how_to_play_title"
+            android:theme="@android:style/Theme.Dialog"/>
         <activity
             android:name=".MultiplayerGame"
             android:label="@string/multiplayer_game_title"/>
