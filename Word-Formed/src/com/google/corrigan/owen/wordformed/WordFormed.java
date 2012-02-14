@@ -29,14 +29,16 @@ public class WordFormed extends Activity implements OnClickListener{
 		switch(v.getId())
 		{
 			case R.id.new_game_button:
+				startActivity(new Intent(this, SinglePlayerGame.class));
 				break;
 			case R.id.multiplayer_button:
+				startActivity(new Intent(this, MultiplayerGame.class));
 				break;
 			case R.id.how_to_play_button:
+				startActivity(new Intent(this, HowToPlay.class));
 				break;
 			case R.id.high_scores_button:
-				Intent i = new Intent(this, HiScore.class);
-				startActivity(i);
+				startActivity(new Intent(this, HiScore.class));
 				break;
 		}
 		

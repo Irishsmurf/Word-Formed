@@ -20,6 +20,15 @@
         <activity
             android:name=".HiScore"
             android:label="@string/high_score_title"/>
+        <activity
+            android:name=".HowToPlay"
+            android:label="@string/how_to_play_title"/>
+        <activity
+            android:name=".MultiplayerGame"
+            android:label="@string/multiplayer_game_title"/>
+        <activity
+            android:name=".SinglePlayerGame"
+            android:label="@string/single_player_title"/>
     </application>
 
 </manifest>
