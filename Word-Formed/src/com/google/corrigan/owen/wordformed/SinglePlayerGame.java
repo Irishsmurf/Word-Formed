@@ -5,10 +5,15 @@ import android.os.Bundle;
 
 public class SinglePlayerGame extends Activity
 {
+	private SinglePlayerGameView game;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.single_player_game);	
+		
+		game = new SinglePlayerGameView(this);
+		setContentView(game);
+		game.requestFocus();
 	}
 }
