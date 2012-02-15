@@ -16,6 +16,9 @@ public class SinglePlayerGameView extends View
 	private int rectSize = 80;
 	private Rect rect = new Rect(rectX-40, rectY-40, rectX+rectSize-40, rectY+rectSize-40);
 	private boolean dragging = false;
+	private int snapX = 300;
+	private int snapY = 300;
+	private Rect snapBox = new Rect(snapX, snapY, snapX+rectSize, snapY+rectSize);
 	
 	public SinglePlayerGameView(Context context)
 	{
@@ -33,6 +36,11 @@ public class SinglePlayerGameView extends View
 		canvas.drawRect(0, 0, getWidth(), getHeight(), background);
 		
 		//Draw Rectangle
+		Paint snap = new Paint();
+		snap.setColor(Color.RED);
+		canvas.drawRect(snapBox, snap);
+				
+		//Draw Rectangle
 		Paint dragRectangle = new Paint();
 		dragRectangle.setColor(Color.BLUE);
 		canvas.drawRect(rect, dragRectangle);
@@ -46,21 +54,29 @@ public class SinglePlayerGameView extends View
 		switch(event.getAction())
 		{
 			case MotionEvent.ACTION_DOWN:
-				if(mouseX < rectX + 40 && mouseX > rectX - 40 && mouseY < rectY + 40 && mouseY > rectY - 40)
+				if(mouseX < rectX && mouseX > rectX && mouseY < rectY && mouseY > rectY)
 					dragging = true;
 				else dragging = false;
 				break;
 			case MotionEvent.ACTION_UP:
+				/*
+				if(mouseX < snapX + 40 && mouseX > snapX - 40 && mouseY < snapY + 40 && snapY > rectY - 40)
+				{
+					rectX = snapX;
+					rectY = snapY;
+					Log.d("WORDFORMED", "Mouse up and inside snapX");
+					rect = new Rect(rectX-40, rectY-40, rectX+rectSize-40, rectY+rectSize-40);
+				}
+				*/
 				dragging = false;
 				break;
 			default:
 				if(dragging)
 				{
-					invalidate(rect);
 					rectX = (int) mouseX;
 					rectY = (int) mouseY;
 					rect = new Rect(rectX-40, rectY-40, rectX+rectSize-40, rectY+rectSize-40);
-					invalidate(rect);
+					invalidate();
 				}
 		}
 		return true;
