@@ -81,6 +81,8 @@ public class SinglePlayerGameView extends View
 					rectY = snapY;
 					Log.d("WORDFORMED", "Mouse up and inside snapX");
 					rect = new RectF(rectX, rectY, rectX+rectSize, rectY+rectSize);
+					rectX -= 40;
+					rectY -= 40;
 				}
 				//offsetX = 0;
 				//offsetY = 0;
@@ -92,7 +94,7 @@ public class SinglePlayerGameView extends View
 				{
 					rectX = mouseX;
 					rectY = mouseY;
-					rect = new RectF(rectX-offsetX, rectY-offsetY, rectX+rectSize-offsetX, rectY+rectSize-offsetY);
+					rect = new RectF(rectX-offsetX-40, rectY-offsetY-40, rectX+rectSize-offsetX-40, rectY+rectSize-offsetY-40);
 					invalidate();
 					
 				}
