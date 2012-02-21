@@ -4,21 +4,23 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
+import android.graphics.RectF;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
 public class SinglePlayerGameView extends View
 {
-	private int rectX = 50;
-	private int rectY = 60;
+	private float rectX = 50;
+	private float rectY = 60;
 	private int rectSize = 80;
-	private Rect rect = new Rect(rectX, rectY, rectX+rectSize, rectY+rectSize);
+	private float offsetX;
+	private float offsetY;
+	private RectF rect = new RectF(rectX, rectY, rectX+rectSize, rectY+rectSize);
 	private boolean dragging = false;
 	private int snapX = 300;
 	private int snapY = 300;
-	private Rect snapBox = new Rect(snapX, snapY, snapX+rectSize, snapY+rectSize);
+	private RectF snapBox = new RectF(snapX, snapY, snapX+rectSize, snapY+rectSize);
 	
 	public SinglePlayerGameView(Context context)
 	{
@@ -54,8 +56,13 @@ public class SinglePlayerGameView extends View
 		switch(event.getAction())
 		{
 			case MotionEvent.ACTION_DOWN:
-				if(mouseX > rectX && mouseX < rectX + rectSize && mouseY > rectY && mouseY < rectY + rectSize)
+				if(mouseX + 10 > rectX - offsetX && 
+						mouseX - 10 < rectX - offsetX + rectSize && 
+						mouseY + 10> rectY - offsetY && 
+						mouseY - 10 < rectY + rectSize - offsetY)
 				{
+					//offsetX = mouseX - rectX;
+					//offsetY = mouseY - rectY;
 					dragging = true;
 					Log.d("WORDFORMED", "Inside Rectangle");
 				}
@@ -68,17 +75,19 @@ public class SinglePlayerGameView extends View
 					rectY = snapY;
 					Log.d("WORDFORMED", "Mouse up and inside snapX");
 					rect = new Rect(rectX-40, rectY-40, rectX+rectSize-40, rectY+rectSize-40);
-				}
+				}*/
+				offsetX = 0;
+				offsetY = 0;
 				dragging = false;
-				*/
 				break;
 			default:
 				if(dragging)
 				{
-					rectX = (int) mouseX;
-					rectY = (int) mouseY;
-					rect = new Rect(rectX, rectY, rectX+rectSize, rectY+rectSize);
+					rectX = mouseX;
+					rectY = mouseY;
+					rect = new RectF(rectX-offsetX, rectY-offsetY, rectX+rectSize-offsetX, rectY+rectSize-offsetY);
 					invalidate();
+					
 				}
 		}
 		return true;
