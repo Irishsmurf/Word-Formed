@@ -14,7 +14,7 @@ public class SinglePlayerGameView extends View
 	private int rectX = 50;
 	private int rectY = 60;
 	private int rectSize = 80;
-	private Rect rect = new Rect(rectX-40, rectY-40, rectX+rectSize-40, rectY+rectSize-40);
+	private Rect rect = new Rect(rectX, rectY, rectX+rectSize, rectY+rectSize);
 	private boolean dragging = false;
 	private int snapX = 300;
 	private int snapY = 300;
@@ -23,7 +23,6 @@ public class SinglePlayerGameView extends View
 	public SinglePlayerGameView(Context context)
 	{
 		super(context);
-		
 	}
 	
 	@Override
@@ -51,31 +50,34 @@ public class SinglePlayerGameView extends View
 	{
 		float mouseX = event.getX();
 		float mouseY = event.getY();
+		Log.d("WORDFORMED", "MouseX = "+ mouseX + ", Mouse Y = " + mouseY);
 		switch(event.getAction())
 		{
 			case MotionEvent.ACTION_DOWN:
-				if(mouseX < rectX && mouseX > rectX && mouseY < rectY && mouseY > rectY)
+				if(mouseX > rectX && mouseX < rectX + rectSize && mouseY > rectY && mouseY < rectY + rectSize)
+				{
 					dragging = true;
+					Log.d("WORDFORMED", "Inside Rectangle");
+				}
 				else dragging = false;
 				break;
 			case MotionEvent.ACTION_UP:
-				/*
-				if(mouseX < snapX + 40 && mouseX > snapX - 40 && mouseY < snapY + 40 && snapY > rectY - 40)
+				/*if(mouseX < snapX + 40 && mouseX > snapX - 40 && mouseY < snapY + 40 && snapY > rectY - 40)
 				{
 					rectX = snapX;
 					rectY = snapY;
 					Log.d("WORDFORMED", "Mouse up and inside snapX");
 					rect = new Rect(rectX-40, rectY-40, rectX+rectSize-40, rectY+rectSize-40);
 				}
-				*/
 				dragging = false;
+				*/
 				break;
 			default:
 				if(dragging)
 				{
 					rectX = (int) mouseX;
 					rectY = (int) mouseY;
-					rect = new Rect(rectX-40, rectY-40, rectX+rectSize-40, rectY+rectSize-40);
+					rect = new Rect(rectX, rectY, rectX+rectSize, rectY+rectSize);
 					invalidate();
 				}
 		}
