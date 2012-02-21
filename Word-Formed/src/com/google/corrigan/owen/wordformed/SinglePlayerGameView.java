@@ -58,7 +58,7 @@ public class SinglePlayerGameView extends View
 			case MotionEvent.ACTION_DOWN:
 				if(mouseX + 10 > rectX - offsetX && 
 						mouseX - 10 < rectX - offsetX + rectSize && 
-						mouseY + 10> rectY - offsetY && 
+						mouseY + 10 > rectY - offsetY && 
 						mouseY - 10 < rectY + rectSize - offsetY)
 				{
 					//offsetX = mouseX - rectX;
@@ -67,18 +67,25 @@ public class SinglePlayerGameView extends View
 					Log.d("WORDFORMED", "Inside Rectangle");
 				}
 				else dragging = false;
+				invalidate();
 				break;
 			case MotionEvent.ACTION_UP:
-				/*if(mouseX < snapX + 40 && mouseX > snapX - 40 && mouseY < snapY + 40 && snapY > rectY - 40)
+				Log.d("MOUSEUP", "Mouse X = " + mouseX + " Mouse Y = " + mouseY );
+				if(mouseX > snapX && 
+						mouseX < snapX + rectSize && 
+						mouseY > snapY && 
+						mouseY <  snapY + rectSize)
 				{
+					Log.d("MOUSEUP", "Inside the Snapper!" );
 					rectX = snapX;
 					rectY = snapY;
 					Log.d("WORDFORMED", "Mouse up and inside snapX");
-					rect = new Rect(rectX-40, rectY-40, rectX+rectSize-40, rectY+rectSize-40);
-				}*/
-				offsetX = 0;
-				offsetY = 0;
+					rect = new RectF(rectX, rectY, rectX+rectSize, rectY+rectSize);
+				}
+				//offsetX = 0;
+				//offsetY = 0;
 				dragging = false;
+				invalidate();
 				break;
 			default:
 				if(dragging)
