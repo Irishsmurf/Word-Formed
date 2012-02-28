@@ -1,9 +1,12 @@
 package com.google.corrigan.owen.wordformed;
 
+import java.util.Random;
+
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.MotionEvent;
 
@@ -17,6 +20,7 @@ public class DraggableBox
 	private int borderSize = 5;
 	private RectF rect, rect2;
 	private boolean dragging = false;
+	private char letter;
 	
 	public DraggableBox(float topX, float topY)
 	{
@@ -27,6 +31,8 @@ public class DraggableBox
 				rectX + rectSize - borderSize, rectY + rectSize - borderSize);
 		startX = rectX;
 		startY = rectY;
+		Random r = new Random();
+		letter = (char)(r.nextInt(26) + 'a');
 	}
 	
 	public void draw(Canvas canvas)
@@ -39,6 +45,17 @@ public class DraggableBox
 		//Draw inner Rectangle
 		dragRectangle.setColor(Color.WHITE);
 		canvas.drawRect(rect2, dragRectangle);
+		
+		//Draw letter
+		Paint font = new Paint();
+		font.setColor(Color.BLACK);
+		font.setTextSize(30);
+		font.setTypeface(Typeface.MONOSPACE);
+		//Very hacky - fix it!!
+		if(!dragging)
+			canvas.drawText(letter+"", rectX + 17, rectY + 30, font);
+		else
+			canvas.drawText(letter+"", rectX + 17 - 40, rectY + 30 - 40, font);
 	}
 	
 	public boolean onTouchEvent(MotionEvent event)
@@ -87,6 +104,7 @@ public class DraggableBox
 					rect = new RectF(rectX, rectY, rectX+rectSize, rectY+rectSize);
 				}
 				*/
+				dragging = false;
 				break;
 			default:
 				if(dragging)
