@@ -18,7 +18,7 @@ public class SinglePlayerGameView extends View
 		super(context);
 		for(int i = 0; i < db.length; i++)
 		{
-			db[i] = new DraggableBox(i * 60 + 40, 60);
+			db[i] = new DraggableBox(i * 65 + 20, 60);
 			Log.d("WORDFORMED", i + " was initilized");
 		}
 	}

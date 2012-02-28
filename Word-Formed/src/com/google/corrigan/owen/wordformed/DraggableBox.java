@@ -9,6 +9,8 @@ import android.view.MotionEvent;
 
 public class DraggableBox
 {
+	private float startX;
+	private float startY;
 	private float rectX;
 	private float rectY;
 	private int rectSize = 45;
@@ -23,6 +25,8 @@ public class DraggableBox
 		rect = new RectF(rectX, rectY, rectX+rectSize, rectY+rectSize);
 		rect2 = new RectF(rectX + borderSize, rectY + borderSize, 
 				rectX + rectSize - borderSize, rectY + rectSize - borderSize);
+		startX = rectX;
+		startY = rectY;
 	}
 	
 	public void draw(Canvas canvas)
@@ -50,18 +54,24 @@ public class DraggableBox
 						mouseY + 10 > rectY && 
 						mouseY - 10 < rectY + rectSize)
 				{
-					//offsetX = mouseX - rectX;
-					//offsetY = mouseY - rectY;
 					dragging = true;
 					Log.d("WORDFORMED", "Inside Rectangle");
 				}
 				else dragging = false;
 				break;
 			case MotionEvent.ACTION_UP:
+				//Reset x and y to compensate bounding box for centering
 				if(dragging)
 				{
+					/*
 					rectX -= 40;
 					rectY -= 40;
+					*/
+					rectX = startX;
+					rectY = startY;
+					rect = new RectF(rectX, rectY, rectX + rectSize, rectY + rectSize);
+					rect2 = new RectF(rectX + borderSize, rectY + borderSize, 
+							rectX + rectSize - borderSize, rectY + rectSize - borderSize);
 				}
 				/*
 				Log.d("MOUSEUP", "Mouse X = " + mouseX + " Mouse Y = " + mouseY );
