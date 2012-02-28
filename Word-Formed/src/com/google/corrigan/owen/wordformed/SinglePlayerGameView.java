@@ -11,6 +11,8 @@ import android.view.View;
 
 public class SinglePlayerGameView extends View
 {
+	RectF boxBorder = new RectF(10, 50, 470, 120);
+	RectF boxFill = new RectF(15, 55, 465, 115);
 	DraggableBox[] db = new DraggableBox[7];
 	
 	public SinglePlayerGameView(Context context)
@@ -31,6 +33,16 @@ public class SinglePlayerGameView extends View
 		background.setColor(getResources().getColor(
 				R.color.background));
 		canvas.drawRect(0, 0, getWidth(), getHeight(), background);
+		
+		//Draw background for dragboxs
+		//Draw Outer Rectangle
+		Paint dragRectangle = new Paint();
+		dragRectangle.setColor(Color.BLACK);
+		canvas.drawRect(boxBorder, dragRectangle);
+		
+		//Draw inner Rectangle
+		dragRectangle.setColor(Color.GRAY);
+		canvas.drawRect(boxFill, dragRectangle);
 		
 		for(int i = 0; i < db.length; i++)
 		{
