@@ -12,7 +12,8 @@ public class DraggableBox
 	private float rectX;
 	private float rectY;
 	private int rectSize = 45;
-	private RectF rect;
+	private int borderSize = 5;
+	private RectF rect, rect2;
 	private boolean dragging = false;
 	
 	public DraggableBox(float topX, float topY)
@@ -20,14 +21,20 @@ public class DraggableBox
 		rectX = topX;
 		rectY = topY;
 		rect = new RectF(rectX, rectY, rectX+rectSize, rectY+rectSize);
+		rect2 = new RectF(rectX + borderSize, rectY + borderSize, 
+				rectX + rectSize - borderSize, rectY + rectSize - borderSize);
 	}
 	
 	public void draw(Canvas canvas)
 	{
-		//Draw Rectangle
+		//Draw Outer Rectangle
 		Paint dragRectangle = new Paint();
 		dragRectangle.setColor(Color.BLUE);
 		canvas.drawRect(rect, dragRectangle);
+		
+		//Draw inner Rectangle
+		dragRectangle.setColor(Color.WHITE);
+		canvas.drawRect(rect2, dragRectangle);
 	}
 	
 	public boolean onTouchEvent(MotionEvent event)
@@ -51,6 +58,11 @@ public class DraggableBox
 				else dragging = false;
 				break;
 			case MotionEvent.ACTION_UP:
+				if(dragging)
+				{
+					rectX -= 40;
+					rectY -= 40;
+				}
 				/*
 				Log.d("MOUSEUP", "Mouse X = " + mouseX + " Mouse Y = " + mouseY );
 				if(mouseX > snapX && 
@@ -63,10 +75,7 @@ public class DraggableBox
 					rectY = snapY;
 					Log.d("WORDFORMED", "Mouse up and inside snapX");
 					rect = new RectF(rectX, rectY, rectX+rectSize, rectY+rectSize);
-					rectX -= 40;
-					rectY -= 40;
 				}
-				dragging = false;
 				*/
 				break;
 			default:
@@ -75,6 +84,8 @@ public class DraggableBox
 					rectX = mouseX;
 					rectY = mouseY;
 					rect = new RectF(rectX - 40, rectY - 40, rectX+rectSize - 40, rectY+rectSize - 40);
+					rect2 = new RectF(rectX + borderSize - 40, rectY + borderSize - 40, 
+							rectX + rectSize - borderSize - 40, rectY + rectSize - borderSize - 40);
 				}
 		}
 		return true;
