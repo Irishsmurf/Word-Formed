@@ -29,6 +29,7 @@
             android:label="@string/multiplayer_game_title"/>
         <activity
             android:name=".SinglePlayerGame"
+            android:screenOrientation="portrait"
             android:label="@string/single_player_title"/>
     </application>
 

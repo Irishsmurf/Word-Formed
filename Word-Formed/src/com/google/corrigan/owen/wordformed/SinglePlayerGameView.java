@@ -11,11 +11,16 @@ import android.view.View;
 
 public class SinglePlayerGameView extends View
 {
-	DraggableBox db = new DraggableBox();
+	DraggableBox[] db = new DraggableBox[7];
 	
 	public SinglePlayerGameView(Context context)
 	{
 		super(context);
+		for(int i = 0; i < db.length; i++)
+		{
+			db[i] = new DraggableBox(i * 60 + 40, 60);
+			Log.d("WORDFORMED", i + " was initilized");
+		}
 	}
 	
 	@Override
@@ -26,14 +31,22 @@ public class SinglePlayerGameView extends View
 		background.setColor(getResources().getColor(
 				R.color.background));
 		canvas.drawRect(0, 0, getWidth(), getHeight(), background);
-				
-		db.draw(canvas);
+		
+		for(int i = 0; i < db.length; i++)
+		{
+			if(db[i]==null) Log.d("WORDFORMED", i + " draggableBox is null");
+			db[i].draw(canvas);
+		}
 	}
-	
+
 	@Override
 	public boolean onTouchEvent(MotionEvent event)
 	{
-		db.onTouchEvent(event);
+		for(DraggableBox d: db)
+		{
+			if(d==null) Log.d("WORDFORMED", "draggableBox is null");
+			d.onTouchEvent(event);
+		}
 		invalidate();
 		return true;
 	}

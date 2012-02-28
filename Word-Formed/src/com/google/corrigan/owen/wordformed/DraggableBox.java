@@ -9,11 +9,18 @@ import android.view.MotionEvent;
 
 public class DraggableBox
 {
-	private float rectX = 50;
-	private float rectY = 60;
-	private int rectSize = 80;
-	private RectF rect = new RectF(rectX, rectY, rectX+rectSize, rectY+rectSize);
+	private float rectX;
+	private float rectY;
+	private int rectSize = 45;
+	private RectF rect;
 	private boolean dragging = false;
+	
+	public DraggableBox(float topX, float topY)
+	{
+		rectX = topX;
+		rectY = topY;
+		rect = new RectF(rectX, rectY, rectX+rectSize, rectY+rectSize);
+	}
 	
 	public void draw(Canvas canvas)
 	{
