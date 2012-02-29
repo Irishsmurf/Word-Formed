@@ -49,7 +49,7 @@ public class DraggableBox
 		//Draw letter
 		Paint font = new Paint();
 		font.setColor(Color.BLACK);
-		font.setTextSize(30);
+		font.setTextSize(25);
 		font.setTypeface(Typeface.MONOSPACE);
 		//Very hacky - fix it!!
 		if(!dragging)
