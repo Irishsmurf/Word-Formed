@@ -54,7 +54,7 @@ public class DraggableBox
 			canvas.drawText(letter+"", rectX + 17 - 40, rectY + 30 - 40, font);
 	}
 	
-	public boolean onTouchEvent(MotionEvent event, RectF dragBox)
+	public boolean onTouchEvent(MotionEvent event, Dropbox drop)
 	{
 		float mouseX = event.getX();
 		float mouseY = event.getY();
@@ -72,7 +72,7 @@ public class DraggableBox
 			case MotionEvent.ACTION_UP:
 				if(dragging)
 				{
-					if(dragBox.contains(rectX, rectY))
+					if(drop.contains(rectX, rectY))
 					{
 						//Reset x and y to compensate bounding box for centering
 						rectX -= 40;
