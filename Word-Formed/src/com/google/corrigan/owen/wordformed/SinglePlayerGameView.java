@@ -1,7 +1,5 @@
 package com.google.corrigan.owen.wordformed;
 
-import java.util.Random;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -15,6 +13,18 @@ public class SinglePlayerGameView extends View
 {
 	RectF boxBorder = new RectF(10, 50, 470, 120);
 	RectF boxFill = new RectF(15, 55, 465, 115);
+	
+	int dragX = 10;
+	int dragY = 250;
+	int dragWidth = 460;
+	int dragHeight = 70;
+	int border = 5;
+	RectF dragBorder = new RectF(dragX, dragY, dragX + dragWidth, dragY + dragHeight);
+	RectF dragFill = new RectF(dragX + border, dragY + border, dragX + dragWidth - border, dragY + dragHeight - border);
+
+	RectF answerBorder = new RectF(10, 50 + 400, 470, 120 + 400);
+	RectF answerFill = new RectF(15, 55 + 400, 465, 115 + 400);
+	
 	DraggableBox[] db = new DraggableBox[7];
 	
 	public SinglePlayerGameView(Context context)
@@ -36,15 +46,19 @@ public class SinglePlayerGameView extends View
 				R.color.background));
 		canvas.drawRect(0, 0, getWidth(), getHeight(), background);
 		
-		//Draw background for dragboxs
+		//Draw background for dragboxes
 		//Draw Outer Rectangle
 		Paint dragRectangle = new Paint();
 		dragRectangle.setColor(Color.BLACK);
 		canvas.drawRect(boxBorder, dragRectangle);
+		canvas.drawRect(dragBorder, dragRectangle);
+		canvas.drawRect(answerBorder, dragRectangle);
 		
 		//Draw inner Rectangle
 		dragRectangle.setColor(Color.GRAY);
 		canvas.drawRect(boxFill, dragRectangle);
+		canvas.drawRect(dragFill, dragRectangle);
+		canvas.drawRect(answerFill, dragRectangle);
 		
 		for(int i = 0; i < db.length; i++)
 		{
@@ -59,7 +73,7 @@ public class SinglePlayerGameView extends View
 		for(DraggableBox d: db)
 		{
 			if(d==null) Log.d("WORDFORMED", "draggableBox is null");
-			d.onTouchEvent(event);
+			d.onTouchEvent(event, dragBorder);
 		}
 		invalidate();
 		return true;

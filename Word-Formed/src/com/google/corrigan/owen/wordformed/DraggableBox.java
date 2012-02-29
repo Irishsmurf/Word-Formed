@@ -49,7 +49,7 @@ public class DraggableBox
 		//Draw letter
 		Paint font = new Paint();
 		font.setColor(Color.BLACK);
-		font.setTextSize(25);
+		font.setTextSize(30);
 		font.setTypeface(Typeface.MONOSPACE);
 		//Very hacky - fix it!!
 		if(!dragging)
@@ -58,7 +58,7 @@ public class DraggableBox
 			canvas.drawText(letter+"", rectX + 17 - 40, rectY + 30 - 40, font);
 	}
 	
-	public boolean onTouchEvent(MotionEvent event)
+	public boolean onTouchEvent(MotionEvent event, RectF dragBox)
 	{
 		float mouseX = event.getX();
 		float mouseY = event.getY();
@@ -77,18 +77,26 @@ public class DraggableBox
 				else dragging = false;
 				break;
 			case MotionEvent.ACTION_UP:
-				//Reset x and y to compensate bounding box for centering
 				if(dragging)
 				{
-					/*
-					rectX -= 40;
-					rectY -= 40;
-					*/
-					rectX = startX;
-					rectY = startY;
-					rect = new RectF(rectX, rectY, rectX + rectSize, rectY + rectSize);
-					rect2 = new RectF(rectX + borderSize, rectY + borderSize, 
-							rectX + rectSize - borderSize, rectY + rectSize - borderSize);
+					if(dragBox.contains(rectX, rectY))
+					{
+						//Reset x and y to compensate bounding box for centering
+						rectX -= 40;
+						rectY = 260;
+						rect = new RectF(rectX, rectY, rectX+rectSize, rectY+rectSize);
+						rect2 = new RectF(rectX + borderSize, rectY + borderSize, 
+								rectX + rectSize - borderSize, rectY + rectSize - borderSize);
+					}
+					else
+					{
+						//Bring box back to original positon
+						rectX = startX;
+						rectY = startY;
+						rect = new RectF(rectX, rectY, rectX + rectSize, rectY + rectSize);
+						rect2 = new RectF(rectX + borderSize, rectY + borderSize, 
+								rectX + rectSize - borderSize, rectY + rectSize - borderSize);
+					}
 				}
 				/*
 				Log.d("MOUSEUP", "Mouse X = " + mouseX + " Mouse Y = " + mouseY );
