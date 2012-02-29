@@ -83,6 +83,9 @@ public class DraggableBox
 					{
 						//Reset x and y to compensate bounding box for centering
 						rectX -= 40;
+						rectX = Math.round(rectX / 65);
+						rectX *= 65;
+						rectX += 20;
 						rectY = 260;
 						rect = new RectF(rectX, rectY, rectX+rectSize, rectY+rectSize);
 						rect2 = new RectF(rectX + borderSize, rectY + borderSize, 
@@ -90,7 +93,7 @@ public class DraggableBox
 					}
 					else
 					{
-						//Bring box back to original positon
+						//Bring box back to original position
 						rectX = startX;
 						rectY = startY;
 						rect = new RectF(rectX, rectY, rectX + rectSize, rectY + rectSize);
