@@ -12,8 +12,6 @@ import android.view.MotionEvent;
 
 public class DraggableBox
 {
-	private float startX;
-	private float startY;
 	private float rectX;
 	private float rectY;
 	private int rectSize = 45;
@@ -29,8 +27,6 @@ public class DraggableBox
 		rect = new RectF(rectX, rectY, rectX+rectSize, rectY+rectSize);
 		rect2 = new RectF(rectX + borderSize, rectY + borderSize, 
 				rectX + rectSize - borderSize, rectY + rectSize - borderSize);
-		startX = rectX;
-		startY = rectY;
 		Random r = new Random();
 		letter = (char)(r.nextInt(26) + 'a');
 	}
@@ -66,10 +62,7 @@ public class DraggableBox
 		switch(event.getAction())
 		{
 			case MotionEvent.ACTION_DOWN:
-				if(mouseX + 10 > rectX && 
-						mouseX - 10 < rectX + rectSize && 
-						mouseY + 10 > rectY && 
-						mouseY - 10 < rectY + rectSize)
+				if(rect.contains(mouseX, mouseY))
 				{
 					dragging = true;
 					Log.d("WORDFORMED", "Inside Rectangle");
@@ -93,28 +86,12 @@ public class DraggableBox
 					}
 					else
 					{
-						//Bring box back to original position
-						rectX = startX;
-						rectY = startY;
-						rect = new RectF(rectX, rectY, rectX + rectSize, rectY + rectSize);
-						rect2 = new RectF(rectX + borderSize, rectY + borderSize, 
-								rectX + rectSize - borderSize, rectY + rectSize - borderSize);
+						//remove box
+						rect = new RectF();
+						rect2 = new RectF();
+						letter = ' ';
 					}
 				}
-				/*
-				Log.d("MOUSEUP", "Mouse X = " + mouseX + " Mouse Y = " + mouseY );
-				if(mouseX > snapX && 
-						mouseX < snapX + rectSize && 
-						mouseY > snapY && 
-						mouseY <  snapY + rectSize)
-				{
-					Log.d("MOUSEUP", "Inside the Snapper!" );
-					rectX = snapX;
-					rectY = snapY;
-					Log.d("WORDFORMED", "Mouse up and inside snapX");
-					rect = new RectF(rectX, rectY, rectX+rectSize, rectY+rectSize);
-				}
-				*/
 				dragging = false;
 				break;
 			default:
