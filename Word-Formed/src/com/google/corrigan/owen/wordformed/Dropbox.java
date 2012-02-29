@@ -14,6 +14,7 @@ public class Dropbox
 	int border = 5;
 	RectF dragBorder;
 	RectF dragFill;
+	boolean [] full = new boolean[7];
 	
 	public Dropbox(int x, int y, int width, int height)
 	{
@@ -21,13 +22,23 @@ public class Dropbox
 		dragFill = new RectF(x + border, y + border, x + width - border, y + height - border);
 	}
 	
+	public boolean isFull(int x)
+	{
+		return full[x];
+	}
+	
+	public void add(int x)
+	{
+		full[x] = true;
+	}
 	
 	public void draw(Canvas canvas)
 	{
 		Paint dragRectangle = new Paint();
 		dragRectangle.setColor(Color.BLACK);
 		canvas.drawRect(dragBorder, dragRectangle);
-		canvas.drawRect(dragBorder, dragRectangle);
+		dragRectangle.setColor(Color.GRAY);
+		canvas.drawRect(dragFill, dragRectangle);
 	}
 	
 	public boolean contains(float x, float y)
