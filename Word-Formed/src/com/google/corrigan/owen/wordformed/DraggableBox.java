@@ -12,21 +12,37 @@ import android.view.MotionEvent;
 
 public class DraggableBox
 {
+	//Top left X and Y coordinates of draggable box
 	private float rectX;
 	private float rectY;
+	//Hold starting position when the box is picked up
+	private float startX;
+	private float startY;
+	//Length of rectangle
 	private int rectSize = 45;
+	//Size of border
 	private int borderSize = 5;
+	//Outer and inner rectangles used for dragging
 	private RectF rect, rect2;
+	//Boolean to say if box is being dragged
 	private boolean dragging = false;
+	//Letter stored in tile
 	private char letter;
 	
 	public DraggableBox(float topX, float topY)
 	{
+		//Set coordinates of box
 		rectX = topX;
 		rectY = topY;
+		//Set coordinates in case box needs to jump back to this position
+		startX = topX;
+		startY = topY;
+		//Calculate size and position of outer and inner box
 		rect = new RectF(rectX, rectY, rectX+rectSize, rectY+rectSize);
 		rect2 = new RectF(rectX + borderSize, rectY + borderSize, 
 				rectX + rectSize - borderSize, rectY + rectSize - borderSize);
+		//Randomly choose a character
+		//TODO: Find a better distribution
 		Random r = new Random();
 		letter = (char)(r.nextInt(26) + 'a');
 	}
@@ -34,20 +50,20 @@ public class DraggableBox
 	public void draw(Canvas canvas)
 	{
 		//Draw Outer Rectangle
-		Paint dragRectangle = new Paint();
-		dragRectangle.setColor(Color.BLUE);
-		canvas.drawRect(rect, dragRectangle);
+		Paint color = new Paint();
+		color.setColor(Color.BLUE);
+		canvas.drawRect(rect, color);
 		
 		//Draw inner Rectangle
-		dragRectangle.setColor(Color.WHITE);
-		canvas.drawRect(rect2, dragRectangle);
+		color.setColor(Color.WHITE);
+		canvas.drawRect(rect2, color);
 		
 		//Draw letter
 		Paint font = new Paint();
 		font.setColor(Color.BLACK);
 		font.setTextSize(30);
 		font.setTypeface(Typeface.MONOSPACE);
-		//Very hacky - fix it!!
+		//If being dragged, account for offset
 		if(!dragging)
 			canvas.drawText(letter+"", rectX + 17, rectY + 30, font);
 		else
@@ -56,11 +72,13 @@ public class DraggableBox
 	
 	public boolean onTouchEvent(MotionEvent event, Dropbox drop)
 	{
+		//Store mouse x and y coordinates
 		float mouseX = event.getX();
 		float mouseY = event.getY();
 		Log.d("WORDFORMED", "MouseX = "+ mouseX + ", Mouse Y = " + mouseY);
 		switch(event.getAction())
 		{
+			//On mouse down, check if touched within area. If so start dragging
 			case MotionEvent.ACTION_DOWN:
 				if(rect.contains(mouseX, mouseY))
 				{
@@ -69,31 +87,63 @@ public class DraggableBox
 				}
 				else dragging = false;
 				break;
+			/* On mouse up drop tile in place if in valid location.
+			 * If it landed on another tile swap that tile back to it's place
+			 * Or be deleted otherwise
+			*/
 			case MotionEvent.ACTION_UP:
 				if(dragging)
 				{
+					//if within drop zone snap to grid
 					if(drop.contains(rectX, rectY))
 					{
-						//Reset x and y to compensate bounding box for centering
+						//Align Y position, snap x position into grid
 						rectX -= 40;
 						rectX = Math.round(rectX / 65);
+						
+						//If there is a box where it wants to land, move it to this tiles old place
+						if(drop.isFull((int)rectX))
+						{
+							//Move other to this startX and Y
+							DraggableBox ref = drop.get((int)rectX);
+							ref.move(startX, startY);
+							drop.add((int)Math.round(startX / 65), ref);
+						}
+						
+						drop.add((int)rectX, this);
 						rectX *= 65;
 						rectX += 20;
 						rectY = 260;
+						int tmpStartX = (int) startX / 65;
+						drop.remove(tmpStartX);
 						rect = new RectF(rectX, rectY, rectX+rectSize, rectY+rectSize);
 						rect2 = new RectF(rectX + borderSize, rectY + borderSize, 
-								rectX + rectSize - borderSize, rectY + rectSize - borderSize);
+							rectX + rectSize - borderSize, rectY + rectSize - borderSize);
+						startX = rectX;
+						startY = rectY;
 					}
+					//If box not within dropbox, remove from board
+					//TODO: return null reference to prevent memory leak
 					else
 					{
 						//remove box
 						rect = new RectF();
 						rect2 = new RectF();
 						letter = ' ';
+						//If stored in dropbox, delete from place
+						if(startY == 260)
+						{
+							int tmpStartX = (int) startX / 65;
+							drop.remove(tmpStartX);
+						}
 					}
 				}
+				//Fixes bug for some reason
+				//TODO: figure out what next line does
 				dragging = false;
 				break;
+			//If this is being dragged, set position to same position as mouse
+			//TODO: Instead of default, find specific dragging case
 			default:
 				if(dragging)
 				{
@@ -105,5 +155,15 @@ public class DraggableBox
 				}
 		}
 		return true;
+	}
+	
+	//Move this tile to a specific x and y position
+	public void move(float x, float y)
+	{
+		rectX = x;
+		rectY = y;
+		rect = new RectF(rectX, rectY, rectX + rectSize, rectY + rectSize);
+		rect2 = new RectF(rectX + borderSize, rectY + borderSize, 
+			rectX + rectSize - borderSize, rectY + rectSize - borderSize);
 	}
 }

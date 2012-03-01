@@ -14,7 +14,7 @@ public class Dropbox
 	int border = 5;
 	RectF dragBorder;
 	RectF dragFill;
-	boolean [] full = new boolean[7];
+	private DraggableBox [] fill = new DraggableBox[7];
 	
 	public Dropbox(int x, int y, int width, int height)
 	{
@@ -24,12 +24,22 @@ public class Dropbox
 	
 	public boolean isFull(int x)
 	{
-		return full[x];
+		return fill[x] != null;
 	}
 	
-	public void add(int x)
+	public void add(int x, DraggableBox d)
 	{
-		full[x] = true;
+		fill[x] = d;
+	}
+	
+	public void remove(int x)
+	{
+		fill[x] = null;
+	}
+	
+	public DraggableBox get(int x)
+	{
+		return fill[x];
 	}
 	
 	public void draw(Canvas canvas)
