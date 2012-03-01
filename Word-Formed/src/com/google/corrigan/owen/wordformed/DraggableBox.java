@@ -29,6 +29,7 @@ public class DraggableBox
 	//Letter stored in tile
 	private char letter;
 	
+	//Constructor. Takes starting position as parameters
 	public DraggableBox(float topX, float topY)
 	{
 		//Set coordinates of box
@@ -47,6 +48,7 @@ public class DraggableBox
 		letter = (char)(r.nextInt(26) + 'a');
 	}
 	
+	//Draw method. Takes canvas as parameter
 	public void draw(Canvas canvas)
 	{
 		//Draw Outer Rectangle
@@ -70,6 +72,7 @@ public class DraggableBox
 			canvas.drawText(letter+"", rectX + 17 - 40, rectY + 30 - 40, font);
 	}
 	
+	//On touch event. Takes MotionEvent and Dropbox as parameter
 	public boolean onTouchEvent(MotionEvent event, Dropbox drop)
 	{
 		//Store mouse x and y coordinates
@@ -157,7 +160,7 @@ public class DraggableBox
 		return true;
 	}
 	
-	//Move this tile to a specific x and y position
+	//Move this tile to a specific x and y position. Takes x and y position as parameters
 	public void move(float x, float y)
 	{
 		rectX = x;
