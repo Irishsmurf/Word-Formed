@@ -1,5 +1,7 @@
 package com.google.corrigan.owen.wordformed;
 
+import java.util.LinkedList;
+
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -9,19 +11,13 @@ import android.util.Log;
 public class Dropbox
 {
 	//X, Y, width and height
-	private int x = 10;
-	private int y = 250;
-	private int width = 460;
-	private int height = 70;
-	//Border size
 	private int border = 5;
 	//Outer and inner rectangles used to draw it
 	private RectF dragBorder, dragFill;
 	//Max number of boxes stored
-	private int limBoxes = 7;
 	//Array of references to Draggable boxes stored at certain position
-	private DraggableBox [] fill = new DraggableBox[limBoxes];
-	private final String TAG = "DRAGGABLEBOX"; 
+	private LinkedList<DraggableBox> tiles = new LinkedList<DraggableBox>();
+	private final String TAG = "DRAGGABLEBOX";
 	
 	//Constructor. Takes x, y, height and width and parameters
 	public Dropbox(int x, int y, int width, int height)
@@ -30,32 +26,23 @@ public class Dropbox
 		dragFill = new RectF(x + border, y + border, x + width - border, y + height - border);
 	}
 	
-	//Checks if a certain place is occupied by a DraggableBox
-	//Parameter x must be less than limBoxes
-	public boolean isFull(int x)
+	public void add(DraggableBox d)
 	{
-		return fill[x] != null;
+		if(tiles.size() < 7)
+			tiles.add(d);
+		updatePositions();
 	}
 	
-	//Puts a reference to a draggable box into the array at place p
-	//Parameter x must be less than limBoxes
-	public void add(int x, DraggableBox d)
+	public void updatePositions()
 	{
-		fill[x] = d;
+		for(int i = 0; i < tiles.size(); i++)
+			tiles.get(i).move(i*65+20, dragBorder.bottom - 60);
 	}
 	
-	//Frees space from the dropbox at position x
-	//Parameter x must be less than limBoxes
-	public void remove(int x)
+	public void remove(DraggableBox d)
 	{
-		fill[x] = null;
-	}
-	
-	//Returns the reference to the draggable box at position x
-	//Parameter x must be less than limBoxes
-	public DraggableBox get(int x)
-	{
-		return fill[x];
+		tiles.remove(d);
+		updatePositions();
 	}
 	
 	//Draws method. Takes canvas as parameter
@@ -66,15 +53,6 @@ public class Dropbox
 		canvas.drawRect(dragBorder, dragRectangle);
 		dragRectangle.setColor(Color.rgb(68, 89, 108));
 		canvas.drawRect(dragFill, dragRectangle);
-	}
-	
-	public int firstFree()
-	{
-		Log.d(TAG, "In firstfree");
-		for(int i = 0; i < fill.length; i++)
-			if(fill[i] == null) return i;
-		Log.d(TAG, "Survived");
-		return -1;
 	}
 	
 	//Contains method. Returns true is point is within bounds of drop box
