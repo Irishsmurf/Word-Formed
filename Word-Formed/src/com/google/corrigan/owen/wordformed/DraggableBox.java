@@ -49,6 +49,14 @@ public class DraggableBox
 		letter = (char)(r.nextInt(26) + 'A');
 	}
 	
+	public DraggableBox(int letter)
+	{
+		/*
+		 * TO DO: Single Constructor and placer
+		 * letter = letter + 'A';
+		 */
+	}
+	
 	//Draw method. Takes canvas as parameter
 	public void draw(Canvas canvas)
 	{
