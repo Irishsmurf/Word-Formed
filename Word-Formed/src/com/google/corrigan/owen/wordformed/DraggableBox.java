@@ -29,6 +29,7 @@ public class DraggableBox
 	private boolean dragging = false;
 	//Letter stored in tile
 	private char letter;
+	boolean inBox = false;
 	
 	//Constructor. Takes starting position as parameters
 	public DraggableBox(float topX, float topY)
@@ -79,7 +80,6 @@ public class DraggableBox
 		//Store mouse x and y coordinates
 		float mouseX = event.getX();
 		float mouseY = event.getY();
-		Log.d("WORDFORMED", "MouseX = "+ mouseX + ", Mouse Y = " + mouseY);
 		switch(event.getAction())
 		{
 			//On mouse down, check if touched within area. If so start dragging
@@ -87,7 +87,6 @@ public class DraggableBox
 				if(rect.contains(mouseX, mouseY))
 				{
 					dragging = true;
-					Log.d("WORDFORMED", "Inside Rectangle");
 				}
 				else dragging = false;
 				break;
@@ -98,32 +97,12 @@ public class DraggableBox
 			case MotionEvent.ACTION_UP:
 				if(dragging)
 				{
-					Log.d(TAG, "Action up");
+					drop.remove(this);
 					//if within drop zone snap to grid
 					if(drop.contains(rectX, rectY))
 					{
-						//Get first free position
-						rectX = drop.firstFree();
-						Log.d(TAG, "free space in " + rectX);
-						if(rectX != -1)
-						{
-							drop.add((int)rectX, this);
-							rectX = rectX * 65 + 20;
-							rectY = 260;
-							rect = new RectF(rectX, rectY, rectX+rectSize, rectY+rectSize);
-							rect2 = new RectF(rectX + borderSize, rectY + borderSize, 
-								rectX + rectSize - borderSize, rectY + rectSize - borderSize);
-							startX = rectX;
-							startY = rectY;
-						}
-						else
-						{
-							rectX = startX;
-							rectY = startY;
-							rect = new RectF(rectX, rectY, rectX+rectSize, rectY+rectSize);
-							rect2 = new RectF(rectX + borderSize, rectY + borderSize, 
-								rectX + rectSize - borderSize, rectY + rectSize - borderSize);
-						}
+						inBox = true;
+						drop.add(this);
 					}
 					//If box not within dropbox, remove from board
 					//TODO: return null reference to prevent memory leak
@@ -133,12 +112,6 @@ public class DraggableBox
 						rect = new RectF();
 						rect2 = new RectF();
 						letter = ' ';
-						//If stored in dropbox, delete from place
-						if(startY == 260)
-						{
-							int tmpStartX = (int) startX / 65;
-							drop.remove(tmpStartX);
-						}
 					}
 				}
 				//Fixes bug for some reason
