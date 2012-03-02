@@ -1,5 +1,8 @@
 package com.google.corrigan.owen.wordformed;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -17,15 +20,14 @@ public class SinglePlayerGameView extends View
 	RectF boxBorder = new RectF(10, 50, 470, 120);
 	RectF boxFill = new RectF(15, 55, 465, 115);
 	
-	DraggableBox[] db = new DraggableBox[7];
+	ArrayList<DraggableBox> db = new ArrayList<DraggableBox>();
 	
 	public SinglePlayerGameView(Context context)
 	{
 		super(context);
-		for(int i = 0; i < db.length; i++)
+		for(int i = 0; i < 7; i++)
 		{
-			db[i] = new DraggableBox(i * 65 + 20, 60);
-			Log.d("WORDFORMED", i + " was initilized");
+			db.add(new DraggableBox(i * 65 + 20, 60));
 		}
 	}
 	
@@ -51,19 +53,24 @@ public class SinglePlayerGameView extends View
 		dragRectangle.setColor(Color.rgb(68, 89, 108));
 		canvas.drawRect(boxFill, dragRectangle);
 		
-		for(int i = 0; i < db.length; i++)
+		for(DraggableBox d: db)
 		{
-			if(db[i]==null) Log.d("WORDFORMED", i + " draggableBox is null");
-			db[i].draw(canvas);
+			d.draw(canvas);
 		}
 	}
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event)
 	{
+		int selected = 0;
 		for(DraggableBox d: db)
 		{
-			if(d==null) Log.d("WORDFORMED", "draggableBox is null");
+			if(d.isSelected()) selected = db.indexOf(d);
+		}
+		Collections.swap(db, db.size() - 1, selected);
+		
+		for(DraggableBox d: db)
+		{
 			d.onTouchEvent(event, drop, answer);
 		}
 		invalidate();
