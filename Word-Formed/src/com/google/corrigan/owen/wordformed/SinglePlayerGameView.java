@@ -50,7 +50,7 @@ public class SinglePlayerGameView extends View
 		canvas.drawRect(answerBorder, dragRectangle);
 		
 		//Draw inner Rectangle
-		dragRectangle.setColor(Color.GRAY);
+		dragRectangle.setColor(Color.rgb(68, 89, 108));
 		canvas.drawRect(boxFill, dragRectangle);
 		canvas.drawRect(answerFill, dragRectangle);
 		
