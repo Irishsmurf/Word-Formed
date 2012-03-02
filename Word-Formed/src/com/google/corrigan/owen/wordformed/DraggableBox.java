@@ -75,7 +75,7 @@ public class DraggableBox
 	}
 	
 	//On touch event. Takes MotionEvent and Dropbox as parameter
-	public boolean onTouchEvent(MotionEvent event, Dropbox drop)
+	public boolean onTouchEvent(MotionEvent event, Dropbox drop, Dropbox answer)
 	{
 		//Store mouse x and y coordinates
 		float mouseX = event.getX();
@@ -98,11 +98,17 @@ public class DraggableBox
 				if(dragging)
 				{
 					drop.remove(this);
+					answer.remove(this);
 					//if within drop zone snap to grid
 					if(drop.contains(rectX, rectY))
 					{
 						inBox = true;
 						drop.add(this);
+					}
+					else if(answer.contains(rectX, rectY))
+					{
+						inBox = true;
+						answer.add(this);
 					}
 					//If box not within dropbox, remove from board
 					//TODO: return null reference to prevent memory leak
@@ -131,6 +137,11 @@ public class DraggableBox
 				}
 		}
 		return true;
+	}
+	
+	public boolean isSelected()
+	{
+		return dragging;
 	}
 	
 	//Move this tile to a specific x and y position. Takes x and y position as parameters

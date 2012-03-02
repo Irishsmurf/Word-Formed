@@ -12,12 +12,10 @@ import android.view.View;
 public class SinglePlayerGameView extends View
 {
 	Dropbox drop = new Dropbox(10, 250, 460, 70);
+	Dropbox answer = new Dropbox(10, 450, 460, 70);
 	
 	RectF boxBorder = new RectF(10, 50, 470, 120);
 	RectF boxFill = new RectF(15, 55, 465, 115);
-	
-	RectF answerBorder = new RectF(10, 50 + 400, 470, 120 + 400);
-	RectF answerFill = new RectF(15, 55 + 400, 465, 115 + 400);
 	
 	DraggableBox[] db = new DraggableBox[7];
 	
@@ -42,17 +40,16 @@ public class SinglePlayerGameView extends View
 		
 		//Draw background for dragboxes
 		drop.draw(canvas);
+		answer.draw(canvas);
 		
 		//Draw Outer Rectangle
 		Paint dragRectangle = new Paint();
 		dragRectangle.setColor(Color.BLACK);
 		canvas.drawRect(boxBorder, dragRectangle);
-		canvas.drawRect(answerBorder, dragRectangle);
 		
 		//Draw inner Rectangle
 		dragRectangle.setColor(Color.GRAY);
 		canvas.drawRect(boxFill, dragRectangle);
-		canvas.drawRect(answerFill, dragRectangle);
 		
 		for(int i = 0; i < db.length; i++)
 		{
@@ -67,7 +64,7 @@ public class SinglePlayerGameView extends View
 		for(DraggableBox d: db)
 		{
 			if(d==null) Log.d("WORDFORMED", "draggableBox is null");
-			d.onTouchEvent(event, drop);
+			d.onTouchEvent(event, drop, answer);
 		}
 		invalidate();
 		return true;
