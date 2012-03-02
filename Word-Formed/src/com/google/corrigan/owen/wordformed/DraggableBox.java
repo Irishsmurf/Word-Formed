@@ -12,6 +12,7 @@ import android.view.MotionEvent;
 
 public class DraggableBox
 {
+	private static final String TAG = "DRAGGABLEBOX";
 	//Top left X and Y coordinates of draggable box
 	private float rectX;
 	private float rectY;
@@ -97,33 +98,32 @@ public class DraggableBox
 			case MotionEvent.ACTION_UP:
 				if(dragging)
 				{
+					Log.d(TAG, "Action up");
 					//if within drop zone snap to grid
 					if(drop.contains(rectX, rectY))
 					{
-						//Align Y position, snap x position into grid
-						rectX -= 40;
-						rectX = Math.round(rectX / 65);
-						
-						//If there is a box where it wants to land, move it to this tiles old place
-						if(drop.isFull((int)rectX))
+						//Get first free position
+						rectX = drop.firstFree();
+						Log.d(TAG, "free space in " + rectX);
+						if(rectX != -1)
 						{
-							//Move other to this startX and Y
-							DraggableBox ref = drop.get((int)rectX);
-							ref.move(startX, startY);
-							drop.add((int)Math.round(startX / 65), ref);
+							drop.add((int)rectX, this);
+							rectX = rectX * 65 + 20;
+							rectY = 260;
+							rect = new RectF(rectX, rectY, rectX+rectSize, rectY+rectSize);
+							rect2 = new RectF(rectX + borderSize, rectY + borderSize, 
+								rectX + rectSize - borderSize, rectY + rectSize - borderSize);
+							startX = rectX;
+							startY = rectY;
 						}
-						
-						drop.add((int)rectX, this);
-						rectX *= 65;
-						rectX += 20;
-						rectY = 260;
-						int tmpStartX = (int) startX / 65;
-						drop.remove(tmpStartX);
-						rect = new RectF(rectX, rectY, rectX+rectSize, rectY+rectSize);
-						rect2 = new RectF(rectX + borderSize, rectY + borderSize, 
-							rectX + rectSize - borderSize, rectY + rectSize - borderSize);
-						startX = rectX;
-						startY = rectY;
+						else
+						{
+							rectX = startX;
+							rectY = startY;
+							rect = new RectF(rectX, rectY, rectX+rectSize, rectY+rectSize);
+							rect2 = new RectF(rectX + borderSize, rectY + borderSize, 
+								rectX + rectSize - borderSize, rectY + rectSize - borderSize);
+						}
 					}
 					//If box not within dropbox, remove from board
 					//TODO: return null reference to prevent memory leak

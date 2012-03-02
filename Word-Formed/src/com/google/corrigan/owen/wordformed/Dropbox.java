@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.util.Log;
 
 public class Dropbox
 {
@@ -20,7 +21,7 @@ public class Dropbox
 	private int limBoxes = 7;
 	//Array of references to Draggable boxes stored at certain position
 	private DraggableBox [] fill = new DraggableBox[limBoxes];
-	private final String TAG = "WORDFORMED"; 
+	private final String TAG = "DRAGGABLEBOX"; 
 	
 	//Constructor. Takes x, y, height and width and parameters
 	public Dropbox(int x, int y, int width, int height)
@@ -65,6 +66,15 @@ public class Dropbox
 		canvas.drawRect(dragBorder, dragRectangle);
 		dragRectangle.setColor(Color.GRAY);
 		canvas.drawRect(dragFill, dragRectangle);
+	}
+	
+	public int firstFree()
+	{
+		Log.d(TAG, "In firstfree");
+		for(int i = 0; i < fill.length; i++)
+			if(fill[i] == null) return i;
+		Log.d(TAG, "Survived");
+		return -1;
 	}
 	
 	//Contains method. Returns true is point is within bounds of drop box
