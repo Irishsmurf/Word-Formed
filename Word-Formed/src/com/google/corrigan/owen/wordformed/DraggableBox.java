@@ -45,7 +45,7 @@ public class DraggableBox
 		//Randomly choose a character
 		//TODO: Find a better distribution
 		Random r = new Random();
-		letter = (char)(r.nextInt(26) + 'a');
+		letter = (char)(r.nextInt(26) + 'A');
 	}
 	
 	//Draw method. Takes canvas as parameter
