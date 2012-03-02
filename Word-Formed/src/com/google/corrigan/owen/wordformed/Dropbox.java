@@ -51,7 +51,7 @@ public class Dropbox
 		Paint dragRectangle = new Paint();
 		dragRectangle.setColor(Color.BLACK);
 		canvas.drawRect(dragBorder, dragRectangle);
-		dragRectangle.setColor(Color.GRAY);
+		dragRectangle.setColor(Color.rgb(68, 89, 108));
 		canvas.drawRect(dragFill, dragRectangle);
 	}
 	
