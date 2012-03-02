@@ -16,9 +16,7 @@ public class SinglePlayerGameView extends View
 {
 	Dropbox drop = new Dropbox(10, 250, 460, 70);
 	Dropbox answer = new Dropbox(10, 450, 460, 70);
-	
-	RectF boxBorder = new RectF(10, 50, 470, 120);
-	RectF boxFill = new RectF(15, 55, 465, 115);
+	CreateBox create = new CreateBox(10, 50, 460, 70);
 	
 	ArrayList<DraggableBox> db = new ArrayList<DraggableBox>();
 	
@@ -27,7 +25,9 @@ public class SinglePlayerGameView extends View
 		super(context);
 		for(int i = 0; i < 7; i++)
 		{
-			db.add(new DraggableBox(i * 65 + 20, 60));
+			DraggableBox d = new DraggableBox(i * 65 + 20, 60);
+			db.add(d);
+			create.add(d);
 		}
 	}
 	
@@ -43,15 +43,7 @@ public class SinglePlayerGameView extends View
 		//Draw background for dragboxes
 		drop.draw(canvas);
 		answer.draw(canvas);
-		
-		//Draw Outer Rectangle
-		Paint dragRectangle = new Paint();
-		dragRectangle.setColor(Color.BLACK);
-		canvas.drawRect(boxBorder, dragRectangle);
-		
-		//Draw inner Rectangle
-		dragRectangle.setColor(Color.rgb(68, 89, 108));
-		canvas.drawRect(boxFill, dragRectangle);
+		create.draw(canvas);
 		
 		for(DraggableBox d: db)
 		{
@@ -71,7 +63,7 @@ public class SinglePlayerGameView extends View
 		
 		for(DraggableBox d: db)
 		{
-			d.onTouchEvent(event, drop, answer);
+			d.onTouchEvent(event, drop, answer, create);
 		}
 		invalidate();
 		return true;

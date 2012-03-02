@@ -29,8 +29,8 @@ public class DraggableBox
 	private boolean dragging = false;
 	//Letter stored in tile
 	private char letter;
-	boolean inBox = false;
-	
+	boolean notMoved = true;
+
 	//Constructor. Takes starting position as parameters
 	public DraggableBox(float topX, float topY)
 	{
@@ -83,7 +83,7 @@ public class DraggableBox
 	}
 	
 	//On touch event. Takes MotionEvent and Dropbox as parameter
-	public boolean onTouchEvent(MotionEvent event, Dropbox drop, Dropbox answer)
+	public boolean onTouchEvent(MotionEvent event, Dropbox drop, Dropbox answer, CreateBox create)
 	{
 		//Store mouse x and y coordinates
 		float mouseX = event.getX();
@@ -107,15 +107,15 @@ public class DraggableBox
 				{
 					drop.remove(this);
 					answer.remove(this);
+					create.remove(this);
 					//if within drop zone snap to grid
 					if(drop.contains(rectX, rectY))
 					{
-						inBox = true;
 						drop.add(this);
+						notMoved = false;
 					}
 					else if(answer.contains(rectX, rectY))
 					{
-						inBox = true;
 						answer.add(this);
 					}
 					//If box not within dropbox, remove from board
