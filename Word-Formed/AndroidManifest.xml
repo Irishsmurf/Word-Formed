@@ -7,7 +7,7 @@
     <uses-sdk android:minSdkVersion="10" />
 
     <application
-        android:icon="@drawable/word"
+        android:icon="@drawable/word2"
         android:label="@string/app_name" >
         <activity
             android:name=".WordFormed"
