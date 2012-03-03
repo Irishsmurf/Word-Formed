@@ -2,11 +2,13 @@ package com.google.corrigan.owen.wordformed;
 
 import java.util.Random;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Typeface;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.MotionEvent;
 
@@ -29,10 +31,11 @@ public class DraggableBox
 	private boolean dragging = false;
 	//Letter stored in tile
 	private char letter;
+	private Context context;
+	
 	boolean notMoved = true;
-
 	//Constructor. Takes starting position as parameters
-	public DraggableBox(float topX, float topY)
+	public DraggableBox(Context context0, float topX, float topY)
 	{
 		//Set coordinates of box
 		rectX = topX;
@@ -48,6 +51,7 @@ public class DraggableBox
 		//TODO: Find a better distribution
 		Random r = new Random();
 		letter = (char)(r.nextInt(26) + 'A');
+		context = context0;
 	}
 	
 	public DraggableBox(int letter)
@@ -94,6 +98,8 @@ public class DraggableBox
 			case MotionEvent.ACTION_DOWN:
 				if(rect.contains(mouseX, mouseY))
 				{
+					Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+					v.vibrate(60);
 					dragging = true;
 				}
 				else dragging = false;

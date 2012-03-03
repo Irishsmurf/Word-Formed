@@ -17,15 +17,15 @@ public class SinglePlayerGameView extends View
 {
 	Dropbox drop = new Dropbox(10, 250, 460, 70);
 	Dropbox answer = new Dropbox(10, 450, 460, 70);
-	CreateBox create = new CreateBox(10, 50, 460, 70);
 	ArrayList<DraggableBox> db = new ArrayList<DraggableBox>();
-	
+	CreateBox create;
 	public SinglePlayerGameView(Context context)
 	{
 		super(context);
+		create = new CreateBox(10, 50, 460, 70, context);
 		for(int i = 0; i < 7; i++)
 		{
-			DraggableBox d = new DraggableBox(i * 65 + 20, 60);
+			DraggableBox d = new DraggableBox(context, i * 65 + 20, 60);
 			db.add(d);
 			create.add(d);
 		}

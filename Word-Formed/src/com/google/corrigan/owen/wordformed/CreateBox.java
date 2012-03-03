@@ -2,6 +2,7 @@ package com.google.corrigan.owen.wordformed;
 
 import java.util.LinkedList;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -18,12 +19,13 @@ public class CreateBox
 	//Array of references to Draggable boxes stored at certain position
 	private LinkedList<DraggableBox> tiles = new LinkedList<DraggableBox>();
 	private final String TAG = "DRAGGABLEBOX";
-	
+	private Context context;
 	//Constructor. Takes x, y, height and width and parameters
-	public CreateBox(int x, int y, int width, int height)
+	public CreateBox(int x, int y, int width, int height, Context context0)
 	{
 		dragBorder = new RectF(x, y, x + width, y + height);
 		dragFill = new RectF(x + border, y + border, x + width - border, y + height - border);
+		context = context0;
 	}
 	
 	public void add(DraggableBox d)
@@ -43,7 +45,7 @@ public class CreateBox
 	{
 		tiles.remove(d);
 		updatePositions();
-		tiles.add(new DraggableBox(65*8+20, 60));
+		tiles.add(new DraggableBox(context, 65*8+20, 60));
 	}
 	
 	//Draws method. Takes canvas as parameter
