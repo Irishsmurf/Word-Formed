@@ -11,13 +11,13 @@ import android.graphics.RectF;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 
 public class SinglePlayerGameView extends View
 {
 	Dropbox drop = new Dropbox(10, 250, 460, 70);
 	Dropbox answer = new Dropbox(10, 450, 460, 70);
 	CreateBox create = new CreateBox(10, 50, 460, 70);
-	
 	ArrayList<DraggableBox> db = new ArrayList<DraggableBox>();
 	
 	public SinglePlayerGameView(Context context)
