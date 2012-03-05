@@ -15,6 +15,7 @@ import android.view.WindowManager;
 
 public class SinglePlayerGameView extends View
 {
+	
 	Dropbox drop = new Dropbox(10, 250, 460, 70);
 	Dropbox answer = new Dropbox(10, 450, 460, 70);
 	ArrayList<DraggableBox> db = new ArrayList<DraggableBox>();
