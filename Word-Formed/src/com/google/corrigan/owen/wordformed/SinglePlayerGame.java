@@ -2,21 +2,34 @@ package com.google.corrigan.owen.wordformed;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
 public class SinglePlayerGame extends Activity
 {
-	private SinglePlayerGameView game;
-	
+	private static final String TAG = SinglePlayerGame.class.getSimpleName();
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);		
-		game = new SinglePlayerGameView(this);
-		setContentView(game);
-		game.requestFocus();
+		setContentView(new SinglePlayerGameView(this));
+		//game.requestFocus();
 	}
+	
+	@Override
+	protected void onDestroy()
+	{
+		Log.d(TAG, "Destroyed");
+		super.onDestroy();
+	}
+	
+	protected void onStop()
+	{
+		Log.d(TAG, "Stopped");
+		super.onStop();
+	}
+	
 }

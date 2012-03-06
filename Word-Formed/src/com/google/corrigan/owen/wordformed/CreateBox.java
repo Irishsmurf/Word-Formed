@@ -56,8 +56,9 @@ public class CreateBox
 		canvas.drawRect(dragBorder, dragRectangle);
 		dragRectangle.setColor(Color.rgb(68, 89, 108));
 		canvas.drawRect(dragFill, dragRectangle);
-		for(DraggableBox d: tiles)
+		for(DraggableBox d: (LinkedList<DraggableBox>) tiles.clone())
 			d.draw(canvas);
+
 	}
 	
 	//Contains method. Returns true is point is within bounds of drop box
