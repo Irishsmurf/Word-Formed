@@ -3,7 +3,7 @@
     android:background="@color/background"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:padding="30dip"
+    android:padding="50dip"
     android:orientation="vertical" >
     
     <LinearLayout
@@ -18,29 +18,46 @@
 	          android:layout_gravity="center"
 	          android:layout_marginBottom="25dip"
 	          android:text="@string/main_title"
-	          android:textSize="35.5sp" />
+	          android:textSize="35.5sp" 
+			  android:paddingTop="32sp"	          
+			/>
 	    <Button 
+	        android:background="@drawable/button"
 	        android:id="@+id/new_game_button"
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
-	        android:text="@string/new_game_label"/>
+	        android:text="@string/new_game_label"
+	        android:src="@drawable/button"
+	        android:paddingTop="12sp"
+	        />
 	    
 	    <Button 
+	        android:background="@drawable/button"
 	        android:id="@+id/multiplayer_button"
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
-	        android:text="@string/multiplayer_label"/>
-	    	
+	        android:text="@string/multiplayer_label"
+	        android:src="@drawable/button"
+	        android:paddingTop="12sp"
+	        />
+
 	    <Button 
+	        android:background="@drawable/button"
 	        android:id="@+id/how_to_play_button"
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
-	        android:text="@string/how_to_play_label"/>
-	    
+	        android:text="@string/how_to_play_label"
+	        android:src="@drawable/button"
+	        android:paddingTop="12sp"
+	        />
 	    <Button
+	        android:background="@drawable/button"
 	        android:id="@+id/high_scores_button"
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
-	        android:text="@string/high_scores_label"/>
+	        android:text="@string/high_scores_label"
+	        android:src="@drawable/button"
+	        android:paddingTop="12sp"
+	        />
 	</LinearLayout>
 </LinearLayout>
