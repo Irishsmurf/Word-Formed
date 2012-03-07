@@ -56,7 +56,7 @@ public class DraggableBox
 		Random r = new Random();
 		letter = (char)(r.nextInt(26) + 'A');
 		context = context0;
-		tile = BitmapFactory.decodeFile("images/tile");
+		tile = BitmapFactory.decodeResource(context.getResources(), R.drawable.tile);
 
 	}
 	
@@ -74,12 +74,10 @@ public class DraggableBox
 		//Draw Outer Rectangle
 		Paint color = new Paint();
 		color.setColor(Color.BLUE);
-		canvas.drawRect(rect, color);
 		
 		//Draw inner Rectangle
 		color.setColor(Color.WHITE);
-		canvas.drawRect(rect2, color);
-		//canvas.drawBitmap(tile, null, rect, color);
+		canvas.drawBitmap(tile, null, rect, color);
 		//Draw letter
 		Paint font = new Paint();
 		font.setColor(Color.BLACK);
@@ -87,9 +85,9 @@ public class DraggableBox
 		font.setTypeface(Typeface.MONOSPACE);
 		//If being dragged, account for offset
 		if(!dragging)
-			canvas.drawText(letter+"", rectX + 17, rectY + 30, font);
-		else
-			canvas.drawText(letter+"", rectX + 17 - 40, rectY + 30 - 40, font);
+			canvas.drawText(letter+"", rectX + 15, rectY + 30, font);
+		//else
+			//canvas.drawText(letter+"", rectX + 15 - 40, rectY + 30 - 40, font); //COME BACK TO THIS
 	}
 	
 	//On touch event. Takes MotionEvent and Dropbox as parameter
