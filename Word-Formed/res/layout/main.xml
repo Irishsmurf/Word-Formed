@@ -27,6 +27,7 @@
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
 	        android:text="@string/new_game_label"
+	        android:textSize="17sp"
 	        android:src="@drawable/button"
 	        android:paddingTop="12sp"
 	        />
@@ -37,7 +38,7 @@
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
 	        android:text="@string/multiplayer_label"
-	        android:src="@drawable/button"
+	       	android:textSize="17sp"
 	        android:paddingTop="12sp"
 	        />
 
@@ -47,7 +48,7 @@
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
 	        android:text="@string/how_to_play_label"
-	        android:src="@drawable/button"
+   	        android:textSize="17sp"	        
 	        android:paddingTop="12sp"
 	        />
 	    <Button
@@ -56,7 +57,7 @@
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
 	        android:text="@string/high_scores_label"
-	        android:src="@drawable/button"
+	        android:textSize="17sp"
 	        android:paddingTop="12sp"
 	        />
 	</LinearLayout>
