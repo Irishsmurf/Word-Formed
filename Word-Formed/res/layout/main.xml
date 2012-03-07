@@ -19,7 +19,7 @@
 	          android:layout_marginBottom="25dip"
 	          android:text="@string/main_title"
 	          android:textSize="35.5sp" 
-			  android:paddingTop="32sp"	          
+			  android:paddingTop="12sp"	          
 			/>
 	    <Button 
 	        android:background="@drawable/button"

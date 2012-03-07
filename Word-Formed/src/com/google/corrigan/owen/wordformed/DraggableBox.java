@@ -2,7 +2,10 @@ package com.google.corrigan.owen.wordformed;
 
 import java.util.Random;
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -11,6 +14,7 @@ import android.graphics.Typeface;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
 
 public class DraggableBox
 {
@@ -32,7 +36,7 @@ public class DraggableBox
 	//Letter stored in tile
 	private char letter;
 	private Context context;
-	
+	private Bitmap tile;
 	boolean notMoved = true;
 	//Constructor. Takes starting position as parameters
 	public DraggableBox(Context context0, float topX, float topY)
@@ -52,6 +56,8 @@ public class DraggableBox
 		Random r = new Random();
 		letter = (char)(r.nextInt(26) + 'A');
 		context = context0;
+		tile = BitmapFactory.decodeFile("images/tile");
+
 	}
 	
 	public DraggableBox(int letter)
@@ -73,7 +79,7 @@ public class DraggableBox
 		//Draw inner Rectangle
 		color.setColor(Color.WHITE);
 		canvas.drawRect(rect2, color);
-		
+		//canvas.drawBitmap(tile, null, rect, color);
 		//Draw letter
 		Paint font = new Paint();
 		font.setColor(Color.BLACK);
