@@ -37,6 +37,8 @@ public class DraggableBox
 	private char letter;
 	private Context context;
 	private Bitmap tile;
+	private Paint paint;
+	
 	boolean notMoved = true;
 	//Constructor. Takes starting position as parameters
 	public DraggableBox(Context context0, float topX, float topY)
@@ -57,7 +59,10 @@ public class DraggableBox
 		letter = (char)(r.nextInt(26) + 'A');
 		context = context0;
 		tile = BitmapFactory.decodeResource(context.getResources(), R.drawable.tile);
-
+		paint = new Paint();
+		paint.setColor(Color.BLACK);
+		paint.setTextSize(30);
+		paint.setTypeface(Typeface.MONOSPACE);
 	}
 	
 	public DraggableBox(int letter)
@@ -72,20 +77,12 @@ public class DraggableBox
 	public void draw(Canvas canvas)
 	{
 		//Draw Outer Rectangle
-		Paint color = new Paint();
-		color.setColor(Color.BLUE);
-		
 		//Draw inner Rectangle
-		color.setColor(Color.WHITE);
-		canvas.drawBitmap(tile, null, rect, color);
+		canvas.drawBitmap(tile, null, rect, paint);
 		//Draw letter
-		Paint font = new Paint();
-		font.setColor(Color.BLACK);
-		font.setTextSize(30);
-		font.setTypeface(Typeface.MONOSPACE);
 		//If being dragged, account for offset
 		if(!dragging)
-			canvas.drawText(letter+"", rectX + 15, rectY + 30, font);
+			canvas.drawText(letter+"", rectX + 15, rectY + 30, paint);
 		//else
 			//canvas.drawText(letter+"", rectX + 15 - 40, rectY + 30 - 40, font); //COME BACK TO THIS
 	}
