@@ -62,11 +62,16 @@ public class CreateBox
 	public void remove(DraggableBox d)
 	{
 		tiles.remove(d);
-		updatePositions();
+		
 		DraggableBox tmp = new DraggableBox(context, 65*8+20, 60);
 		tiles.add(tmp);
 		ref.add(tmp);
-		
+		updatePositions();
+	}
+	
+	public boolean contains(DraggableBox d)
+	{
+		return tiles.contains(d);
 	}
 	
 	//Draws method. Takes canvas as parameter

@@ -114,7 +114,8 @@ public class DraggableBox
 				{
 					drop.remove(this);
 					answer.remove(this);
-					create.remove(this);
+					if(create.contains(this))
+						create.remove(this);
 					//if within drop zone snap to grid
 					if(drop.contains(rectX, rectY))
 					{
