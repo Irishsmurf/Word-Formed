@@ -83,7 +83,7 @@ public class DraggableBox
 		if(!dragging)
 			canvas.drawText(letter+"", rectX + 15, rectY + 35, paint);
 		else
-			canvas.drawText(letter+"", rectX + 15 - 40, rectY + 35 - 40, paint); //COME BACK TO THIS
+			canvas.drawText(letter+"", rectX + 15 - 35, rectY + 35 - 10, paint); //COME BACK TO THIS
 	}
 	
 	//On touch event. Takes MotionEvent and Dropbox as parameter
@@ -101,7 +101,8 @@ public class DraggableBox
 					Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
 					v.vibrate(60);
 					dragging = true;
-					
+					rectSize = 80;
+					paint.setTextSize(60);
 					//Update position immediatly to prevent letter inside from jumping
 					rectX = mouseX;
 					rectY = mouseY;
@@ -129,12 +130,23 @@ public class DraggableBox
 							drop.remove(drop.getFirst());
 						drop.add(this);
 						notMoved = false;
+						rectSize = 45;
+						paint.setTextSize(30);
+						rect = new RectF(rectX, rectY, rectX+rectSize, rectY+rectSize);
+						rect2 = new RectF(rectX + borderSize, rectY + borderSize, 
+								rectX + rectSize - borderSize, rectY + rectSize - borderSize);
 					}
 					else if(answer.contains(rectX, rectY))
 					{
 						if(answer.full())
 							answer.remove(answer.getFirst());
 						answer.add(this);
+						rectSize = 45;
+						paint.setTextSize(30);
+						rect = new RectF(rectX, rectY, rectX+rectSize, rectY+rectSize);
+						rect2 = new RectF(rectX + borderSize, rectY + borderSize, 
+								rectX + rectSize - borderSize, rectY + rectSize - borderSize);
+						
 					}
 					//If box not within dropbox, remove from board
 					//TODO: return null reference to prevent memory leak
