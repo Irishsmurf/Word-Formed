@@ -46,7 +46,7 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 	{
 		public void onTick(long millisUntilFinished)
 		{
-			timeLeft = "Time: "+ String.format("%d:%2d", 
+			timeLeft = "Time: "+ String.format("%d:%02d", 
 						TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished),
 						TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - 
 						TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)));
@@ -194,8 +194,8 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		answer.draw(canvas);
 		create.draw(canvas);
 		this.draw(canvas);
-		background.setTextSize(35);
-		canvas.drawText(timeLeft, 100, 100, background);
+		background.setTextSize(45);
+		canvas.drawText(timeLeft, 150, 80, background);
 		synchronized (db) {
 			for(DraggableBox d: db)
 			{
