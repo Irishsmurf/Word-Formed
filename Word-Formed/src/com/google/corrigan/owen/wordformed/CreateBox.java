@@ -30,6 +30,22 @@ public class CreateBox
 		ref = ref0;
 	}
 	
+	public void setContext(Context context0)
+	{
+		context = context0;
+	}
+	
+	public void setRef(LinkedList<DraggableBox> ref0)
+	{
+		ref = ref0;
+	}
+	
+	public CreateBox(int x, int y, int width, int height)
+	{
+		dragBorder = new RectF(x, y, x+width, y+height);
+		dragFill = new RectF(x+border, y + border, x+width - border, y+ height - border);
+	}
+	
 	public void add(DraggableBox d)
 	{
 		if(tiles.size() < 7)

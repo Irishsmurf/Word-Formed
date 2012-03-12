@@ -1,6 +1,6 @@
 package com.google.corrigan.owen.wordformed;
 
-import java.util.ArrayList;
+
 import java.util.Collections;
 import java.util.LinkedList;
 
@@ -22,7 +22,8 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 	Dropbox drop = new Dropbox(10, 250, 460, 70);
 	Dropbox answer = new Dropbox(10, 450, 460, 70);
 	LinkedList<DraggableBox> db = new LinkedList<DraggableBox>();
-	CreateBox create;
+	CreateBox create = new CreateBox(10, 50, 460, 70);
+	
 	
 	private GameThread thread;
 	
@@ -35,6 +36,8 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		setFocusable(true);
 		getHolder().addCallback(this);
 		create = new CreateBox(10, 50, 460, 70, context, db);
+		create.setContext(context);
+		create.setRef(db);
 		for(int i = 0; i < 7; i++)
 		{
 			DraggableBox d = new DraggableBox(context, i * 65 + 20, 60);
