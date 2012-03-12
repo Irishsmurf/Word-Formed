@@ -11,18 +11,23 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.Log;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-
+import android.view.View;
+import android.view.WindowManager;
 
 public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.Callback
 {
 	private final String TAG = "SINGLEPLAYERGAMEVIEW";
-	Dropbox drop = new Dropbox(10, 250, 460, 70);
-	Dropbox answer = new Dropbox(10, 450, 460, 70);
+	
+	private RectF holdBox;	
+	private CreateBox create = new CreateBox(10, 200, 460, 70);
+	private Dropbox drop = new Dropbox(10, 350, 460, 70);
+	private Dropbox answer = new Dropbox(10, 500, 460, 70);
+	private Display display;
 	LinkedList<DraggableBox> db = new LinkedList<DraggableBox>();
-	CreateBox create = new CreateBox(10, 50, 460, 70);
 	
 	
 	private GameThread thread;
@@ -30,12 +35,14 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 	public SinglePlayerGameView(Context context)
 	{
 		super(context);
+		display = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+		holdBox = new RectF(0, 0, display.getWidth(), display.getHeight());
 		
 		thread = new GameThread(getHolder(), this);
 		
 		setFocusable(true);
 		getHolder().addCallback(this);
-		create = new CreateBox(10, 50, 460, 70, context, db);
+		//create = new CreateBox(10, 50, 460, 70, context, db);
 		create.setContext(context);
 		create.setRef(db);
 		for(int i = 0; i < 7; i++)
