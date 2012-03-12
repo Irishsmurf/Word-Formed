@@ -195,7 +195,7 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		create.draw(canvas);
 		this.draw(canvas);
 		background.setTextSize(45);
-		canvas.drawText(timeLeft, 150, 80, background);
+		canvas.drawText(timeLeft, 130, 80, background);
 		synchronized (db) {
 			for(DraggableBox d: db)
 			{
