@@ -62,7 +62,6 @@ public class CreateBox
 	public void remove(DraggableBox d)
 	{
 		tiles.remove(d);
-		
 		DraggableBox tmp = new DraggableBox(context, 65*8+20, 60);
 		tiles.add(tmp);
 		ref.add(tmp);

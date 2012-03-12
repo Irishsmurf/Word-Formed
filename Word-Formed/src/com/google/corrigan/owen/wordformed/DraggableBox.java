@@ -80,11 +80,10 @@ public class DraggableBox
 		//Draw inner Rectangle
 		canvas.drawBitmap(tile, null, rect, paint);
 		//Draw letter
-		//If being dragged, account for offset
 		if(!dragging)
-			canvas.drawText(letter+"", rectX + 15, rectY + 30, paint);
-		//else
-			//canvas.drawText(letter+"", rectX + 15 - 40, rectY + 30 - 40, font); //COME BACK TO THIS
+			canvas.drawText(letter+"", rectX + 15, rectY + 35, paint);
+		else
+			canvas.drawText(letter+"", rectX + 15 - 40, rectY + 35 - 40, paint); //COME BACK TO THIS
 	}
 	
 	//On touch event. Takes MotionEvent and Dropbox as parameter
