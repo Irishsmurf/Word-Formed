@@ -74,7 +74,7 @@ public class DraggableBox
 	}
 	
 	//Draw method. Takes canvas as parameter
-	public void draw(Canvas canvas)
+	public synchronized void draw(Canvas canvas)
 	{
 		//Draw Outer Rectangle
 		//Draw inner Rectangle
@@ -88,7 +88,7 @@ public class DraggableBox
 	}
 	
 	//On touch event. Takes MotionEvent and Dropbox as parameter
-	public boolean onTouchEvent(MotionEvent event, Dropbox drop, Dropbox answer, CreateBox create)
+	public synchronized boolean onTouchEvent(MotionEvent event, Dropbox drop, Dropbox answer, CreateBox create)
 	{
 		//Store mouse x and y coordinates
 		float mouseX = event.getX();

@@ -20,12 +20,14 @@ public class CreateBox
 	private LinkedList<DraggableBox> tiles = new LinkedList<DraggableBox>();
 	private final String TAG = "DRAGGABLEBOX";
 	private Context context;
+	private LinkedList<DraggableBox> ref;
 	//Constructor. Takes x, y, height and width and parameters
-	public CreateBox(int x, int y, int width, int height, Context context0)
+	public CreateBox(int x, int y, int width, int height, Context context0, LinkedList<DraggableBox> ref0)
 	{
 		dragBorder = new RectF(x, y, x + width, y + height);
 		dragFill = new RectF(x + border, y + border, x + width - border, y + height - border);
 		context = context0;
+		ref = ref0;
 	}
 	
 	public void add(DraggableBox d)
@@ -45,7 +47,10 @@ public class CreateBox
 	{
 		tiles.remove(d);
 		updatePositions();
-		tiles.add(new DraggableBox(context, 65*8+20, 60));
+		DraggableBox tmp = new DraggableBox(context, 65*8+20, 60);
+		tiles.add(tmp);
+		ref.add(tmp);
+		
 	}
 	
 	//Draws method. Takes canvas as parameter

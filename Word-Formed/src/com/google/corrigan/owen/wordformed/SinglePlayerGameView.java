@@ -2,6 +2,7 @@ package com.google.corrigan.owen.wordformed;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,15 +14,14 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
-import android.view.WindowManager;
+
 
 public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.Callback
 {
-	
+	private final String TAG = "SINGLEPLAYERGAMEVIEW";
 	Dropbox drop = new Dropbox(10, 250, 460, 70);
 	Dropbox answer = new Dropbox(10, 450, 460, 70);
-	ArrayList<DraggableBox> db = new ArrayList<DraggableBox>();
+	LinkedList<DraggableBox> db = new LinkedList<DraggableBox>();
 	CreateBox create;
 	
 	private GameThread thread;
@@ -34,7 +34,7 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		
 		setFocusable(true);
 		getHolder().addCallback(this);
-		create = new CreateBox(10, 50, 460, 70, context);
+		create = new CreateBox(10, 50, 460, 70, context, db);
 		for(int i = 0; i < 7; i++)
 		{
 			DraggableBox d = new DraggableBox(context, i * 65 + 20, 60);
@@ -65,7 +65,7 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 	}
 
 	@Override
-	public boolean onTouchEvent(MotionEvent event)
+	public synchronized boolean onTouchEvent(MotionEvent event)
 	{
 		int selected = 0;
 		for(DraggableBox d: db)
@@ -74,12 +74,20 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		}
 		Collections.swap(db, db.size() - 1, selected);
 		
-		for(DraggableBox d: db)
+		try
 		{
-			d.onTouchEvent(event, drop, answer, create);
+			for(DraggableBox d: db)
+			{
+				d.onTouchEvent(event, drop, answer, create);
+			}
+			invalidate();
 		}
-		invalidate();
-		return true;
+		catch(Exception e)
+		{
+			String out = e.toString();
+			Log.d(TAG, out);
+		}
+			return true;
 	}
 
 	@Override
@@ -121,7 +129,7 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		
 	}
 
-	public void render(Canvas canvas)
+	public synchronized void render(Canvas canvas)
 	{	
 		try{
 		//Draw the background...

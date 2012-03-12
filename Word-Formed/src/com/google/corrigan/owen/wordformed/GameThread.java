@@ -28,7 +28,7 @@ public class GameThread extends Thread
 	}
 	
 	@Override
-	public void run()
+	public synchronized void run()
 	{
 		//Boilerplate Initializations
 		Canvas canvas;
