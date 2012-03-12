@@ -18,8 +18,17 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
 
+
+
 public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.Callback
 {
+	public void draw(Canvas canvas)
+	{
+		Paint paint = new Paint();
+		paint.setColor(Color.rgb(42, 63, 82));
+		canvas.drawRect(holdBox, paint);
+		
+	}
 	private final String TAG = "SINGLEPLAYERGAMEVIEW";
 	
 	private RectF holdBox;	
@@ -36,8 +45,8 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 	{
 		super(context);
 		display = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-		holdBox = new RectF(0, 0, display.getWidth(), display.getHeight());
-		
+		holdBox = new RectF(0, 0, display.getWidth(), 180);
+		Log.d(TAG, "Width = "+ display.getWidth() +", Height = "+display.getHeight());
 		thread = new GameThread(getHolder(), this);
 		
 		setFocusable(true);
@@ -67,6 +76,7 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		drop.draw(canvas);
 		answer.draw(canvas);
 		create.draw(canvas);
+		this.draw(canvas); //Draw Top Rectangle
 		
 		for(DraggableBox d: db)
 		{
@@ -155,7 +165,7 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		drop.draw(canvas);
 		answer.draw(canvas);
 		create.draw(canvas);
-			
+		this.draw(canvas);
 		synchronized (db) {
 			for(DraggableBox d: db)
 			{
