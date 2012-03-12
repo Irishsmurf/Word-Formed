@@ -100,14 +100,14 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 			return true;
 	}
 
-	@Override
+	
 	public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3)
 	{
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public void surfaceCreated(SurfaceHolder arg0)
 	{
 		// TODO Auto-generated method stub
@@ -115,7 +115,6 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		thread.start();
 	}
 
-	@Override
 	public void surfaceDestroyed(SurfaceHolder arg0)
 	{
 		boolean retry = true;
