@@ -101,6 +101,13 @@ public class DraggableBox
 					Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
 					v.vibrate(60);
 					dragging = true;
+					
+					//Update position immediatly to prevent letter inside from jumping
+					rectX = mouseX;
+					rectY = mouseY;
+					rect = new RectF(rectX - 40, rectY - 40, rectX+rectSize - 40, rectY+rectSize - 40);
+					rect2 = new RectF(rectX + borderSize - 40, rectY + borderSize - 40, 
+							rectX + rectSize - borderSize - 40, rectY + rectSize - borderSize - 40);
 				}
 				else dragging = false;
 				break;
