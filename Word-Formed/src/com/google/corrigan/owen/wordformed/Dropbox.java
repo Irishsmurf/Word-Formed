@@ -45,6 +45,16 @@ public class Dropbox
 		updatePositions();
 	}
 	
+	public boolean full()
+	{
+		return tiles.size() == 7;
+	}
+	
+	public DraggableBox getFirst()
+	{
+		return tiles.get(0);
+	}
+	
 	//Draws method. Takes canvas as parameter
 	public void draw(Canvas canvas)
 	{

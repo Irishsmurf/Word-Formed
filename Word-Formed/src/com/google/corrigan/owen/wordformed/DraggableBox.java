@@ -118,11 +118,15 @@ public class DraggableBox
 					//if within drop zone snap to grid
 					if(drop.contains(rectX, rectY))
 					{
+						if(drop.full())
+							drop.remove(drop.getFirst());
 						drop.add(this);
 						notMoved = false;
 					}
 					else if(answer.contains(rectX, rectY))
 					{
+						if(answer.full())
+							answer.remove(answer.getFirst());
 						answer.add(this);
 					}
 					//If box not within dropbox, remove from board
