@@ -3,6 +3,7 @@ package com.google.corrigan.owen.wordformed;
 
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.concurrent.TimeUnit;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,6 +11,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
@@ -17,7 +19,8 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
-
+import android.widget.Button;
+import android.os.CountDownTimer;
 
 
 public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.Callback
@@ -36,6 +39,26 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 	private Dropbox drop = new Dropbox(10, 350, 460, 70);
 	private Dropbox answer = new Dropbox(10, 500, 460, 70);
 	private Display display;
+	private Button submit;
+	//private Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
+	private String timeLeft = "3:00";
+	private CountDownTimer clock = new CountDownTimer(180000, 1000)
+	{
+		public void onTick(long millisUntilFinished)
+		{
+			timeLeft = "Time: "+ String.format("%d:%2d", 
+						TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished),
+						TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - 
+						TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)));
+			Log.d(TAG, timeLeft);
+		}
+		
+		public void onFinish()
+		{
+			//TODO
+			timeLeft = "Done!";
+		}
+	};
 	LinkedList<DraggableBox> db = new LinkedList<DraggableBox>();
 	
 	
@@ -49,6 +72,7 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		Log.d(TAG, "Width = "+ display.getWidth() +", Height = "+display.getHeight());
 		thread = new GameThread(getHolder(), this);
 		
+		clock.start();
 		setFocusable(true);
 		getHolder().addCallback(this);
 		//create = new CreateBox(10, 50, 460, 70, context, db);
@@ -72,6 +96,8 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 				R.color.background));
 		canvas.drawRect(0, 0, getWidth(), getHeight(), background);
 		
+		clock.start();
+		Log.d(TAG, "LOLOLOL");
 		//Draw background for dragboxes
 		drop.draw(canvas);
 		answer.draw(canvas);
@@ -150,9 +176,9 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 
 	public synchronized void render(Canvas canvas)
 	{	
+		Paint background = new Paint();
 		try{
 		//Draw the background...
-		Paint background = new Paint();
 		background.setColor(getResources().getColor(
 				R.color.background));
 		canvas.drawRect(0, 0, getWidth(), getHeight(), background);
@@ -162,10 +188,14 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 			e.printStackTrace();
 		}
 		//Draw background for dragboxes
+		
+		background.setColor(Color.WHITE);
 		drop.draw(canvas);
 		answer.draw(canvas);
 		create.draw(canvas);
 		this.draw(canvas);
+		background.setTextSize(35);
+		canvas.drawText(timeLeft, 100, 100, background);
 		synchronized (db) {
 			for(DraggableBox d: db)
 			{

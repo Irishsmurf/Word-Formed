@@ -49,7 +49,6 @@ public class GameThread extends Thread
 					//this.gamePanel.update(); 
 					this.gamePanel.render(canvas); //Render Canvas
 					timeDiff = System.currentTimeMillis() - beginTime;//Time for rendering
-					Log.d("AndroidRuntime", ""+timeDiff);
 					sleepTime = (int)(FRAME_PERIOD - timeDiff);
 					
 					if(sleepTime > 0)
