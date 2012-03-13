@@ -27,6 +27,7 @@ public class DraggableBox
 	private float startY;
 	//Length of rectangle
 	private int rectSize = 45;
+	int gt;
 	//Size of border
 	private int borderSize = 5;
 	//Outer and inner rectangles used for dragging
