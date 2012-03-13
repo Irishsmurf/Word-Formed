@@ -18,7 +18,7 @@ public class Dropbox
 	//Array of references to Draggable boxes stored at certain position
 	private LinkedList<DraggableBox> tiles = new LinkedList<DraggableBox>();
 	private final String TAG = "DRAGGABLEBOX";
-	
+	private char[] word = new char[7];
 	//Constructor. Takes x, y, height and width and parameters
 	public Dropbox(int x, int y, int width, int height)
 	{
@@ -31,6 +31,12 @@ public class Dropbox
 		if(tiles.size() < 7)
 			tiles.add(d);
 		updatePositions();
+		//Adding the current word to an char array for easy printing.
+		for(int i = 0; i < tiles.size(); i++)
+		{
+			word[i] = tiles.get(i).letter();
+		}
+		Log.d("Word: ", new String(word));
 	}
 	
 	public void updatePositions()

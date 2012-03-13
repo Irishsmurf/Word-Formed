@@ -41,6 +41,10 @@ public class DraggableBox
 	
 	boolean notMoved = true;
 	//Constructor. Takes starting position as parameters
+	public char letter()
+	{
+		return letter;
+	}
 	public DraggableBox(Context context0, float topX, float topY)
 	{
 		//Set coordinates of box
