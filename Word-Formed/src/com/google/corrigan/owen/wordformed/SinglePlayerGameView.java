@@ -11,15 +11,12 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
-import android.graphics.Typeface;
 import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.os.CountDownTimer;
 
 
@@ -30,8 +27,8 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		Paint paint = new Paint();
 		paint.setColor(Color.rgb(42, 63, 82));
 		canvas.drawRect(holdBox, paint);
-		
 	}
+	
 	private final String TAG = "SINGLEPLAYERGAMEVIEW";
 	
 	private RectF holdBox;	
@@ -39,9 +36,13 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 	private Dropbox drop = new Dropbox(10, 350, 460, 70);
 	private Dropbox answer = new Dropbox(10, 500, 460, 70);
 	private Display display;
-	private Button submit;
+	private Button submit = new Button(150, 650, 200, 100);
+	private int score = 0;
+	
+	
 	//private Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
 	private String timeLeft = "3:00";
+	
 	private CountDownTimer clock = new CountDownTimer(180000, 1000)
 	{
 		public void onTick(long millisUntilFinished)
@@ -59,8 +60,8 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 			timeLeft = "Done!";
 		}
 	};
-	LinkedList<DraggableBox> db = new LinkedList<DraggableBox>();
 	
+	LinkedList<DraggableBox> db = new LinkedList<DraggableBox>();
 	
 	private GameThread thread;
 	
@@ -69,15 +70,15 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		super(context);
 		display = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
 		holdBox = new RectF(0, 0, display.getWidth(), 180);
-		Log.d(TAG, "Width = "+ display.getWidth() +", Height = "+display.getHeight());
+		Log.d(TAG, "Width = " + display.getWidth() + ", Height = " + display.getHeight());
 		thread = new GameThread(getHolder(), this);
 		
 		clock.start();
 		setFocusable(true);
 		getHolder().addCallback(this);
-		//create = new CreateBox(10, 50, 460, 70, context, db);
 		create.setContext(context);
 		create.setRef(db);
+		
 		for(int i = 0; i < 7; i++)
 		{
 			DraggableBox d = new DraggableBox(context, i * 65 + 20, 60);
@@ -104,6 +105,8 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		create.draw(canvas);
 		this.draw(canvas); //Draw Top Rectangle
 		
+		submit.draw(canvas);
+		
 		for(DraggableBox d: db)
 		{
 			d.draw(canvas);
@@ -120,6 +123,8 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		}
 		Collections.swap(db, db.size() - 1, selected);
 		
+		score += submit.onTouchEvent(event);
+		
 		try
 		{
 			for(DraggableBox d: db)
@@ -133,7 +138,7 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 			String out = e.toString();
 			Log.d(TAG, out);
 		}
-			return true;
+		return true;
 	}
 
 	
@@ -195,7 +200,11 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		create.draw(canvas);
 		this.draw(canvas);
 		background.setTextSize(45);
+		
 		canvas.drawText(timeLeft, 130, 80, background);
+		canvas.drawText("Score: " + score, 150, 150, background);
+		
+		submit.draw(canvas);
 		synchronized (db) {
 			for(DraggableBox d: db)
 			{

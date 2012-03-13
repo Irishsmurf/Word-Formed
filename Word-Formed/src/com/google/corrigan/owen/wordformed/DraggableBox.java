@@ -27,7 +27,6 @@ public class DraggableBox
 	private float startY;
 	//Length of rectangle
 	private int rectSize = 45;
-	int gt;
 	//Size of border
 	private int borderSize = 5;
 	//Outer and inner rectangles used for dragging
@@ -42,10 +41,6 @@ public class DraggableBox
 	
 	boolean notMoved = true;
 	//Constructor. Takes starting position as parameters
-	public char letter()
-	{
-		return letter;
-	}
 	public DraggableBox(Context context0, float topX, float topY)
 	{
 		//Set coordinates of box
@@ -101,6 +96,7 @@ public class DraggableBox
 		{
 			//On mouse down, check if touched within area. If so start dragging
 			case MotionEvent.ACTION_DOWN:
+				Log.d("WORDFORMED", "Action down");
 				if(rect.contains(mouseX, mouseY))
 				{
 					Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
@@ -128,6 +124,7 @@ public class DraggableBox
 					answer.remove(this);
 					if(create.contains(this))
 						create.remove(this);
+					
 					//if within drop zone snap to grid
 					if(drop.contains(rectX, rectY))
 					{

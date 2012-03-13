@@ -14,6 +14,7 @@ public class SinglePlayerGame extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);		
 		setContentView(new SinglePlayerGameView(this));
 		//game.requestFocus();
@@ -31,5 +32,4 @@ public class SinglePlayerGame extends Activity
 		Log.d(TAG, "Stopped");
 		super.onStop();
 	}
-	
 }
