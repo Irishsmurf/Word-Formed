@@ -6,7 +6,9 @@ import java.util.LinkedList;
 import java.util.concurrent.TimeUnit;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -38,12 +40,13 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 	private Display display;
 	private Button submit = new Button(150, 650, 200, 100);
 	private int score = 0;
-	
+	Context context;
+	SurfaceView sv = this;
 	
 	//private Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
 	private String timeLeft = "3:00";
 	
-	private CountDownTimer clock = new CountDownTimer(180000, 1000)
+	private CountDownTimer clock = new CountDownTimer(10000, 1000)
 	{
 		public void onTick(long millisUntilFinished)
 		{
@@ -56,7 +59,18 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		
 		public void onFinish()
 		{
-			//TODO
+			new AlertDialog.Builder(context)
+		      .setMessage("Congradulations, you acheived a score of " + score)
+		      .setTitle("Game Over")
+		      .setCancelable(false)
+		      .setNeutralButton("Ok",
+		         new DialogInterface.OnClickListener() {
+		         public void onClick(DialogInterface dialog, int whichButton){
+		        	 //Close this window
+		        	 sv.setVisibility(INVISIBLE);
+		         }
+		         })
+		      .show();
 			timeLeft = "Done!";
 		}
 	};
@@ -78,6 +92,8 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		getHolder().addCallback(this);
 		create.setContext(context);
 		create.setRef(db);
+		
+		this.context = context;
 		
 		for(int i = 0; i < 7; i++)
 		{
@@ -145,7 +161,6 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 	public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3)
 	{
 		// TODO Auto-generated method stub
-		
 	}
 
 	
