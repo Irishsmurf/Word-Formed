@@ -1,6 +1,5 @@
 package com.google.corrigan.owen.wordformed;
 
-
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.concurrent.TimeUnit;
@@ -46,7 +45,22 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 	//private Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
 	private String timeLeft = "3:00";
 	
-	private CountDownTimer clock = new CountDownTimer(10000, 1000)
+	private CountDownTimer anim = new CountDownTimer(180000, 10)
+	{
+		public void onTick(long millisUntilFinished)
+		{
+			for(DraggableBox d: db)
+				d.anim();
+		}
+
+		@Override
+		public void onFinish()
+		{
+			
+		}
+	};
+	
+	private CountDownTimer clock = new CountDownTimer(180000, 1000)
 	{
 		public void onTick(long millisUntilFinished)
 		{
@@ -88,6 +102,7 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		thread = new GameThread(getHolder(), this);
 		
 		clock.start();
+		anim.start();
 		setFocusable(true);
 		getHolder().addCallback(this);
 		create.setContext(context);
@@ -154,13 +169,13 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 			String out = e.toString();
 			Log.d(TAG, out);
 		}
+		
 		return true;
 	}
 
 	
 	public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3)
 	{
-		// TODO Auto-generated method stub
 	}
 
 	

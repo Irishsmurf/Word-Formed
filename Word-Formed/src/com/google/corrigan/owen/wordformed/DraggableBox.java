@@ -38,6 +38,12 @@ public class DraggableBox
 	private Context context;
 	private Bitmap tile;
 	private Paint paint;
+	private double angle = Math.random() * Math.PI / 2 + Math.PI;
+	private float speed = 10;
+	private float velX = (float) (Math.sin(angle) * speed);
+	private float velY = (float) (Math.cos(angle) * speed);
+	//True when user lets go
+	private boolean flinging = false;
 	
 	boolean notMoved = true;
 	//Constructor. Takes starting position as parameters
@@ -154,10 +160,7 @@ public class DraggableBox
 					//TODO: return null reference to prevent memory leak
 					else
 					{
-						//remove box
-						rect = new RectF();
-						rect2 = new RectF();
-						letter = ' ';
+						flinging = true;
 					}
 				}
 				//Fixes bug for some reason
@@ -177,6 +180,18 @@ public class DraggableBox
 				}
 		}
 		return true;
+	}
+	
+	public void anim()
+	{
+		if(flinging)
+		{
+			rectX += velX;
+			rectY += velY;
+			rect = new RectF(rectX - 40, rectY - 40, rectX+rectSize - 40, rectY+rectSize - 40);
+			rect2 = new RectF(rectX + borderSize - 40, rectY + borderSize - 40, 
+					rectX + rectSize - borderSize - 40, rectY + rectSize - borderSize - 40);
+		}
 	}
 	
 	public boolean isSelected()
