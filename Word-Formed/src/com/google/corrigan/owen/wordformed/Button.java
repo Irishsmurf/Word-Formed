@@ -51,7 +51,7 @@ public class Button
 		canvas.drawRect(outer, borderColor);
 		canvas.drawRect(inner, bgColor);
 
-		canvas.drawText("Submit", inner.left + 35, inner.top + 60, textPaint);
+		canvas.drawText("Submit", inner.left + 80, inner.top + 60, textPaint);
 	}
 
 	public boolean contains(float x, float y)

@@ -6,90 +6,53 @@ import java.io.InputStream;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 import android.app.Activity;
 import android.util.Log;
 
-class Trie
-{
-	public final static char DELIMITER = '\u0001';
-	private Node root;
-	private int size;
-	private int maxDepth;
-	
-	private class Node implements Serializable
-	{
-		public int value;
-		public Node firstChild;
-		public Node nextSibling;
-		
-		public Node(int value)
-		{
-			this.value = value;
-			firstChild = null;
-			nextSibling = null;
-		}
-	}
-	
-	public Trie()
-	{
-		root = new Node('r');
-		size = 0;
-	}
-	
-	public boolean isEntry(String word)
-	{
-		if(word.length() == 0)
-			throw new IllegalArgumentException("Words can't be empty");
-		return
-				isEntry(root, word + DELIMITER, 0);
-	}
-	
-	private boolean isEntry(Node root, String word, int offset)
-	{
-		if(offset == word.length())
-			return true;
-		int c = word.charAt(offset);
-		//Search for node to add to
-		Node next = root.firstChild;
-		while(next != null)
-		{
-			if(next.value < c)
-				next = next.nextSibling;
-			else if (next.value == c)
-				return isEntry(next, word, offset + 1);
-			else 
-				return false;
-		}
-		return false;
-	}
-	
-	public int size()
-	{
-		return size;
-	}
-	
-}
 
 public class Dictionary
 {
 	private Trie prefixTree;
 	
+	/*public Dictionary(Activity act)
+	{
+		prefixTree = new Trie();
+		
+		try{
+				Scanner in = new Scanner(act.getResources().openRawResource(R.raw.word_list));
+				while(in.hasNextLine())
+				{
+					String line = in.nextLine();
+					prefixTree.add(line);
+					Log.d("Loading", line + " added. Total: "+prefixTree.size());
+				}
+		}
+		catch(Exception e)
+		{
+			Log.d("Dictionary", ""+e.getCause());
+		}
+	}*/
 	public Dictionary(Activity act)
 	{
 		try{
-			InputStream file = act.getAssets().open("dict/words.dict"); //new FileInputStream("words.dict");
+			InputStream file = act.getResources().openRawResource(R.raw.words); //new FileInputStream("words.dict");
 			InputStream buffer = new BufferedInputStream(file);
 			ObjectInput input = new ObjectInputStream( buffer );
 			try{
-				prefixTree = (Trie) input.readObject();
+				Object obj = input.readObject();
+				Log.d("Dictionary", "obj.toString: "+obj.toString());
+				//prefixTree = input.readObject();
 			}
 			finally{
 				input.close();
 			}
 		}
 		catch(Exception e){
-			Log.d("Exceptions", ""+e.getCause());
+			e.getStackTrace();
+			Log.d("Exceptions", "ObjectStream : "+ e.getCause());
 		}
 	}
 	

@@ -1,5 +1,6 @@
 package com.google.corrigan.owen.wordformed;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.concurrent.TimeUnit;
@@ -18,6 +19,9 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.WindowManager;
+import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnCompletionListener;
+import android.media.MediaPlayer.OnPreparedListener;
 import android.os.CountDownTimer;
 
 
@@ -37,7 +41,7 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 	private Dropbox drop = new Dropbox(10, 350, 460, 70);
 	private Dropbox answer = new Dropbox(10, 500, 460, 70);
 	private Display display;
-	private Button submit = new Button(150, 650, 200, 100);
+	private Button submit = new Button(100, 650, 280, 100);
 	private int score = 0;
 	Context context;
 	SurfaceView sv = this;
@@ -152,7 +156,26 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		int selected = 0;
 		for(DraggableBox d: db)
 		{
-			if(d.isSelected()) selected = db.indexOf(d);
+			if(d.isSelected())
+			{
+				/*try
+				{
+					MediaPlayer mp = MediaPlayer.create(this.context, R.raw.pop);
+					mp.start();
+					mp.setOnCompletionListener(new OnCompletionListener() {
+						@Override
+						public void onCompletion(MediaPlayer mp)
+						{
+							mp.release();
+						}	
+					});
+				}
+				catch(Exception e)
+				{
+					Log.d(TAG, "ExceptioN!: "+e.getCause());
+				}*/
+				selected = db.indexOf(d);
+			}
 		}
 		if(db.size() != 0)
 			Collections.swap(db, db.size() - 1, selected);
@@ -199,6 +222,7 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 	public void surfaceDestroyed(SurfaceHolder arg0)
 	{
 		boolean retry = true;
+		clock.cancel();
 		while(retry)
 		{
 			try {
