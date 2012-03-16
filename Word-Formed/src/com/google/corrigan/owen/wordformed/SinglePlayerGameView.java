@@ -92,6 +92,8 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 	LinkedList<DraggableBox> db = new LinkedList<DraggableBox>();
 	
 	private GameThread thread;
+
+	private String FPS;
 	
 	public SinglePlayerGameView(Context context)
 	{
@@ -152,8 +154,16 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		{
 			if(d.isSelected()) selected = db.indexOf(d);
 		}
-		Collections.swap(db, db.size() - 1, selected);
+		if(db.size() != 0)
+			Collections.swap(db, db.size() - 1, selected);
 		
+		int rtnScore = submit.onTouchEvent(event);
+		if(rtnScore != 0)
+		{
+			score += rtnScore;
+			answer.clear();
+			//db.clear();
+		}
 		score += submit.onTouchEvent(event);
 		
 		try
@@ -233,6 +243,9 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		
 		canvas.drawText(timeLeft, 130, 80, background);
 		canvas.drawText("Score: " + score, 150, 150, background);
+		background.setTextSize(20);
+		canvas.drawText("FPS: "+FPS, getWidth() - 80, 30, background);
+
 		
 		submit.draw(canvas);
 		synchronized (db) {
@@ -241,6 +254,13 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 				d.draw(canvas);
 			}
 		}
+	}
+
+	public void setFPS(String FPS)
+	{
+		this.FPS = FPS;
+		// TODO Auto-generated method stub
+		
 	}
 }
 

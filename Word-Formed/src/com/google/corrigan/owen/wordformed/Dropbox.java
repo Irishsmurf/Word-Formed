@@ -26,6 +26,10 @@ public class Dropbox
 		dragFill = new RectF(x + border, y + border, x + width - border, y + height - border);
 	}
 	
+	public void clear()
+	{
+		tiles.clear();
+	}
 	public void add(DraggableBox d)
 	{
 		if(tiles.size() < 7)
