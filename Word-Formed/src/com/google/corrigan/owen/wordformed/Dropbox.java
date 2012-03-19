@@ -26,6 +26,17 @@ public class Dropbox
 		dragFill = new RectF(x + border, y + border, x + width - border, y + height - border);
 	}
 	
+	public String tilesToString()
+	{
+		String word = "";
+		for(DraggableBox tile: tiles)
+		{
+			word += tile.getLetter();
+		}
+		Log.d("DropBox", word);
+		return word;
+	}
+	
 	public void add(DraggableBox d)
 	{
 		Log.d("WORDFORMED", "adding tile");
@@ -38,6 +49,7 @@ public class Dropbox
 		}
 		tiles.add(d);
 		updatePositions();
+		tilesToString();
 	}
 	
 	public void updatePositions()
@@ -49,6 +61,15 @@ public class Dropbox
 	public void remove(DraggableBox d)
 	{
 		tiles.remove(d);
+		updatePositions();
+	}
+	
+	public void removeAll()
+	{
+		for(DraggableBox tile: tiles)
+		{
+			tiles.remove(tile);
+		}
 		updatePositions();
 	}
 	

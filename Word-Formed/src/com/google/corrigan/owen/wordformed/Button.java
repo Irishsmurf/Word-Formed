@@ -9,6 +9,8 @@ import android.view.MotionEvent;
 
 public class Button
 {
+	private Dropbox answer;
+	private Dictionary dict;
 	RectF outer;
 	RectF inner;
 	int borderWidth = 5;
@@ -17,14 +19,14 @@ public class Button
 	Paint bgColor = new Paint();
 	Paint textPaint = new Paint();
 	
-	public Button(int x, int y, int width, int height)
+	public Button(Dropbox answer, int x, int y, int width, int height)
 	{
+		this.answer = answer;
 		outer = new RectF(x, y, x + width, y + height);
 		inner = new RectF(x + borderWidth, y + borderWidth, x + width - borderWidth, y + height - borderWidth);
 		
 		borderColor.setColor(Color.BLACK);
 		bgColor.setColor(Color.WHITE);
-		
 		textPaint.setColor(Color.BLACK);
 		textPaint.setTextSize(30);
 		textPaint.setTypeface(Typeface.MONOSPACE);
@@ -52,7 +54,11 @@ public class Button
 				if(outer.contains(event.getX(), event.getY()))
 				{
 					bgColor.setColor(Color.parseColor("#CCCCCC"));
-					score++;
+					if(dict.isWord(answer.tilesToString()))
+					{
+						//answer.removeAll();
+						score++;
+					}
 				}
 				break;
 			case MotionEvent.ACTION_UP:
@@ -62,5 +68,10 @@ public class Button
 				break;
 		}
 		return score;
+	}
+
+	public void setDictionary(Dictionary dict)
+	{
+		this.dict = dict;	
 	}
 }

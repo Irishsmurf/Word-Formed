@@ -37,7 +37,7 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 	private Dropbox drop = new Dropbox(10, 350, 460, 70);
 	private Dropbox answer = new Dropbox(10, 500, 460, 70);
 	private Display display;
-	private Button submit = new Button(150, 650, 200, 100);
+	private Button submit = new Button(answer, 150, 650, 200, 100);
 	private int score = 0;
 	Context context;
 	SurfaceView sv = this;
@@ -92,7 +92,7 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 	
 	private GameThread thread;
 	
-	public SinglePlayerGameView(Context context)
+	public SinglePlayerGameView(Context context, Dictionary dict)
 	{
 		super(context);
 		display = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
@@ -107,6 +107,7 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		create.setContext(context);
 		create.setRef(db);
 		
+		submit.setDictionary(dict);
 		this.context = context;
 		
 		for(int i = 0; i < 7; i++)

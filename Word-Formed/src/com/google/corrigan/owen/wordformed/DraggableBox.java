@@ -51,6 +51,7 @@ public class DraggableBox
 	private float targetX = 0;
 	
 	boolean notMoved = true;
+	
 	//Constructor. Takes starting position as parameters
 	public DraggableBox(Context context0, float topX, float topY)
 	{
@@ -82,6 +83,11 @@ public class DraggableBox
 		 * TO DO: Single Constructor and placer
 		 * letter = letter + 'A';
 		 */
+	}
+	
+	public char getLetter()
+	{
+		return letter;
 	}
 	
 	//Draw method. Takes canvas as parameter
