@@ -208,29 +208,29 @@ public class DraggableBox
 		}
 		else if(movingLeft)
 		{
-			rectX += velX;
-			rect = new RectF(rectX, rectY, rectX + rectSize, rectY + rectSize);
-			rect2 = new RectF(rectX + borderSize, rectY + borderSize, 
-					rectX + rectSize - borderSize, rectY + rectSize - borderSize);
 			if(rectX <= targetX)
 			{
 				rectX = targetX;
 				movingLeft = false;
 				velX = 0;
 			}
-		}
-		else if(movingRight)
-		{
 			rectX += velX;
 			rect = new RectF(rectX, rectY, rectX + rectSize, rectY + rectSize);
 			rect2 = new RectF(rectX + borderSize, rectY + borderSize, 
 					rectX + rectSize - borderSize, rectY + rectSize - borderSize);
+		}
+		else if(movingRight)
+		{
 			if(rectX >= targetX)
 			{
 				rectX = targetX;
 				movingRight = false;
 				velX = 0;
 			}
+			rectX += velX;
+			rect = new RectF(rectX, rectY, rectX + rectSize, rectY + rectSize);
+			rect2 = new RectF(rectX + borderSize, rectY + borderSize, 
+					rectX + rectSize - borderSize, rectY + rectSize - borderSize);
 		}
 	}
 	
@@ -264,5 +264,13 @@ public class DraggableBox
 		rect = new RectF(rectX, rectY, rectX + rectSize, rectY + rectSize);
 		rect2 = new RectF(rectX + borderSize, rectY + borderSize, 
 			rectX + rectSize - borderSize, rectY + rectSize - borderSize);
+	}
+	
+	public void move(float x, float y)
+	{
+		if(rectX > x)
+			moveLeft(x, y);
+		else
+			moveRight(x, y);
 	}
 }

@@ -22,7 +22,8 @@ public class WordFormed extends Activity implements OnClickListener
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
         TextView tv = (TextView) findViewById(R.id.CustomFontText);
         
-        tv.setTypeface(tf);
+        //TODO: Add this, but at the moment it crashes the program
+        //tv.setTypeface(tf);
         
         //Set up click listeners for all the buttons
         View newGameButton = findViewById(R.id.new_game_button);

@@ -42,9 +42,8 @@ public class Dropbox
 	
 	public void updatePositions()
 	{
-		for(int i = 0; i < tiles.size() - 1; i++)
-			tiles.get(i).moveLeft(i*65+20, dragBorder.bottom - 60);
-		//tiles.get(tiles.size() - 1).moveLeft((tiles.size() - 1) * 65, dragBorder.bottom - 60);
+		for(int i = 0; i < tiles.size(); i++)
+			tiles.get(i).move(i*65+20, dragBorder.bottom - 60);
 	}
 	
 	public void remove(DraggableBox d)
