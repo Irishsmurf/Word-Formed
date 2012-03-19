@@ -3,6 +3,7 @@ package com.google.corrigan.owen.wordformed;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -19,6 +20,9 @@ public class WordFormed extends Activity implements OnClickListener
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.main);
+		Dictionary dict = new Dictionary(this.getApplicationContext());
+		Log.d("Dictionary", ""+dict.size());
+		Log.d("Dictionary", ""+dict.isWord("HELLO"));
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
         TextView tv = (TextView) findViewById(R.id.CustomFontText);
         
