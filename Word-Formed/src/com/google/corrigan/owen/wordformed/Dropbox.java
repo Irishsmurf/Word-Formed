@@ -49,7 +49,14 @@ public class Dropbox
 		}
 		tiles.add(d);
 		updatePositions();
-		tilesToString();
+		if(Dictionary.isWord(tilesToString()))
+		{
+			Button.opaque();
+		}
+		else
+		{
+			Button.fade();
+		}
 	}
 	
 	public void updatePositions()
@@ -64,7 +71,7 @@ public class Dropbox
 		updatePositions();
 	}
 	
-	public void removeAll()
+	public synchronized void removeAll()
 	{
 		for(DraggableBox tile: tiles)
 		{
