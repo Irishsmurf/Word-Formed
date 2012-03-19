@@ -1,7 +1,5 @@
 package com.google.corrigan.owen.wordformed;
 
-import java.text.DecimalFormat;
-
 import android.graphics.Canvas;
 import android.util.Log;
 import android.view.SurfaceHolder;
@@ -38,8 +36,7 @@ public class GameThread extends Thread
 		long timeDiff;
 		int sleepTime;
 		int framesSkipped;
-		int delay;
-		long lastFpsTIme = 0;
+		
 		long ticks = 0L;
 		while(running) //While Game runs
 		{
@@ -74,21 +71,8 @@ public class GameThread extends Thread
 					surfaceHolder.unlockCanvasAndPost(canvas);
 				}
 			}
-			
-			delay = (int)(System.currentTimeMillis() - lastFpsTIme);
-			if(delay > 1000)
-			{
-				double FPS = (((double)ticks)/ delay)*1000;
-				ticks = 0;
-				lastFpsTIme = System.currentTimeMillis();
-				
-				DecimalFormat df = new DecimalFormat("#.##");
-				this.gamePanel.setFPS(df.format(FPS));
-				Log.d(TAG, "FPS: "+FPS);
-			}
-			
 			ticks++;
-			//Log.d(TAG, "FPS= "+ticks);
+			
 			
 		}
 		Log.d(TAG, "Game loops "+ticks+" times.");

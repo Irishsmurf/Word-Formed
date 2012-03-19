@@ -26,32 +26,31 @@ public class Dropbox
 		dragFill = new RectF(x + border, y + border, x + width - border, y + height - border);
 	}
 	
-	public void clear()
-	{
-		tiles.clear();
-	}
 	public void add(DraggableBox d)
 	{
-		if(tiles.size() < 7)
-			tiles.add(d);
+		Log.d("WORDFORMED", "adding tile");
+		if(tiles.size() == 7)
+		{
+			Log.d("WORDFORMED", "is full, removing");
+			DraggableBox tmp = getFirst();
+			tmp.moveLeft(-100, dragBorder.bottom - 60);
+			tiles.remove(tmp);
+		}
+		tiles.add(d);
 		updatePositions();
 	}
 	
 	public void updatePositions()
 	{
-		for(int i = 0; i < tiles.size(); i++)
-			tiles.get(i).move(i*65+20, dragBorder.bottom - 60);
+		for(int i = 0; i < tiles.size() - 1; i++)
+			tiles.get(i).moveLeft(i*65+20, dragBorder.bottom - 60);
+		//tiles.get(tiles.size() - 1).moveLeft((tiles.size() - 1) * 65, dragBorder.bottom - 60);
 	}
 	
 	public void remove(DraggableBox d)
 	{
 		tiles.remove(d);
 		updatePositions();
-	}
-	
-	public boolean full()
-	{
-		return tiles.size() == 7;
 	}
 	
 	public DraggableBox getFirst()

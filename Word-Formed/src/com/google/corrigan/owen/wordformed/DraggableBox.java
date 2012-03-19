@@ -1,11 +1,9 @@
 package com.google.corrigan.owen.wordformed;
 
-import java.io.IOException;
 import java.util.Random;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -13,9 +11,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Typeface;
-import android.media.MediaPlayer;
-import android.media.MediaPlayer.OnCompletionListener;
-import android.media.MediaPlayer.OnPreparedListener;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -43,12 +40,15 @@ public class DraggableBox
 	private Context context;
 	private Bitmap tile;
 	private Paint paint;
-	private double angle = Math.random() * Math.PI / 2 + Math.PI;
-	private float speed = 10;
-	private float velX = (float) (Math.sin(angle) * speed);
-	private float velY = (float) (Math.cos(angle) * speed);
+	private float speed = 5;
+	private float velX;
+	private float velY;
 	//True when user lets go
 	private boolean flinging = false;
+	private int transperancy = 255;
+	private boolean movingLeft = false;
+	private boolean movingRight = false;
+	private float targetX = 0;
 	
 	boolean notMoved = true;
 	//Constructor. Takes starting position as parameters
@@ -89,9 +89,12 @@ public class DraggableBox
 	{
 		//Draw Outer Rectangle
 		//Draw inner Rectangle
-		canvas.drawBitmap(tile, null, rect, paint);
+		Drawable box = context.getResources().getDrawable(R.drawable.tile);
+		Bitmap bitmap = ((BitmapDrawable)box).getBitmap();
+		paint.setAlpha(transperancy);
+		canvas.drawBitmap(bitmap, null, rect, paint);
 		//Draw letter
-		if(!dragging)
+		if(!dragging && !flinging)
 			canvas.drawText(letter+"", rectX + 15, rectY + 35, paint);
 		else
 			canvas.drawText(letter+"", rectX + 15 - 35, rectY + 35 - 10, paint); //COME BACK TO THIS
@@ -107,15 +110,16 @@ public class DraggableBox
 		{
 			//On mouse down, check if touched within area. If so start dragging
 			case MotionEvent.ACTION_DOWN:
-				Log.d("WORDFORMED", "Action down");
-				if(rect.contains(mouseX, mouseY))
+				startX = mouseX;
+				startY = mouseY;
+				if(rect.contains(mouseX, mouseY) && !flinging)
 				{
 					Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
 					v.vibrate(60);
 					dragging = true;
 					rectSize = 80;
 					paint.setTextSize(60);
-					//Update position immediatly to prevent letter inside from jumping
+					//Update position immediately to prevent letter inside from jumping
 					rectX = mouseX;
 					rectY = mouseY;
 					rect = new RectF(rectX - 40, rectY - 40, rectX+rectSize - 40, rectY+rectSize - 40);
@@ -129,8 +133,15 @@ public class DraggableBox
 			 * Or be deleted otherwise
 			*/
 			case MotionEvent.ACTION_UP:
+				//angle = Math.atan(mouseY - startY  / mouseX - startX);
 				if(dragging)
 				{
+					velY = (mouseY - startY);
+					velX = (mouseX - startX);
+					float factor = (float)Math.sqrt(velX * velX + velY * velY) / speed;
+					velX /= factor;
+					velY /= factor;
+					
 					drop.remove(this);
 					answer.remove(this);
 					if(create.contains(this))
@@ -139,8 +150,6 @@ public class DraggableBox
 					//if within drop zone snap to grid
 					if(drop.contains(rectX, rectY))
 					{
-						if(drop.full())
-							drop.remove(drop.getFirst());
 						drop.add(this);
 						notMoved = false;
 						rectSize = 45;
@@ -151,8 +160,6 @@ public class DraggableBox
 					}
 					else if(answer.contains(rectX, rectY))
 					{
-						if(answer.full())
-							answer.remove(answer.getFirst());
 						answer.add(this);
 						rectSize = 45;
 						paint.setTextSize(30);
@@ -196,6 +203,34 @@ public class DraggableBox
 			rect = new RectF(rectX - 40, rectY - 40, rectX+rectSize - 40, rectY+rectSize - 40);
 			rect2 = new RectF(rectX + borderSize - 40, rectY + borderSize - 40, 
 					rectX + rectSize - borderSize - 40, rectY + rectSize - borderSize - 40);
+			if(transperancy > 0)
+				transperancy -= 5;
+		}
+		else if(movingLeft)
+		{
+			rectX += velX;
+			rect = new RectF(rectX, rectY, rectX + rectSize, rectY + rectSize);
+			rect2 = new RectF(rectX + borderSize, rectY + borderSize, 
+					rectX + rectSize - borderSize, rectY + rectSize - borderSize);
+			if(rectX <= targetX)
+			{
+				rectX = targetX;
+				movingLeft = false;
+				velX = 0;
+			}
+		}
+		else if(movingRight)
+		{
+			rectX += velX;
+			rect = new RectF(rectX, rectY, rectX + rectSize, rectY + rectSize);
+			rect2 = new RectF(rectX + borderSize, rectY + borderSize, 
+					rectX + rectSize - borderSize, rectY + rectSize - borderSize);
+			if(rectX >= targetX)
+			{
+				rectX = targetX;
+				movingRight = false;
+				velX = 0;
+			}
 		}
 	}
 	
@@ -205,9 +240,26 @@ public class DraggableBox
 	}
 	
 	//Move this tile to a specific x and y position. Takes x and y position as parameters
-	public void move(float x, float y)
+	public void moveLeft(float x, float y)
 	{
-		rectX = x;
+		targetX = x;
+		movingLeft = true;
+		
+		velX = -1 * speed;
+		//rectX = x;
+		rectY = y;
+		rect = new RectF(rectX, rectY, rectX + rectSize, rectY + rectSize);
+		rect2 = new RectF(rectX + borderSize, rectY + borderSize, 
+			rectX + rectSize - borderSize, rectY + rectSize - borderSize);
+	}
+	
+	public void moveRight(float x, float y)
+	{
+		targetX = x;
+		movingRight = true;
+		
+		velX = speed;
+		//rectX = x;
 		rectY = y;
 		rect = new RectF(rectX, rectY, rectX + rectSize, rectY + rectSize);
 		rect2 = new RectF(rectX + borderSize, rectY + borderSize, 

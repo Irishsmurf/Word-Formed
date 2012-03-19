@@ -56,7 +56,7 @@ public class CreateBox
 	public void updatePositions()
 	{
 		for(int i = 0; i < tiles.size(); i++)
-			tiles.get(i).move(i*65+20, dragBorder.bottom - 60);
+			tiles.get(i).moveLeft(i*65+20, dragBorder.bottom - 60);
 	}
 	
 	public void remove(DraggableBox d)

@@ -1,6 +1,5 @@
 package com.google.corrigan.owen.wordformed;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.concurrent.TimeUnit;
@@ -19,9 +18,6 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.WindowManager;
-import android.media.MediaPlayer;
-import android.media.MediaPlayer.OnCompletionListener;
-import android.media.MediaPlayer.OnPreparedListener;
 import android.os.CountDownTimer;
 
 
@@ -41,7 +37,7 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 	private Dropbox drop = new Dropbox(10, 350, 460, 70);
 	private Dropbox answer = new Dropbox(10, 500, 460, 70);
 	private Display display;
-	private Button submit = new Button(100, 650, 280, 100);
+	private Button submit = new Button(150, 650, 200, 100);
 	private int score = 0;
 	Context context;
 	SurfaceView sv = this;
@@ -72,7 +68,6 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 						TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished),
 						TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - 
 						TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)));
-			Log.d(TAG, timeLeft);
 		}
 		
 		public void onFinish()
@@ -96,8 +91,6 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 	LinkedList<DraggableBox> db = new LinkedList<DraggableBox>();
 	
 	private GameThread thread;
-
-	private String FPS;
 	
 	public SinglePlayerGameView(Context context)
 	{
@@ -135,7 +128,6 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		canvas.drawRect(0, 0, getWidth(), getHeight(), background);
 		
 		clock.start();
-		Log.d(TAG, "LOLOLOL");
 		//Draw background for dragboxes
 		drop.draw(canvas);
 		answer.draw(canvas);
@@ -156,37 +148,10 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		int selected = 0;
 		for(DraggableBox d: db)
 		{
-			if(d.isSelected())
-			{
-				/*try
-				{
-					MediaPlayer mp = MediaPlayer.create(this.context, R.raw.pop);
-					mp.start();
-					mp.setOnCompletionListener(new OnCompletionListener() {
-						@Override
-						public void onCompletion(MediaPlayer mp)
-						{
-							mp.release();
-						}	
-					});
-				}
-				catch(Exception e)
-				{
-					Log.d(TAG, "ExceptioN!: "+e.getCause());
-				}*/
-				selected = db.indexOf(d);
-			}
+			if(d.isSelected()) selected = db.indexOf(d);
 		}
-		if(db.size() != 0)
-			Collections.swap(db, db.size() - 1, selected);
+		Collections.swap(db, db.size() - 1, selected);
 		
-		int rtnScore = submit.onTouchEvent(event);
-		if(rtnScore != 0)
-		{
-			score += rtnScore;
-			answer.clear();
-			//db.clear();
-		}
 		score += submit.onTouchEvent(event);
 		
 		try
@@ -200,7 +165,7 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		catch(Exception e)
 		{
 			String out = e.toString();
-			Log.d(TAG, out);
+			//Log.d(TAG, out);
 		}
 		
 		return true;
@@ -222,7 +187,6 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 	public void surfaceDestroyed(SurfaceHolder arg0)
 	{
 		boolean retry = true;
-		clock.cancel();
 		while(retry)
 		{
 			try {
@@ -267,9 +231,6 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		
 		canvas.drawText(timeLeft, 130, 80, background);
 		canvas.drawText("Score: " + score, 150, 150, background);
-		background.setTextSize(20);
-		canvas.drawText("FPS: "+FPS, getWidth() - 80, 30, background);
-
 		
 		submit.draw(canvas);
 		synchronized (db) {
@@ -278,13 +239,6 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 				d.draw(canvas);
 			}
 		}
-	}
-
-	public void setFPS(String FPS)
-	{
-		this.FPS = FPS;
-		// TODO Auto-generated method stub
-		
 	}
 }
 
