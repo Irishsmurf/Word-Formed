@@ -51,7 +51,6 @@ public class DraggableBox
 	private float targetX = 0;
 	
 	boolean notMoved = true;
-	
 	//Constructor. Takes starting position as parameters
 	public DraggableBox(Context context0, float topX, float topY)
 	{
@@ -246,7 +245,7 @@ public class DraggableBox
 	}
 	
 	//Move this tile to a specific x and y position. Takes x and y position as parameters
-	public void moveLeft(float x, float y)
+	private void moveLeft(float x, float y)
 	{
 		targetX = x;
 		movingLeft = true;
@@ -259,7 +258,7 @@ public class DraggableBox
 			rectX + rectSize - borderSize, rectY + rectSize - borderSize);
 	}
 	
-	public void moveRight(float x, float y)
+	private void moveRight(float x, float y)
 	{
 		targetX = x;
 		movingRight = true;

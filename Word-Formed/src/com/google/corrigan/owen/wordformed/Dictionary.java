@@ -16,14 +16,14 @@ import android.util.Log;
 
 public class Dictionary
 {
-	private static ArrayList<String> data;
+	private ArrayList<String> data;
 	
 	public Dictionary(Context context)
 	{
 		doLoad(context);
 	}
 	
-	public static boolean isWord(String word)
+	public boolean isWord(String word)
 	{
 		int index = Collections.binarySearch(data, word);
 		return index >= 0;
@@ -51,7 +51,7 @@ public class Dictionary
 		}
 	}
 	
-	public static int size()
+	public int size()
 	{
 		return data.size();
 	}

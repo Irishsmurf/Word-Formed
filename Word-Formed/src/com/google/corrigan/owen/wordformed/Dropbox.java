@@ -44,19 +44,12 @@ public class Dropbox
 		{
 			Log.d("WORDFORMED", "is full, removing");
 			DraggableBox tmp = getFirst();
-			tmp.moveLeft(-100, dragBorder.bottom - 60);
+			tmp.move(-100, dragBorder.bottom - 60);
 			tiles.remove(tmp);
 		}
 		tiles.add(d);
 		updatePositions();
-		if(Dictionary.isWord(tilesToString()))
-		{
-			Button.opaque();
-		}
-		else
-		{
-			Button.fade();
-		}
+		tilesToString();
 	}
 	
 	public void updatePositions()
@@ -71,7 +64,7 @@ public class Dropbox
 		updatePositions();
 	}
 	
-	public synchronized void removeAll()
+	public void removeAll()
 	{
 		for(DraggableBox tile: tiles)
 		{
