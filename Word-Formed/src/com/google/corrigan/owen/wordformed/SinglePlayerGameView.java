@@ -60,7 +60,7 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		}
 	};
 	
-	private CountDownTimer clock = new CountDownTimer(5000, 1000)
+	private CountDownTimer clock = new CountDownTimer(180000, 1000)
 	{
 		public void onTick(long millisUntilFinished)
 		{
