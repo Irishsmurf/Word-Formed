@@ -64,7 +64,7 @@ public class Dropbox
 		updatePositions();
 	}
 	
-	public void removeAll()
+	public synchronized void removeAll()
 	{
 		for(DraggableBox tile: tiles)
 		{

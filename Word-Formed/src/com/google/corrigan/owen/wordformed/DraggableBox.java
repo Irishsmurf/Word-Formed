@@ -2,7 +2,6 @@ package com.google.corrigan.owen.wordformed;
 
 import java.util.Random;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,13 +13,10 @@ import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Vibrator;
-import android.util.Log;
 import android.view.MotionEvent;
-import android.view.View;
 
 public class DraggableBox
 {
-	private static final String TAG = "DRAGGABLEBOX";
 	//Top left X and Y coordinates of draggable box
 	private float rectX;
 	private float rectY;
