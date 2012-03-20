@@ -37,6 +37,16 @@ public class Dropbox
 		return word;
 	}
 	
+	public int getScore()
+	{
+		int val = 0;
+		for(DraggableBox tile: tiles)
+		{
+			val += tile.getValue();
+		}
+		return val;
+	}
+	
 	public void add(DraggableBox d)
 	{
 		Log.d("WORDFORMED", "adding tile");
@@ -64,11 +74,15 @@ public class Dropbox
 		updatePositions();
 	}
 	
-	public void removeAll()
+	public synchronized void removeAll()
 	{
-		for(DraggableBox tile: tiles)
+		LinkedList<DraggableBox> clone = (LinkedList<DraggableBox>) tiles.clone();
+		for(DraggableBox tile: clone)
 		{
-			tiles.remove(tile);
+			
+			DraggableBox tmp = getFirst();
+			tmp.move(-100, dragBorder.bottom - 60);
+			tiles.remove(tmp);		
 		}
 		updatePositions();
 	}

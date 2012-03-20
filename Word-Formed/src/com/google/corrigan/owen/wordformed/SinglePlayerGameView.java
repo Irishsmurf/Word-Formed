@@ -96,7 +96,7 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 	
 	private GameThread thread;
 	
-	public SinglePlayerGameView(Context context, Dictionary dict)
+	public SinglePlayerGameView(Context context)
 	{
 		super(context);
 		display = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
@@ -111,7 +111,6 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		create.setContext(context);
 		create.setRef(db);
 		
-		submit.setDictionary(dict);
 		this.context = context;
 		
 		for(int i = 0; i < 7; i++)
