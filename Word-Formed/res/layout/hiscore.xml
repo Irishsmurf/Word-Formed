@@ -30,377 +30,401 @@
 	            android:background="@color/light_grey" >
 	
 	            <TextView
+	                android:id="@+id/name1"
 	                android:layout_height="40dp"
 	                android:textColor="@color/black"
 	                android:layout_column="1"
 	                android:paddingTop="10dp"
 	                android:paddingLeft="15dp"
-	                android:text="1. Owen" />
+	                 />
 	             <TextView
+	                android:id="@+id/score1"
 	                android:layout_height="40dp"
 	                android:textColor="@color/black"
 	                android:layout_column="1"
 	                android:paddingTop="10dp"
 	                android:paddingRight="15dp"
-	                android:text="123" />
+	                 />
 	        </TableRow>
 	
 	        <TableRow
 	             android:background="@color/light_blue" >
 	
 	            <TextView
+	                android:id="@+id/name2"
 	                android:layout_height="40dp"
 	                android:textColor="@color/black"
 	                android:layout_column="1"
 	                android:paddingTop="10dp"
 	                android:paddingLeft="15dp"
-	                android:text="2. Owen" />
+	                 />
 	             <TextView
+	                android:id="@+id/score2"
 	                android:layout_height="40dp"
 	                android:textColor="@color/black"
 	                android:layout_column="1"
 	                android:paddingTop="10dp"
-	                android:text="123" />
+	                 />
 	        </TableRow>
 	        
 	        <TableRow 
 	            android:background="@color/light_grey" >
 	
 	            <TextView
+	                android:id="@+id/name3"
 	                android:layout_height="40dp"
 	                android:textColor="@color/black"
 	                android:layout_column="1"
 	                android:paddingTop="10dp"
 	                android:paddingLeft="15dp"
-	                android:text="3. Owen" />
+	                 />
 	             <TextView
+	                 android:id="@+id/score3"
 	                android:layout_height="40dp"
 	                android:textColor="@color/black"
 	                android:layout_column="1"
 	                android:paddingTop="10dp"
-	                android:text="123" />
+	                 />
 	        </TableRow>
 	
 	        <TableRow
 	             android:background="@color/light_blue" >
 	
 	            <TextView
+	                android:id="@+id/name4"
 	                android:layout_height="40dp"
 	                android:textColor="@color/black"
 	                android:layout_column="1"
 	                android:paddingTop="10dp"
 	                android:paddingLeft="15dp"
-	                android:text="4. Owen" />
+	                 />
 	             <TextView
+	                android:id="@+id/score4"
 	                android:layout_height="40dp"
 	                android:textColor="@color/black"
 	                android:layout_column="1"
 	                android:paddingTop="10dp"
-	                android:text="123" />
+	                 />
 	        </TableRow>
 	        
 	        <TableRow 
 	            android:background="@color/light_grey" >
 	
 	            <TextView
+	                android:id="@+id/name5"
 	                android:layout_height="40dp"
 	                android:textColor="@color/black"
 	                android:layout_column="1"
 	                android:paddingTop="10dp"
 	                android:paddingLeft="15dp"
-	                android:text="5. Owen" />
+	                 />
 	             <TextView
+	                android:id="@+id/score5"
 	                android:layout_height="40dp"
 	                android:textColor="@color/black"
 	                android:layout_column="1"
 	                android:paddingTop="10dp"
-	                android:text="123" />
+	                 />
 	        </TableRow>
 	
 	        <TableRow
 	             android:background="@color/light_blue" >
 	
 	            <TextView
+	                android:id="@+id/name6"
 	                android:layout_height="40dp"
 	                android:textColor="@color/black"
 	                android:layout_column="1"
 	                android:paddingTop="10dp"
 	                android:paddingLeft="15dp"
-	                android:text="6. Owen" />
+	                 />
 	             <TextView
+	                android:id="@+id/score6"
 	                android:layout_height="40dp"
 	                android:textColor="@color/black"
 	                android:layout_column="1"
 	                android:paddingTop="10dp"
-	                android:text="123" />
+	                 />
 	        </TableRow>
 	        
 	        <TableRow 
 	            android:background="@color/light_grey" >
 	
 	            <TextView
+	                android:id="@+id/name7"
 	                android:layout_height="40dp"
 	                android:textColor="@color/black"
 	                android:layout_column="1"
 	                android:paddingTop="10dp"
 	                android:paddingLeft="15dp"
-	                android:text="7. Owen" />
+	                 />
 	             <TextView
+	                 android:id="@+id/score7"
 	                android:layout_height="40dp"
 	                android:textColor="@color/black"
 	                android:layout_column="1"
 	                android:paddingTop="10dp"
-	                android:text="123" />
+	                 />
 	        </TableRow>
 	
 	        <TableRow
 	             android:background="@color/light_blue" >
 	
 	            <TextView
+	                android:id="@+id/name8"
 	                android:layout_height="40dp"
 	                android:textColor="@color/black"
 	                android:layout_column="1"
 	                android:paddingTop="10dp"
 	                android:paddingLeft="15dp"
-	                android:text="8. Owen" />
+	                 />
 	             <TextView
+	                android:id="@+id/score8"
 	                android:layout_height="40dp"
 	                android:textColor="@color/black"
 	                android:layout_column="1"
 	                android:paddingTop="10dp"
-	                android:text="123" />
+	                 />
 	        </TableRow>
 	        
 	        <TableRow 
 	            android:background="@color/light_grey" >
 	
 	            <TextView
+	                android:id="@+id/name9"
 	                android:layout_height="40dp"
 	                android:textColor="@color/black"
 	                android:layout_column="1"
 	                android:paddingTop="10dp"
 	                android:paddingLeft="15dp"
-	                android:text="9. Owen" />
+	                 />
 	             <TextView
+	                android:id="@+id/score9"
 	                android:layout_height="40dp"
 	                android:textColor="@color/black"
 	                android:layout_column="1"
 	                android:paddingTop="10dp"
-	                android:text="123" />
+	                 />
 	        </TableRow>
 	
 	        <TableRow
 	             android:background="@color/light_blue" >
 	
 	            <TextView
+	                android:id="@+id/name10"
 	                android:layout_height="40dp"
 	                android:textColor="@color/black"
 	                android:layout_column="1"
 	                android:paddingTop="10dp"
 	                android:paddingLeft="15dp"
-	                android:text="10. Owen" />
+	                 />
 	             <TextView
+	                android:id="@+id/score10"
 	                android:layout_height="40dp"
 	                android:textColor="@color/black"
 	                android:layout_column="1"
 	                android:paddingTop="10dp"
-	                android:text="123" />
+	                 />
 	        </TableRow>
 	        
 	        <TableRow 
 	            android:background="@color/light_grey" >
 	
 	            <TextView
+	                android:id="@+id/name11"
 	                android:layout_height="40dp"
 	                android:textColor="@color/black"
 	                android:layout_column="1"
 	                android:paddingTop="10dp"
 	                android:paddingLeft="15dp"
-	                android:text="11. Owen" />
+	                 />
 	             <TextView
+	                android:id="@+id/score11"
 	                android:layout_height="40dp"
 	                android:textColor="@color/black"
 	                android:layout_column="1"
 	                android:paddingTop="10dp"
-	                android:text="123" />
+	                 />
 	        </TableRow>
 	
 	        <TableRow
 	             android:background="@color/light_blue" >
 	
 	            <TextView
+	                android:id="@+id/name12"
 	                android:layout_height="40dp"
 	                android:textColor="@color/black"
 	                android:layout_column="1"
 	                android:paddingTop="10dp"
 	                android:paddingLeft="15dp"
-	                android:text="12. Owen" />
+	                 />
 	             <TextView
+	                android:id="@+id/score12"
 	                android:layout_height="40dp"
 	                android:textColor="@color/black"
 	                android:layout_column="1"
 	                android:paddingTop="10dp"
-	                android:text="123" />
+	                 />
 	        </TableRow>
 	        
 	        <TableRow 
 	            android:background="@color/light_grey" >
 	
 	            <TextView
+	                android:id="@+id/name13"
 	                android:layout_height="40dp"
 	                android:textColor="@color/black"
 	                android:layout_column="1"
 	                android:paddingTop="10dp"
 	                android:paddingLeft="15dp"
-	                android:text="13. Owen" />
+	                 />
 	             <TextView
+	                android:id="@+id/score13"
 	                android:layout_height="40dp"
 	                android:textColor="@color/black"
 	                android:layout_column="1"
 	                android:paddingTop="10dp"
-	                android:text="123" />
+	                 />
 	        </TableRow>
 	
 	        <TableRow
 	             android:background="@color/light_blue" >
 	
 	            <TextView
+	                android:id="@+id/name14"
 	                android:layout_height="40dp"
 	                android:textColor="@color/black"
 	                android:layout_column="1"
 	                android:paddingTop="10dp"
 	                android:paddingLeft="15dp"
-	                android:text="14. Owen" />
+	                 />
 	             <TextView
+	                android:id="@+id/score14"
 	                android:layout_height="40dp"
 	                android:textColor="@color/black"
 	                android:layout_column="1"
 	                android:paddingTop="10dp"
-	                android:text="123" />
+	                 />
 	        </TableRow>
 	        
 	        <TableRow
 	             android:background="@color/light_grey" >
 	
 	            <TextView
+	                android:id="@+id/name15"
 	                android:layout_height="40dp"
 	                android:textColor="@color/black"
 	                android:layout_column="1"
 	                android:paddingTop="10dp"
 	                android:paddingLeft="15dp"
-	                android:text="15. Owen" />
+	                 />
 	             <TextView
+	                android:id="@+id/score15"
 	                android:layout_height="40dp"
 	                android:textColor="@color/black"
 	                android:layout_column="1"
 	                android:paddingTop="10dp"
-	                android:text="123" />
+	                 />
 	        </TableRow>
 	        
 	        <TableRow
 	             android:background="@color/light_blue" >
 	
 	            <TextView
+	                android:id="@+id/name16"
 	                android:layout_height="40dp"
 	                android:textColor="@color/black"
 	                android:layout_column="1"
 	                android:paddingTop="10dp"
 	                android:paddingLeft="15dp"
-	                android:text="16. Owen" />
+	                 />
 	             <TextView
+	                android:id="@+id/score16"
 	                android:layout_height="40dp"
 	                android:textColor="@color/black"
 	                android:layout_column="1"
 	                android:paddingTop="10dp"
-	                android:text="123" />
+	                 />
 	        </TableRow>
 	        
 	        <TableRow
 	             android:background="@color/light_grey" >
 	
 	            <TextView
+	                android:id="@+id/name17"
 	                android:layout_height="40dp"
 	                android:textColor="@color/black"
 	                android:layout_column="1"
 	                android:paddingTop="10dp"
 	                android:paddingLeft="15dp"
-	                android:text="17. Owen" />
+	                 />
 	             <TextView
+	                android:id="@+id/score17"
 	                android:layout_height="40dp"
 	                android:textColor="@color/black"
 	                android:layout_column="1"
 	                android:paddingTop="10dp"
-	                android:text="123" />
+	                 />
 	        </TableRow>
 	        
 	        <TableRow
 	             android:background="@color/light_blue" >
 	
 	            <TextView
+	                android:id="@+id/name18"
 	                android:layout_height="40dp"
 	                android:textColor="@color/black"
 	                android:layout_column="1"
 	                android:paddingTop="10dp"
 	                android:paddingLeft="15dp"
-	                android:text="18. Owen" />
+	                 />
 	             <TextView
+	                android:id="@+id/score18"
 	                android:layout_height="40dp"
 	                android:textColor="@color/black"
 	                android:layout_column="1"
 	                android:paddingTop="10dp"
-	                android:text="123" />
+	                 />
 	        </TableRow>
 	        
 	        <TableRow
 	             android:background="@color/light_grey" >
 	
 	            <TextView
+	                android:id="@+id/name19"
 	                android:layout_height="40dp"
 	                android:textColor="@color/black"
 	                android:layout_column="1"
 	                android:paddingTop="10dp"
 	                android:paddingLeft="15dp"
-	                android:text="19. Owen" />
+	                 />
 	             <TextView
+	                android:id="@+id/score19"
 	                android:layout_height="40dp"
 	                android:textColor="@color/black"
 	                android:layout_column="1"
 	                android:paddingTop="10dp"
-	                android:text="123" />
+	                 />
 	        </TableRow>
 	        
 	        <TableRow
 	             android:background="@color/light_blue" >
 	
 	            <TextView
+	                android:id="@+id/name20"
 	                android:layout_height="40dp"
 	                android:textColor="@color/black"
 	                android:layout_column="1"
 	                android:paddingTop="10dp"
 	                android:paddingLeft="15dp"
-	                android:text="20. Owen" />
+	                />
 	             <TextView
+	                android:id="@+id/score20"
 	                android:layout_height="40dp"
 	                android:textColor="@color/black"
 	                android:layout_column="1"
 	                android:paddingTop="10dp"
-	                android:text="123" />
-	        </TableRow>
-	        
-	        <TableRow
-	             android:background="@color/background" >
-	
-	            <TextView
-	                android:layout_height="40dp"
-	                android:textColor="@color/black"
-	                android:layout_column="1"
-	                android:paddingTop="10dp"
-	                android:paddingLeft="15dp"/>
-	             <TextView
-	                android:layout_height="40dp"
-	                android:textColor="@color/black"
-	                android:layout_column="1"
-	                android:paddingTop="10dp"/>
+	                />
 	        </TableRow>
 	    </TableLayout>
 	</ScrollView>

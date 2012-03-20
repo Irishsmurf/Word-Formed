@@ -13,6 +13,9 @@ public class HiScore extends Activity
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		setContentView(R.layout.hiscore);	
+        setContentView(R.layout.hiscore);
+		HiScoreManager highScoreManager = new HiScoreManager(getApplicationContext());
+        highScoreManager.readScores();
+		highScoreManager.synch(this);
 	}
 }

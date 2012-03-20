@@ -60,7 +60,7 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		}
 	};
 	
-	private CountDownTimer clock = new CountDownTimer(180000, 1000)
+	private CountDownTimer clock = new CountDownTimer(5000, 1000)
 	{
 		public void onTick(long millisUntilFinished)
 		{
@@ -80,6 +80,10 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		         new DialogInterface.OnClickListener() {
 		         public void onClick(DialogInterface dialog, int whichButton){
 		        	 //Close this window
+		        	 HiScoreManager sm = new HiScoreManager(context);
+		        	 //sm.add("Owen", score);
+		        	 sm.reset();
+		        	 //sm.saveScores();
 		        	 sv.setVisibility(INVISIBLE);
 		         }
 		         })
