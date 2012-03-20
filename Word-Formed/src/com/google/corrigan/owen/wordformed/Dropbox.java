@@ -44,7 +44,6 @@ public class Dropbox
 		{
 			val += tile.getValue();
 		}
-		
 		return val;
 	}
 	

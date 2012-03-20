@@ -66,6 +66,7 @@ public class Button
 					bgColor.setColor(Color.parseColor("#CCCCCC"));
 					if(Dictionary.isWord(answer.tilesToString()))
 					{
+						score += answer.getScore();
 						try
 						{
 							answer.removeAll();
@@ -73,7 +74,6 @@ public class Button
 						catch(Exception e){
 							Log.d("ExceptionS", e.getMessage()+"");
 						}
-						score += answer.getScore();
 					}
 				}
 				break;
