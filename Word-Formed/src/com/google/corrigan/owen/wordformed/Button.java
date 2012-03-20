@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.MotionEvent;
 
 public class Button
@@ -65,8 +66,14 @@ public class Button
 					bgColor.setColor(Color.parseColor("#CCCCCC"));
 					if(Dictionary.isWord(answer.tilesToString()))
 					{
-						//answer.removeAll();
-						score++;
+						try
+						{
+							answer.removeAll();
+						}
+						catch(Exception e){
+							Log.d("ExceptionS", e.getMessage()+"");
+						}
+						score += answer.getScore();
 					}
 				}
 				break;

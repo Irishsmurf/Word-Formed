@@ -20,6 +20,7 @@ public class WordFormed extends Activity implements OnClickListener
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.main);
+		TileGenerator tiles = new TileGenerator(5);
 		Dictionary dict = new Dictionary(this);
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
         TextView tv = (TextView) findViewById(R.id.CustomFontText);

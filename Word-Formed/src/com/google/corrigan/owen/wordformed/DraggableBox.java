@@ -19,7 +19,7 @@ public class DraggableBox
 {
 	//Top left X and Y coordinates of draggable box
 	private float rectX;
-	private float rectY;
+	float rectY;
 	//Hold starting position when the box is picked up
 	private float startX;
 	private float startY;
@@ -45,6 +45,7 @@ public class DraggableBox
 	private boolean movingLeft = false;
 	private boolean movingRight = false;
 	private float targetX = 0;
+	private int value;
 	
 	boolean notMoved = true;
 	//Constructor. Takes starting position as parameters
@@ -63,7 +64,8 @@ public class DraggableBox
 		//Randomly choose a character
 		//TODO: Find a better distribution
 		Random r = new Random();
-		letter = (char)(r.nextInt(26) + 'A');
+		letter = TileGenerator.nextTile();
+		value = TileGenerator.getValue(letter);
 		context = context0;
 		tile = BitmapFactory.decodeResource(context.getResources(), R.drawable.tile);
 		paint = new Paint();
@@ -233,6 +235,11 @@ public class DraggableBox
 			rect2 = new RectF(rectX + borderSize, rectY + borderSize, 
 					rectX + rectSize - borderSize, rectY + rectSize - borderSize);
 		}
+	}
+	
+	public int getValue()
+	{
+		return value;
 	}
 	
 	public boolean isSelected()
