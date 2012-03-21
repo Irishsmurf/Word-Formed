@@ -10,6 +10,7 @@ import android.view.MotionEvent;
 
 public class Button
 {
+	private static boolean clickable = false;
 	private Dropbox answer;
 	RectF outer;
 	RectF inner;
@@ -22,11 +23,13 @@ public class Button
 	public static void opaque()
 	{
 		bgColor.setAlpha(255);
+		clickable = true;
 	}
 	
 	public static void fade()
 	{
 		bgColor.setAlpha(50);
+		clickable = false;
 	}
 	
 	public Button(Dropbox answer, int x, int y, int width, int height)
@@ -37,6 +40,7 @@ public class Button
 		
 		borderColor.setColor(Color.BLACK);
 		bgColor.setColor(Color.WHITE);
+		bgColor.setAlpha(50);
 		textPaint.setColor(Color.BLACK);
 		textPaint.setTextSize(30);
 		textPaint.setTypeface(Typeface.MONOSPACE);
@@ -58,31 +62,36 @@ public class Button
 	public int onTouchEvent(MotionEvent event)
 	{
 		int score = 0;
-		switch(event.getAction())
+	
+		if(clickable)
 		{
-			case MotionEvent.ACTION_DOWN:
-				if(outer.contains(event.getX(), event.getY()))
-				{
-					bgColor.setColor(Color.parseColor("#CCCCCC"));
-					if(Dictionary.isWord(answer.tilesToString()))
+			switch(event.getAction())
+			{
+				case MotionEvent.ACTION_DOWN:
+					if(outer.contains(event.getX(), event.getY()))
 					{
-						score += answer.getScore();
-						try
+						bgColor.setColor(Color.parseColor("#CCCCCC"));
+						if(Dictionary.isWord(answer.tilesToString()))
 						{
-							answer.removeAll();
-						}
-						catch(Exception e){
-							Log.d("ExceptionS", e.getMessage()+"");
+							score += answer.getScore();
+							try
+							{
+								answer.removeAll();
+							}
+							catch(Exception e){
+								Log.d("ExceptionS", e.getMessage()+"");
+							}
 						}
 					}
-				}
-				break;
-			case MotionEvent.ACTION_UP:
-				bgColor.setColor(Color.WHITE);
-				break;
-			default:
-				break;
+					break;
+				case MotionEvent.ACTION_UP:
+					bgColor.setColor(Color.WHITE);
+					break;
+				default:
+					break;
+			}
 		}
+		
 		return score;
 	}
 }

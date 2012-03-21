@@ -58,6 +58,10 @@ public class Dropbox
 			tiles.remove(tmp);
 		}
 		tiles.add(d);
+		if(Dictionary.isWord(tilesToString()))
+			Button.opaque();
+		else
+			Button.fade();
 		updatePositions();
 		tilesToString();
 	}
@@ -71,6 +75,10 @@ public class Dropbox
 	public void remove(DraggableBox d)
 	{
 		tiles.remove(d);
+		if(Dictionary.isWord(tilesToString()))
+			Button.opaque();
+		else
+			Button.fade();
 		updatePositions();
 	}
 	
@@ -84,6 +92,7 @@ public class Dropbox
 			tmp.move(-100, dragBorder.bottom - 60);
 			tiles.remove(tmp);		
 		}
+		Button.opaque();
 		updatePositions();
 	}
 	
