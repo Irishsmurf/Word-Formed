@@ -15,6 +15,7 @@ import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.media.SoundPool.OnLoadCompleteListener;
+import android.os.SystemClock;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -24,8 +25,9 @@ public class DraggableBox
 	//Top left X and Y coordinates of draggable box
 	
 	private static SoundPool sound;
-	private static int popID;
-	private boolean loaded;
+	static int popID;
+	static int submitID;
+	private static boolean loaded;
 
 	
 	private float rectX;
@@ -43,7 +45,7 @@ public class DraggableBox
 	private boolean dragging = false;
 	//Letter stored in tile
 	private char letter;
-	private Context context;
+	private static Context context;
 	private Bitmap tile;
 	private Paint paint;
 	private float speed = 5;
@@ -76,7 +78,7 @@ public class DraggableBox
 		Random r = new Random();
 		letter = TileGenerator.nextTile();
 		value = TileGenerator.getValue(letter);
-		context = context0;
+		context = context0;	
 		tile = BitmapFactory.decodeResource(context.getResources(), R.drawable.tile);
 		paint = new Paint();
 		paint.setColor(Color.BLACK);
@@ -93,6 +95,7 @@ public class DraggableBox
 			}
 		});
 		popID = sound.load(context, R.raw.pop, 1);
+		submitID = sound.load(context, R.raw.submit, 1);
 	}
 	
 	public DraggableBox(int letter)
@@ -138,10 +141,7 @@ public class DraggableBox
 				startY = mouseY;
 				if(rect.contains(mouseX, mouseY) && !flinging)
 				{
-					if(loaded)
-					{
-						sound.play(popID, 1, 1, 1, 0, 1f);
-					}					
+					playSound(popID);	
 					Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
 					v.vibrate(60);
 					dragging = true;
@@ -178,6 +178,7 @@ public class DraggableBox
 					//if within drop zone snap to grid
 					if(drop.contains(rectX, rectY))
 					{
+						playSound(popID);
 						drop.add(this);
 						notMoved = false;
 						rectSize = 45;
@@ -188,6 +189,7 @@ public class DraggableBox
 					}
 					else if(answer.contains(rectX, rectY))
 					{
+						playSound(popID);
 						answer.add(this);
 						rectSize = 45;
 						paint.setTextSize(30);
@@ -305,5 +307,23 @@ public class DraggableBox
 			moveLeft(x, y);
 		else
 			moveRight(x, y);
+	}
+	
+	public static void playSound(int soundID)
+	{
+		if(loaded)
+		{
+			AudioManager am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+			float curVol = (float) am.getStreamVolume(AudioManager.STREAM_MUSIC);
+			float maxVol = (float) am.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+			float vol = curVol/maxVol;
+			int waitCounter = 0;
+			int waitLimit = 100;
+			while(sound.play(soundID, vol, vol, 1, 0, 1.f) == 0 && waitCounter < waitLimit)
+			{
+				waitCounter++;
+				SystemClock.sleep(5);
+			}
+		}				
 	}
 }

@@ -5,11 +5,14 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Typeface;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.util.Log;
 import android.view.MotionEvent;
 
 public class Button
 {
+	
 	private static boolean clickable = false;
 	private Dropbox answer;
 	RectF outer;
@@ -77,6 +80,7 @@ public class Button
 						bgColor.setColor(Color.parseColor("#CCCCCC"));
 						if(Dictionary.isWord(answer.tilesToString()))
 						{
+							//DraggableBox.playSound(DraggableBox.submitID);
 							score += answer.getScore();
 							try
 							{
@@ -90,6 +94,7 @@ public class Button
 					break;
 				case MotionEvent.ACTION_UP:
 					bgColor.setColor(Color.WHITE);
+					Button.fade();
 					break;
 				default:
 					break;

@@ -47,7 +47,7 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 	private Display display;
 	private Button submit = new Button(answer, 150, 650, 200, 100);
 	private int score = 0;
-	Context context;
+	static Context context;
 	SurfaceView sv = this;
 	
 	//private Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");

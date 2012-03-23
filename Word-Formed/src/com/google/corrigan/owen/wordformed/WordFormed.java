@@ -25,7 +25,7 @@ public class WordFormed extends Activity implements OnClickListener
 		Dictionary dict = new Dictionary(this);
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
         TextView tv = (TextView) findViewById(R.id.CustomFontText);
-        
+        Sounds sound = new Sounds(this);
         //TODO: Add this, but at the moment it crashes the program
         tv.setTypeface(tf);
         //Set up click listeners for all the buttons

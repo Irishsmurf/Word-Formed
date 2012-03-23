@@ -10,6 +10,7 @@ import android.util.Log;
 
 public class Dropbox
 {
+	private int type;
 	//X, Y, width and height
 	private int border = 5;
 	//Outer and inner rectangles used to draw it
@@ -59,7 +60,10 @@ public class Dropbox
 		}
 		tiles.add(d);
 		if(Dictionary.isWord(tilesToString()))
+		{
 			Button.opaque();
+			DraggableBox.playSound(DraggableBox.submitID);
+		}
 		else
 			Button.fade();
 		updatePositions();
