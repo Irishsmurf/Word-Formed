@@ -12,13 +12,20 @@ import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.AudioManager;
+import android.media.SoundPool;
+import android.media.SoundPool.OnLoadCompleteListener;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.MotionEvent;
 
 public class DraggableBox
 {
 	//Top left X and Y coordinates of draggable box
 	
+	private static SoundPool sound;
+	private static int popID;
+	private boolean loaded;
 
 	
 	private float rectX;
@@ -75,6 +82,17 @@ public class DraggableBox
 		paint.setColor(Color.BLACK);
 		paint.setTextSize(30);
 		paint.setTypeface(Typeface.MONOSPACE);
+		
+		sound = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
+		sound.setOnLoadCompleteListener(new OnLoadCompleteListener() 
+		{
+			@Override
+			public void onLoadComplete(SoundPool soundPool, int sampleId, int status) 
+			{
+				loaded = true;
+			}
+		});
+		popID = sound.load(context, R.raw.pop, 1);
 	}
 	
 	public DraggableBox(int letter)
@@ -120,6 +138,10 @@ public class DraggableBox
 				startY = mouseY;
 				if(rect.contains(mouseX, mouseY) && !flinging)
 				{
+					if(loaded)
+					{
+						sound.play(popID, 1, 1, 1, 0, 1f);
+					}					
 					Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
 					v.vibrate(60);
 					dragging = true;

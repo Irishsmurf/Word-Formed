@@ -119,16 +119,6 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		create.setContext(context);
 		create.setRef(db);
 		
-		sound = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
-		sound.setOnLoadCompleteListener(new OnLoadCompleteListener() 
-		{
-			@Override
-			public void onLoadComplete(SoundPool soundPool, int sampleId, int status) 
-			{
-				loaded = true;
-			}
-		});
-		soundID = sound.load(context, R.raw.pop, 1);
 		this.context = context;
 		
 		for(int i = 0; i < 7; i++)
