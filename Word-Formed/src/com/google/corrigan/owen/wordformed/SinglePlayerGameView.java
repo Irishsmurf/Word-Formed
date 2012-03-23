@@ -18,6 +18,9 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.WindowManager;
+import android.media.AudioManager;
+import android.media.SoundPool;
+import android.media.SoundPool.OnLoadCompleteListener;
 import android.os.CountDownTimer;
 
 
@@ -30,7 +33,12 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		canvas.drawRect(holdBox, paint);
 	}
 	
+	
 	private final String TAG = "SINGLEPLAYERGAMEVIEW";
+	
+	private SoundPool sound;
+	private int soundID;
+	private boolean loaded = false;
 	
 	private RectF holdBox;	
 	private CreateBox create = new CreateBox(10, 200, 460, 70);
@@ -73,7 +81,7 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		public void onFinish()
 		{
 			new AlertDialog.Builder(context)
-		      .setMessage("Congradulations, you acheived a score of " + score)
+		      .setMessage("Congratulations, you acheived a score of " + score)
 		      .setTitle("Game Over")
 		      .setCancelable(false)
 		      .setNeutralButton("Ok",
@@ -111,6 +119,16 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		create.setContext(context);
 		create.setRef(db);
 		
+		sound = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
+		sound.setOnLoadCompleteListener(new OnLoadCompleteListener() 
+		{
+			@Override
+			public void onLoadComplete(SoundPool soundPool, int sampleId, int status) 
+			{
+				loaded = true;
+			}
+		});
+		soundID = sound.load(context, R.raw.pop, 1);
 		this.context = context;
 		
 		for(int i = 0; i < 7; i++)
@@ -149,6 +167,15 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 	@Override
 	public synchronized boolean onTouchEvent(MotionEvent event)
 	{
+		if(event.getAction() == MotionEvent.ACTION_DOWN)
+		{
+			
+			if(loaded)
+			{
+				sound.play(soundID, 1, 1, 1, 0, 1f);
+				Log.d(TAG, "Played Sound");
+			}
+		}
 		int selected = 0;
 		for(DraggableBox d: db)
 		{

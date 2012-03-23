@@ -16,19 +16,23 @@ public class Button
 	RectF inner;
 	int borderWidth = 5;
 	
-	Paint borderColor = new Paint();
+	static Paint borderColor = new Paint();
 	static Paint bgColor = new Paint();
-	Paint textPaint = new Paint();
+	static Paint textPaint = new Paint();
 	
 	public static void opaque()
 	{
 		bgColor.setAlpha(255);
+		borderColor.setAlpha(255);
+		textPaint.setAlpha(255);
 		clickable = true;
 	}
 	
 	public static void fade()
 	{
 		bgColor.setAlpha(50);
+		borderColor.setAlpha(50);
+		textPaint.setAlpha(50);
 		clickable = false;
 	}
 	
@@ -40,10 +44,10 @@ public class Button
 		
 		borderColor.setColor(Color.BLACK);
 		bgColor.setColor(Color.WHITE);
-		bgColor.setAlpha(50);
 		textPaint.setColor(Color.BLACK);
 		textPaint.setTextSize(30);
 		textPaint.setTypeface(Typeface.MONOSPACE);
+		fade();
 	}
 	
 	public void draw(Canvas canvas)

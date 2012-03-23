@@ -18,6 +18,9 @@ import android.view.MotionEvent;
 public class DraggableBox
 {
 	//Top left X and Y coordinates of draggable box
+	
+
+	
 	private float rectX;
 	float rectY;
 	//Hold starting position when the box is picked up
