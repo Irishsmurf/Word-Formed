@@ -3,7 +3,6 @@ package com.google.corrigan.owen.wordformed;
 import java.util.ArrayList;
 import java.util.Random;
 
-import android.util.Log;
 
 public class TileGenerator
 {	
@@ -20,7 +19,6 @@ public class TileGenerator
 		for(int j = 0; j < dist.length; j++)
 			for(int i = 0; i < tiles[j]; i++ )
 			{
-				Log.d("Distrib", dist[j] + "");
 				bag.add(dist[j]);
 			}
 	}

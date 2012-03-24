@@ -32,6 +32,8 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		Paint paint = new Paint();
 		paint.setColor(Color.rgb(42, 63, 82));
 		canvas.drawRect(holdBox, paint);
+		paint.setColor(Color.rgb(42, 73, 82));
+		canvas.drawRect(scoreBox, paint);
 	}
 	
 	
@@ -41,7 +43,8 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 	private int soundID;
 	private boolean loaded = false;
 	
-	private RectF holdBox;	
+	private RectF holdBox;
+	private RectF scoreBox;
 	private CreateBox create = new CreateBox(10, 200, 460, 70);
 	private Dropbox drop = new Dropbox(10, 350, 460, 70);
 	private Dropbox answer = new Dropbox(10, 500, 460, 70);
@@ -120,6 +123,7 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 	{
 		super(context);
 		display = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+		scoreBox = new RectF(30, 580, display.getWidth() - 30, 640);
 		holdBox = new RectF(0, 0, display.getWidth(), 180);
 		Log.d(TAG, "Width = " + display.getWidth() + ", Height = " + display.getHeight());
 		thread = new GameThread(getHolder(), this);

@@ -71,7 +71,7 @@ public class Button extends Application
 		canvas.drawRect(inner, bgColor);
 		
 		canvas.drawText("Submit", inner.left + 30, inner.top + 60, textPaint);
-		canvas.drawText("Word: "+answer.getScore(), inner.left+20, inner.top - 40, textPaint);
+		canvas.drawText("Word: "+answer.getScore(), inner.left+20, inner.top - 35, textPaint);
 	}
 	
 	public boolean contains(float x, float y)
@@ -83,7 +83,7 @@ public class Button extends Application
 	{
 		int score = 0;
 	
-		if(clickable)
+		if(clickable) 
 		{
 			switch(event.getAction())
 			{
@@ -98,6 +98,7 @@ public class Button extends Application
 							try
 							{
 								answer.removeAll();
+								DraggableBox.playSound(DraggableBox.enteredID);
 							}
 							catch(Exception e){
 								Log.d("ExceptionS", e.getMessage()+"");
