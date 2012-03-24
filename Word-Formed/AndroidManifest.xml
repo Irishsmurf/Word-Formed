@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".HiScoreActivity"
+            android:name=".HiScore"
             android:label="@string/high_score_title"/>
         <activity
             android:name=".HowToPlay"

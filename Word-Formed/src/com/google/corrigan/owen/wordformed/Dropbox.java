@@ -19,7 +19,7 @@ public class Dropbox
 	private LinkedList<DraggableBox> tiles = new LinkedList<DraggableBox>();
 	@SuppressWarnings("unused")
 	private final String TAG = "DRAGGABLEBOX";
-	
+	 
 	//Constructor. Takes x, y, height and width and parameters
 	public Dropbox(int x, int y, int width, int height)
 	{
@@ -51,10 +51,9 @@ public class Dropbox
 	//Method for Adding tiles to the Dropbox
 	public void add(DraggableBox d)
 	{
-		Log.d("WORDFORMED", "adding tile");
+		//size of 7 tiles held.
 		if(tiles.size() == 7)
 		{
-			Log.d("WORDFORMED", "is full, removing");
 			DraggableBox tmp = getFirst();
 			tmp.move(-100, dragBorder.bottom - 60);
 			tiles.remove(tmp);
@@ -79,6 +78,7 @@ public class Dropbox
 		updatePositions();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public synchronized void removeAll()
 	{
 		LinkedList<DraggableBox> clone = (LinkedList<DraggableBox>) tiles.clone();

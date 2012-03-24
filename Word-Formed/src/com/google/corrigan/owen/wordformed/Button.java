@@ -1,5 +1,6 @@
 package com.google.corrigan.owen.wordformed;
 
+import android.app.Application;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -8,8 +9,9 @@ import android.graphics.Typeface;
 import android.util.Log;
 import android.view.MotionEvent;
 
-public class Button
+public class Button extends Application
 {
+	
 	private static boolean clickable = false;
 	private static Dropbox answer;
 	RectF outer;
@@ -55,12 +57,11 @@ public class Button
 		Button.answer = answer;
 		outer = new RectF(x, y, x + width, y + height);
 		inner = new RectF(x + borderWidth, y + borderWidth, x + width - borderWidth, y + height - borderWidth);
-		
 		borderColor.setColor(Color.BLACK);
 		bgColor.setColor(Color.WHITE);
 		textPaint.setColor(Color.BLACK);
-		textPaint.setTextSize(30);
-		textPaint.setTypeface(Typeface.MONOSPACE);
+		textPaint.setTextSize(40);
+		textPaint.setTypeface(WordFormed.tf);
 		fade();
 	}
 	
@@ -70,7 +71,7 @@ public class Button
 		canvas.drawRect(inner, bgColor);
 		
 		canvas.drawText("Submit", inner.left + 30, inner.top + 60, textPaint);
-		canvas.drawText("Word: "+answer.getScore(), inner.left+20, inner.top - 40, textPaint);
+		canvas.drawText("Word: "+answer.getScore(), inner.left+20, inner.top - 35, textPaint);
 	}
 	
 	public boolean contains(float x, float y)
@@ -82,7 +83,7 @@ public class Button
 	{
 		int score = 0;
 	
-		if(clickable)
+		if(clickable) 
 		{
 			switch(event.getAction())
 			{
@@ -93,9 +94,11 @@ public class Button
 						if(Dictionary.isWord(answer.tilesToString()))
 						{
 							score += answer.getScore();
+							SinglePlayerGame.wordList.add(new Word(answer.tilesToString(), answer.getScore()));
 							try
 							{
 								answer.removeAll();
+								DraggableBox.playSound(DraggableBox.enteredID);
 							}
 							catch(Exception e){
 								Log.d("ExceptionS", e.getMessage()+"");
@@ -114,4 +117,6 @@ public class Button
 		
 		return score;
 	}
+
+
 }

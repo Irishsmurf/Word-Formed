@@ -24,6 +24,7 @@ public class DraggableBox
 	private static SoundPool sound;
 	static int popID;
 	static int submitID;
+	static int enteredID;
 	private static boolean loaded;
 
 	
@@ -68,8 +69,6 @@ public class DraggableBox
 		startY = topY;
 		//Calculate size and position of outer and inner box
 		rect = new RectF(rectX, rectY, rectX+rectSize, rectY+rectSize);
-		new RectF(rectX + borderSize, rectY + borderSize, 
-				rectX + rectSize - borderSize, rectY + rectSize - borderSize);
 		//Randomly choose a character
 		//TODO: Find a better distribution
 		letter = TileGenerator.nextTile();
@@ -89,8 +88,9 @@ public class DraggableBox
 				loaded = true;
 			}
 		});
-		popID = sound.load(context, R.raw.pop, 1);
+		popID = sound.load(context, R.raw.pop_sound, 1);
 		submitID = sound.load(context, R.raw.submit, 1);
+		enteredID = sound.load(context, R.raw.entered, 1);
 	}
 	
 	public DraggableBox(int letter)
@@ -313,7 +313,7 @@ public class DraggableBox
 			float maxVol = (float) am.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
 			float vol = curVol/maxVol;
 			int waitCounter = 0;
-			int waitLimit = 100;
+			int waitLimit = 20;
 			while(sound.play(soundID, vol, vol, 1, 0, 1.f) == 0 && waitCounter < waitLimit)
 			{
 				waitCounter++;
