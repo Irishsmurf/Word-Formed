@@ -129,6 +129,9 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		Log.d(TAG, "Width = " + display.getWidth() + ", Height = " + display.getHeight());
 		thread = new GameThread(getHolder(), this);
 		
+		datasource = new HiScoreDataSource(this.getContext());
+		datasource.open();
+		
 		clock.start();
 		anim.start();
 		setFocusable(true);
