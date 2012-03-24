@@ -25,6 +25,7 @@ public class DraggableBox
 	static int popID;
 	static int submitID;
 	static int enteredID;
+	static int finishID;
 	private static boolean loaded;
 
 	
@@ -70,7 +71,6 @@ public class DraggableBox
 		//Calculate size and position of outer and inner box
 		rect = new RectF(rectX, rectY, rectX+rectSize, rectY+rectSize);
 		//Randomly choose a character
-		//TODO: Find a better distribution
 		letter = TileGenerator.nextTile();
 		value = TileGenerator.getValue(letter);
 		context = context0;	
@@ -91,15 +91,9 @@ public class DraggableBox
 		popID = sound.load(context, R.raw.pop_sound, 1);
 		submitID = sound.load(context, R.raw.submit, 1);
 		enteredID = sound.load(context, R.raw.entered, 1);
+		finishID = sound.load(context, R.raw.finish, 1);
 	}
-	
-	public DraggableBox(int letter)
-	{
-		/*
-		 * TO DO: Single Constructor and placer
-		 * letter = letter + 'A';
-		 */
-	}
+
 	
 	public char getLetter()
 	{

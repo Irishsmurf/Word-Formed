@@ -86,6 +86,7 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		
 		public void onFinish()
 		{
+			DraggableBox.playSound(DraggableBox.finishID);
 			List<Word> wordsByScore = new ArrayList<Word>(SinglePlayerGame.wordList);
 			Collections.sort(wordsByScore, new Comparator<Word>() {
 				public int compare(Word o1, Word o2)
@@ -112,6 +113,7 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		         }
 		         })
 		      .show();
+			
 			timeLeft = "Done!";
 		}
 	};
