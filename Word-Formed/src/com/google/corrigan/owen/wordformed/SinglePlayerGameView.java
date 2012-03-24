@@ -21,6 +21,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.WindowManager;
+import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.CountDownTimer;
 
@@ -32,10 +33,7 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		Paint paint = new Paint();
 		paint.setColor(Color.rgb(42, 63, 82));
 		canvas.drawRect(holdBox, paint);
-		paint.setColor(Color.rgb(42, 73, 82));
-		canvas.drawRect(scoreBox, paint);
 	}
-	
 	
 	private final String TAG = "SINGLEPLAYERGAMEVIEW";
 	
@@ -43,8 +41,8 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 	private int soundID;
 	private boolean loaded = false;
 	
-	private RectF holdBox;
-	private RectF scoreBox;
+	private HiScoreDataSource datasource;
+	private RectF holdBox;	
 	private CreateBox create = new CreateBox(10, 200, 460, 70);
 	private Dropbox drop = new Dropbox(10, 350, 460, 70);
 	private Dropbox answer = new Dropbox(10, 500, 460, 70);
@@ -103,10 +101,9 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		         new DialogInterface.OnClickListener() {
 		         public void onClick(DialogInterface dialog, int whichButton){
 		        	 //Close this window
-		        	 HiScoreManager sm = new HiScoreManager(context);
-		        	 //sm.add("Owen", score);
-		        	 sm.reset();
-		        	 //sm.saveScores();
+		        	 datasource.createHiScore("Paddez", score);
+		        	 Log.d("HISCORES", "In SinglePlayerGame, score = " + score);
+		        	 datasource.close();
 		        	 sv.setVisibility(INVISIBLE);
 		         }
 		         })
@@ -123,10 +120,12 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 	{
 		super(context);
 		display = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-		scoreBox = new RectF(30, 580, display.getWidth() - 30, 640);
 		holdBox = new RectF(0, 0, display.getWidth(), 180);
 		Log.d(TAG, "Width = " + display.getWidth() + ", Height = " + display.getHeight());
 		thread = new GameThread(getHolder(), this);
+		
+		datasource = new HiScoreDataSource(this.getContext());
+		datasource.open();
 		
 		clock.start();
 		anim.start();
@@ -135,7 +134,10 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		create.setContext(context);
 		create.setRef(db);
 		
-		SinglePlayerGameView.context = context;
+		sound = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
+		
+		soundID = sound.load(context, R.raw.pop, 1);
+		this.context = context;
 		
 		for(int i = 0; i < 7; i++)
 		{
@@ -147,8 +149,7 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 	
 	@Override
 	protected void onDraw(Canvas canvas)
-	{
-		
+	{	
 		//Draw the background...
 		Paint background = new Paint();
 		background.setColor(getResources().getColor(
@@ -201,7 +202,8 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		}
 		catch(Exception e)
 		{
-		//TODO	
+			String out = e.toString();
+			//Log.d(TAG, out);
 		}
 		
 		return true;

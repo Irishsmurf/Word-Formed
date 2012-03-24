@@ -53,7 +53,7 @@ public class WordFormed extends Activity implements OnClickListener
 				startActivity(new Intent(this, HowToPlay.class));
 				break;
 			case R.id.high_scores_button:
-				startActivity(new Intent(this, HiScore.class));
+				startActivity(new Intent(this, HiScoreActivity.class));
 				break;
 		}
 		

@@ -1,21 +1,48 @@
 package com.google.corrigan.owen.wordformed;
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.view.Window;
-import android.view.WindowManager;
+import android.util.Log;
 
-public class HiScore extends Activity
-{
-	@Override
-	public void onCreate(Bundle savedInstanceState)
+public class HiScore implements Comparable<HiScore>
 	{
-		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.hiscore);
-		HiScoreManager highScoreManager = new HiScoreManager(getApplicationContext());
-        highScoreManager.readScores();
-		highScoreManager.synch(this);
+		private long id;
+		private String name;
+		private int score;
+
+		public long getId() {
+			return id;
+		}
+
+		public void setId(long id) {
+			this.id = id;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		// Will be used by the ArrayAdapter in the ListView
+		@Override
+		public String toString() {
+			return name + " score: " + score;
+		}
+		
+		public void setScore(int score)
+		{
+			this.score = score;
+		}
+		
+		public int getScore(int score)
+		{
+			return score;
+		}
+
+		public int compareTo(HiScore other)
+		{
+			Log.d("HISCORES", "Comparing");
+			return other.score - score;
+		}
 	}
-}
