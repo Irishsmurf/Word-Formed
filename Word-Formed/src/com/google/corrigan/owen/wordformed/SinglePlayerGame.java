@@ -1,8 +1,10 @@
 package com.google.corrigan.owen.wordformed;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import android.app.Activity;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
@@ -11,7 +13,7 @@ import android.view.WindowManager;
 public class SinglePlayerGame extends Activity
 {
 	private static final String TAG = SinglePlayerGame.class.getSimpleName();
-	static ArrayList<String> wordList = new ArrayList<String>();
+	static ArrayList<Word> wordList = new ArrayList<Word>();
 	
 	
 	
@@ -20,7 +22,7 @@ public class SinglePlayerGame extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		
+		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);		
 		setContentView(new SinglePlayerGameView(this));
 		//game.requestFocus();

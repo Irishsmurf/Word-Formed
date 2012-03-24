@@ -2,6 +2,7 @@ package com.google.corrigan.owen.wordformed;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.graphics.Typeface;
 public class WordFormed extends Activity implements OnClickListener
 {
+	public static Typeface tf;
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) 
@@ -25,6 +27,7 @@ public class WordFormed extends Activity implements OnClickListener
         TextView tv = (TextView) findViewById(R.id.CustomFontText);
         //TODO: Add this, but at the moment it crashes the program
         tv.setTypeface(tf);
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
         //Set up click listeners for all the buttons
         View newGameButton = findViewById(R.id.new_game_button);
         newGameButton.setOnClickListener(this);

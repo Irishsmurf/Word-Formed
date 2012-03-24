@@ -61,7 +61,7 @@ public class Button extends Application
 		bgColor.setColor(Color.WHITE);
 		textPaint.setColor(Color.BLACK);
 		textPaint.setTextSize(40);
-		textPaint.setTypeface(Typeface.MONOSPACE);
+		textPaint.setTypeface(WordFormed.tf);
 		fade();
 	}
 	
@@ -94,7 +94,7 @@ public class Button extends Application
 						if(Dictionary.isWord(answer.tilesToString()))
 						{
 							score += answer.getScore();
-							SinglePlayerGame.wordList.add(answer.tilesToString());
+							SinglePlayerGame.wordList.add(new Word(answer.tilesToString(), answer.getScore()));
 							try
 							{
 								answer.removeAll();

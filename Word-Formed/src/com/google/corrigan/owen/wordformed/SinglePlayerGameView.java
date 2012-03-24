@@ -1,7 +1,10 @@
 package com.google.corrigan.owen.wordformed;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import android.app.Activity;
@@ -78,6 +81,17 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		
 		public void onFinish()
 		{
+			List<Word> wordsByScore = new ArrayList<Word>(SinglePlayerGame.wordList);
+			Collections.sort(wordsByScore, new Comparator<Word>() {
+				public int compare(Word o1, Word o2)
+				{
+					return o2.score - o1.score;
+				}
+			});
+			for(Word p: wordsByScore)
+			{
+				Log.d("Words Used", p.word + ": "+p.score);
+			}
 			new AlertDialog.Builder(context)
 		      .setMessage("Congratulations, you acheived a score of " + score)
 		      .setTitle("Game Over")
