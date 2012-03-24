@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/background"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+    
+    <TextView
+			android:layout_height="50dp"
+			android:layout_width="250dp"
+			android:paddingLeft="80dp"
+			android:textColor="@color/white"
+			android:layout_column="1"
+			android:paddingTop="10dp"
+			android:text="High Scores" />
+    
+    <ScrollView
+        android:layout_width="250dp"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:scrollbars="none">
+	    <TableLayout
+	        android:layout_width="250dp"
+	        android:layout_height="fill_parent"
+	        android:stretchColumns="1" >
+	        
+	        <TableRow 
+	            android:background="@color/light_grey" >
+	
+	            <TextView
+	                android:id="@+id/name1"
+	                android:layout_height="40dp"
+	                android:textColor="@color/black"
+	                android:layout_column="1"
+	                android:paddingTop="10dp"
+	                android:paddingLeft="15dp"
+	                 />
+	             <TextView
+	                android:id="@+id/score1"
+	                android:layout_height="40dp"
+	                android:textColor="@color/black"
+	                android:layout_column="1"
+	                android:paddingTop="10dp"
+	                android:paddingRight="15dp"
+	                 />
+	        </TableRow>
+	
+	        <TableRow
+	             android:background="@color/light_blue" >
+	
+	            <TextView
+	                android:id="@+id/name2"
+	                android:layout_height="40dp"
+	                android:textColor="@color/black"
+	                android:layout_column="1"
+	                android:paddingTop="10dp"
+	                android:paddingLeft="15dp"
+	                 />
+	             <TextView
+	                android:id="@+id/score2"
+	                android:layout_height="40dp"
+	                android:textColor="@color/black"
+	                android:layout_column="1"
+	                android:paddingTop="10dp"
+	                 />
+	        </TableRow>
+	        
+	        <TableRow 
+	            android:background="@color/light_grey" >
+	
+	            <TextView
+	                android:id="@+id/name3"
+	                android:layout_height="40dp"
+	                android:textColor="@color/black"
+	                android:layout_column="1"
+	                android:paddingTop="10dp"
+	                android:paddingLeft="15dp"
+	                 />
+	             <TextView
+	                 android:id="@+id/score3"
+	                android:layout_height="40dp"
+	                android:textColor="@color/black"
+	                android:layout_column="1"
+	                android:paddingTop="10dp"
+	                 />
+	        </TableRow>
+	
+	        <TableRow
+	             android:background="@color/light_blue" >
+	
+	            <TextView
+	                android:id="@+id/name4"
+	                android:layout_height="40dp"
+	                android:textColor="@color/black"
+	                android:layout_column="1"
+	                android:paddingTop="10dp"
+	                android:paddingLeft="15dp"
+	                 />
+	             <TextView
+	                android:id="@+id/score4"
+	                android:layout_height="40dp"
+	                android:textColor="@color/black"
+	                android:layout_column="1"
+	                android:paddingTop="10dp"
+	                 />
+	        </TableRow>
+	        
+	        <TableRow 
+	            android:background="@color/light_grey" >
+	
+	            <TextView
+	                android:id="@+id/name5"
+	                android:layout_height="40dp"
+	                android:textColor="@color/black"
+	                android:layout_column="1"
+	                android:paddingTop="10dp"
+	                android:paddingLeft="15dp"
+	                 />
+	             <TextView
+	                android:id="@+id/score5"
+	                android:layout_height="40dp"
+	                android:textColor="@color/black"
+	                android:layout_column="1"
+	                android:paddingTop="10dp"
+	                 />
+	        </TableRow>
+	
+	        <TableRow
+	             android:background="@color/light_blue" >
+	
+	            <TextView
+	                android:id="@+id/name6"
+	                android:layout_height="40dp"
+	                android:textColor="@color/black"
+	                android:layout_column="1"
+	                android:paddingTop="10dp"
+	                android:paddingLeft="15dp"
+	                 />
+	             <TextView
+	                android:id="@+id/score6"
+	                android:layout_height="40dp"
+	                android:textColor="@color/black"
+	                android:layout_column="1"
+	                android:paddingTop="10dp"
+	                 />
+	        </TableRow>
+	        
+	        <TableRow 
+	            android:background="@color/light_grey" >
+	
+	            <TextView
+	                android:id="@+id/name7"
+	                android:layout_height="40dp"
+	                android:textColor="@color/black"
+	                android:layout_column="1"
+	                android:paddingTop="10dp"
+	                android:paddingLeft="15dp"
+	                 />
+	             <TextView
+	                 android:id="@+id/score7"
+	                android:layout_height="40dp"
+	                android:textColor="@color/black"
+	                android:layout_column="1"
+	                android:paddingTop="10dp"
+	                 />
+	        </TableRow>
+	
+	        <TableRow
+	             android:background="@color/light_blue" >
+	
+	            <TextView
+	                android:id="@+id/name8"
+	                android:layout_height="40dp"
+	                android:textColor="@color/black"
+	                android:layout_column="1"
+	                android:paddingTop="10dp"
+	                android:paddingLeft="15dp"
+	                 />
+	             <TextView
+	                android:id="@+id/score8"
+	                android:layout_height="40dp"
+	                android:textColor="@color/black"
+	                android:layout_column="1"
+	                android:paddingTop="10dp"
+	                 />
+	        </TableRow>
+	        
+	        <TableRow 
+	            android:background="@color/light_grey" >
+	
+	            <TextView
+	                android:id="@+id/name9"
+	                android:layout_height="40dp"
+	                android:textColor="@color/black"
+	                android:layout_column="1"
+	                android:paddingTop="10dp"
+	                android:paddingLeft="15dp"
+	                 />
+	             <TextView
+	                android:id="@+id/score9"
+	                android:layout_height="40dp"
+	                android:textColor="@color/black"
+	                android:layout_column="1"
+	                android:paddingTop="10dp"
+	                 />
+	        </TableRow>
+	
+	        <TableRow
+	             android:background="@color/light_blue" >
+	
+	            <TextView
+	                android:id="@+id/name10"
+	                android:layout_height="40dp"
+	                android:textColor="@color/black"
+	                android:layout_column="1"
+	                android:paddingTop="10dp"
+	                android:paddingLeft="15dp"
+	                 />
+	             <TextView
+	                android:id="@+id/score10"
+	                android:layout_height="40dp"
+	                android:textColor="@color/black"
+	                android:layout_column="1"
+	                android:paddingTop="10dp"
+	                 />
+	        </TableRow>
+	        
+	        <TableRow 
+	            android:background="@color/light_grey" >
+	
+	            <TextView
+	                android:id="@+id/name11"
+	                android:layout_height="40dp"
+	                android:textColor="@color/black"
+	                android:layout_column="1"
+	                android:paddingTop="10dp"
+	                android:paddingLeft="15dp"
+	                 />
+	             <TextView
+	                android:id="@+id/score11"
+	                android:layout_height="40dp"
+	                android:textColor="@color/black"
+	                android:layout_column="1"
+	                android:paddingTop="10dp"
+	                 />
+	        </TableRow>
+	
+	        <TableRow
+	             android:background="@color/light_blue" >
+	
+	            <TextView
+	                android:id="@+id/name12"
+	                android:layout_height="40dp"
+	                android:textColor="@color/black"
+	                android:layout_column="1"
+	                android:paddingTop="10dp"
+	                android:paddingLeft="15dp"
+	                 />
+	             <TextView
+	                android:id="@+id/score12"
+	                android:layout_height="40dp"
+	                android:textColor="@color/black"
+	                android:layout_column="1"
+	                android:paddingTop="10dp"
+	                 />
+	        </TableRow>
+	        
+	        <TableRow 
+	            android:background="@color/light_grey" >
+	
+	            <TextView
+	                android:id="@+id/name13"
+	                android:layout_height="40dp"
+	                android:textColor="@color/black"
+	                android:layout_column="1"
+	                android:paddingTop="10dp"
+	                android:paddingLeft="15dp"
+	                 />
+	             <TextView
+	                android:id="@+id/score13"
+	                android:layout_height="40dp"
+	                android:textColor="@color/black"
+	                android:layout_column="1"
+	                android:paddingTop="10dp"
+	                 />
+	        </TableRow>
+	
+	        <TableRow
+	             android:background="@color/light_blue" >
+	
+	            <TextView
+	                android:id="@+id/name14"
+	                android:layout_height="40dp"
+	                android:textColor="@color/black"
+	                android:layout_column="1"
+	                android:paddingTop="10dp"
+	                android:paddingLeft="15dp"
+	                 />
+	             <TextView
+	                android:id="@+id/score14"
+	                android:layout_height="40dp"
+	                android:textColor="@color/black"
+	                android:layout_column="1"
+	                android:paddingTop="10dp"
+	                 />
+	        </TableRow>
+	        
+	        <TableRow
+	             android:background="@color/light_grey" >
+	
+	            <TextView
+	                android:id="@+id/name15"
+	                android:layout_height="40dp"
+	                android:textColor="@color/black"
+	                android:layout_column="1"
+	                android:paddingTop="10dp"
+	                android:paddingLeft="15dp"
+	                 />
+	             <TextView
+	                android:id="@+id/score15"
+	                android:layout_height="40dp"
+	                android:textColor="@color/black"
+	                android:layout_column="1"
+	                android:paddingTop="10dp"
+	                 />
+	        </TableRow>
+	        
+	        <TableRow
+	             android:background="@color/light_blue" >
+	
+	            <TextView
+	                android:id="@+id/name16"
+	                android:layout_height="40dp"
+	                android:textColor="@color/black"
+	                android:layout_column="1"
+	                android:paddingTop="10dp"
+	                android:paddingLeft="15dp"
+	                 />
+	             <TextView
+	                android:id="@+id/score16"
+	                android:layout_height="40dp"
+	                android:textColor="@color/black"
+	                android:layout_column="1"
+	                android:paddingTop="10dp"
+	                 />
+	        </TableRow>
+	        
+	        <TableRow
+	             android:background="@color/light_grey" >
+	
+	            <TextView
+	                android:id="@+id/name17"
+	                android:layout_height="40dp"
+	                android:textColor="@color/black"
+	                android:layout_column="1"
+	                android:paddingTop="10dp"
+	                android:paddingLeft="15dp"
+	                 />
+	             <TextView
+	                android:id="@+id/score17"
+	                android:layout_height="40dp"
+	                android:textColor="@color/black"
+	                android:layout_column="1"
+	                android:paddingTop="10dp"
+	                 />
+	        </TableRow>
+	        
+	        <TableRow
+	             android:background="@color/light_blue" >
+	
+	            <TextView
+	                android:id="@+id/name18"
+	                android:layout_height="40dp"
+	                android:textColor="@color/black"
+	                android:layout_column="1"
+	                android:paddingTop="10dp"
+	                android:paddingLeft="15dp"
+	                 />
+	             <TextView
+	                android:id="@+id/score18"
+	                android:layout_height="40dp"
+	                android:textColor="@color/black"
+	                android:layout_column="1"
+	                android:paddingTop="10dp"
+	                 />
+	        </TableRow>
+	        
+	        <TableRow
+	             android:background="@color/light_grey" >
+	
+	            <TextView
+	                android:id="@+id/name19"
+	                android:layout_height="40dp"
+	                android:textColor="@color/black"
+	                android:layout_column="1"
+	                android:paddingTop="10dp"
+	                android:paddingLeft="15dp"
+	                 />
+	             <TextView
+	                android:id="@+id/score19"
+	                android:layout_height="40dp"
+	                android:textColor="@color/black"
+	                android:layout_column="1"
+	                android:paddingTop="10dp"
+	                 />
+	        </TableRow>
+	        
+	        <TableRow
+	             android:background="@color/light_blue" >
+	
+	            <TextView
+	                android:id="@+id/name20"
+	                android:layout_height="40dp"
+	                android:textColor="@color/black"
+	                android:layout_column="1"
+	                android:paddingTop="10dp"
+	                android:paddingLeft="15dp"
+	                />
+	             <TextView
+	                android:id="@+id/score20"
+	                android:layout_height="40dp"
+	                android:textColor="@color/black"
+	                android:layout_column="1"
+	                android:paddingTop="10dp"
+	                />
+	        </TableRow>
+	    </TableLayout>
+	</ScrollView>
+</LinearLayout>
