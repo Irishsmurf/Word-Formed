@@ -1,20 +1,19 @@
 package com.google.corrigan.owen.wordformed;
 
+import android.app.Application;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Typeface;
-import android.media.AudioManager;
-import android.media.SoundPool;
 import android.util.Log;
 import android.view.MotionEvent;
 
-public class Button
+public class Button extends Application
 {
 	
 	private static boolean clickable = false;
-	private Dropbox answer;
+	private static Dropbox answer;
 	RectF outer;
 	RectF inner;
 	int borderWidth = 5;
@@ -22,6 +21,20 @@ public class Button
 	static Paint borderColor = new Paint();
 	static Paint bgColor = new Paint();
 	static Paint textPaint = new Paint();
+	
+	public static void checkWord()
+	{
+		if(Dictionary.isWord(answer.tilesToString()))
+		{
+			Button.opaque();
+			DraggableBox.playSound(DraggableBox.submitID);
+		}
+		else
+		{
+			Button.fade();
+		}
+		
+	}
 	
 	public static void opaque()
 	{
@@ -41,14 +54,13 @@ public class Button
 	
 	public Button(Dropbox answer, int x, int y, int width, int height)
 	{
-		this.answer = answer;
+		Button.answer = answer;
 		outer = new RectF(x, y, x + width, y + height);
 		inner = new RectF(x + borderWidth, y + borderWidth, x + width - borderWidth, y + height - borderWidth);
-		
 		borderColor.setColor(Color.BLACK);
 		bgColor.setColor(Color.WHITE);
 		textPaint.setColor(Color.BLACK);
-		textPaint.setTextSize(30);
+		textPaint.setTextSize(40);
 		textPaint.setTypeface(Typeface.MONOSPACE);
 		fade();
 	}
@@ -58,7 +70,8 @@ public class Button
 		canvas.drawRect(outer, borderColor);
 		canvas.drawRect(inner, bgColor);
 		
-		canvas.drawText("Submit", inner.left + 35, inner.top + 60, textPaint);
+		canvas.drawText("Submit", inner.left + 30, inner.top + 60, textPaint);
+		canvas.drawText("Word: "+answer.getScore(), inner.left+20, inner.top - 40, textPaint);
 	}
 	
 	public boolean contains(float x, float y)
@@ -80,8 +93,8 @@ public class Button
 						bgColor.setColor(Color.parseColor("#CCCCCC"));
 						if(Dictionary.isWord(answer.tilesToString()))
 						{
-							//DraggableBox.playSound(DraggableBox.submitID);
 							score += answer.getScore();
+							SinglePlayerGame.wordList.add(answer.tilesToString());
 							try
 							{
 								answer.removeAll();
@@ -103,4 +116,6 @@ public class Button
 		
 		return score;
 	}
+
+
 }

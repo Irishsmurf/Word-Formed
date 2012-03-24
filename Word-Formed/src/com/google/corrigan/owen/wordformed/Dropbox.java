@@ -10,7 +10,6 @@ import android.util.Log;
 
 public class Dropbox
 {
-	private int type;
 	//X, Y, width and height
 	private int border = 5;
 	//Outer and inner rectangles used to draw it
@@ -18,8 +17,9 @@ public class Dropbox
 	//Max number of boxes stored
 	//Array of references to Draggable boxes stored at certain position
 	private LinkedList<DraggableBox> tiles = new LinkedList<DraggableBox>();
+	@SuppressWarnings("unused")
 	private final String TAG = "DRAGGABLEBOX";
-	
+	 
 	//Constructor. Takes x, y, height and width and parameters
 	public Dropbox(int x, int y, int width, int height)
 	{
@@ -48,26 +48,20 @@ public class Dropbox
 		return val;
 	}
 	
+	//Method for Adding tiles to the Dropbox
 	public void add(DraggableBox d)
 	{
-		Log.d("WORDFORMED", "adding tile");
+		//size of 7 tiles held.
 		if(tiles.size() == 7)
 		{
-			Log.d("WORDFORMED", "is full, removing");
 			DraggableBox tmp = getFirst();
 			tmp.move(-100, dragBorder.bottom - 60);
 			tiles.remove(tmp);
 		}
 		tiles.add(d);
-		if(Dictionary.isWord(tilesToString()))
-		{
-			Button.opaque();
-			DraggableBox.playSound(DraggableBox.submitID);
-		}
-		else
-			Button.fade();
+		//Call the Button to check if it should light up
+		Button.checkWord();
 		updatePositions();
-		tilesToString();
 	}
 	
 	public void updatePositions()
@@ -76,16 +70,15 @@ public class Dropbox
 			tiles.get(i).move(i*65+20, dragBorder.bottom - 60);
 	}
 	
+	//Remove a tile from the Box.
 	public void remove(DraggableBox d)
 	{
 		tiles.remove(d);
-		if(Dictionary.isWord(tilesToString()))
-			Button.opaque();
-		else
-			Button.fade();
+		Button.checkWord();
 		updatePositions();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public synchronized void removeAll()
 	{
 		LinkedList<DraggableBox> clone = (LinkedList<DraggableBox>) tiles.clone();

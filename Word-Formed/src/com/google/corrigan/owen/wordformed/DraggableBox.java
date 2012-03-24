@@ -1,7 +1,5 @@
 package com.google.corrigan.owen.wordformed;
 
-import java.util.Random;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,7 +15,6 @@ import android.media.SoundPool;
 import android.media.SoundPool.OnLoadCompleteListener;
 import android.os.SystemClock;
 import android.os.Vibrator;
-import android.util.Log;
 import android.view.MotionEvent;
 
 public class DraggableBox
@@ -40,7 +37,7 @@ public class DraggableBox
 	//Size of border
 	private int borderSize = 5;
 	//Outer and inner rectangles used for dragging
-	private RectF rect, rect2;
+	private RectF rect;
 	//Boolean to say if box is being dragged
 	private boolean dragging = false;
 	//Letter stored in tile
@@ -71,11 +68,10 @@ public class DraggableBox
 		startY = topY;
 		//Calculate size and position of outer and inner box
 		rect = new RectF(rectX, rectY, rectX+rectSize, rectY+rectSize);
-		rect2 = new RectF(rectX + borderSize, rectY + borderSize, 
+		new RectF(rectX + borderSize, rectY + borderSize, 
 				rectX + rectSize - borderSize, rectY + rectSize - borderSize);
 		//Randomly choose a character
 		//TODO: Find a better distribution
-		Random r = new Random();
 		letter = TileGenerator.nextTile();
 		value = TileGenerator.getValue(letter);
 		context = context0;	
@@ -117,9 +113,9 @@ public class DraggableBox
 		//Draw Outer Rectangle
 		//Draw inner Rectangle
 		Drawable box = context.getResources().getDrawable(R.drawable.tile);
-		Bitmap bitmap = ((BitmapDrawable)box).getBitmap();
+		tile = ((BitmapDrawable)box).getBitmap();
 		paint.setAlpha(transperancy);
-		canvas.drawBitmap(bitmap, null, rect, paint);
+		canvas.drawBitmap(tile, null, rect, paint);
 		//Draw letter
 		if(!dragging && !flinging)
 			canvas.drawText(letter+"", rectX + 15, rectY + 35, paint);
@@ -151,7 +147,7 @@ public class DraggableBox
 					rectX = mouseX;
 					rectY = mouseY;
 					rect = new RectF(rectX - 40, rectY - 40, rectX+rectSize - 40, rectY+rectSize - 40);
-					rect2 = new RectF(rectX + borderSize - 40, rectY + borderSize - 40, 
+					new RectF(rectX + borderSize - 40, rectY + borderSize - 40, 
 							rectX + rectSize - borderSize - 40, rectY + rectSize - borderSize - 40);
 				}
 				else dragging = false;
@@ -184,7 +180,7 @@ public class DraggableBox
 						rectSize = 45;
 						paint.setTextSize(30);
 						rect = new RectF(rectX, rectY, rectX+rectSize, rectY+rectSize);
-						rect2 = new RectF(rectX + borderSize, rectY + borderSize, 
+						new RectF(rectX + borderSize, rectY + borderSize, 
 								rectX + rectSize - borderSize, rectY + rectSize - borderSize);
 					}
 					else if(answer.contains(rectX, rectY))
@@ -194,7 +190,7 @@ public class DraggableBox
 						rectSize = 45;
 						paint.setTextSize(30);
 						rect = new RectF(rectX, rectY, rectX+rectSize, rectY+rectSize);
-						rect2 = new RectF(rectX + borderSize, rectY + borderSize, 
+						new RectF(rectX + borderSize, rectY + borderSize, 
 								rectX + rectSize - borderSize, rectY + rectSize - borderSize);
 						
 					}
@@ -217,7 +213,7 @@ public class DraggableBox
 					rectX = mouseX;
 					rectY = mouseY;
 					rect = new RectF(rectX - 40, rectY - 40, rectX+rectSize - 40, rectY+rectSize - 40);
-					rect2 = new RectF(rectX + borderSize - 40, rectY + borderSize - 40, 
+					new RectF(rectX + borderSize - 40, rectY + borderSize - 40, 
 							rectX + rectSize - borderSize - 40, rectY + rectSize - borderSize - 40);
 				}
 		}
@@ -231,7 +227,7 @@ public class DraggableBox
 			rectX += velX;
 			rectY += velY;
 			rect = new RectF(rectX - 40, rectY - 40, rectX+rectSize - 40, rectY+rectSize - 40);
-			rect2 = new RectF(rectX + borderSize - 40, rectY + borderSize - 40, 
+			new RectF(rectX + borderSize - 40, rectY + borderSize - 40, 
 					rectX + rectSize - borderSize - 40, rectY + rectSize - borderSize - 40);
 			if(transperancy > 0)
 				transperancy -= 5;
@@ -246,7 +242,7 @@ public class DraggableBox
 			}
 			rectX += velX;
 			rect = new RectF(rectX, rectY, rectX + rectSize, rectY + rectSize);
-			rect2 = new RectF(rectX + borderSize, rectY + borderSize, 
+			new RectF(rectX + borderSize, rectY + borderSize, 
 					rectX + rectSize - borderSize, rectY + rectSize - borderSize);
 		}
 		else if(movingRight)
@@ -259,7 +255,7 @@ public class DraggableBox
 			}
 			rectX += velX;
 			rect = new RectF(rectX, rectY, rectX + rectSize, rectY + rectSize);
-			rect2 = new RectF(rectX + borderSize, rectY + borderSize, 
+			new RectF(rectX + borderSize, rectY + borderSize, 
 					rectX + rectSize - borderSize, rectY + rectSize - borderSize);
 		}
 	}
@@ -284,7 +280,7 @@ public class DraggableBox
 		//rectX = x;
 		rectY = y;
 		rect = new RectF(rectX, rectY, rectX + rectSize, rectY + rectSize);
-		rect2 = new RectF(rectX + borderSize, rectY + borderSize, 
+		new RectF(rectX + borderSize, rectY + borderSize, 
 			rectX + rectSize - borderSize, rectY + rectSize - borderSize);
 	}
 	
@@ -297,7 +293,7 @@ public class DraggableBox
 		//rectX = x;
 		rectY = y;
 		rect = new RectF(rectX, rectY, rectX + rectSize, rectY + rectSize);
-		rect2 = new RectF(rectX + borderSize, rectY + borderSize, 
+		new RectF(rectX + borderSize, rectY + borderSize, 
 			rectX + rectSize - borderSize, rectY + rectSize - borderSize);
 	}
 	

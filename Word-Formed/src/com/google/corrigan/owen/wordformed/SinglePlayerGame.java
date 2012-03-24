@@ -1,5 +1,7 @@
 package com.google.corrigan.owen.wordformed;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +11,10 @@ import android.view.WindowManager;
 public class SinglePlayerGame extends Activity
 {
 	private static final String TAG = SinglePlayerGame.class.getSimpleName();
+	static ArrayList<String> wordList = new ArrayList<String>();
+	
+	
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{

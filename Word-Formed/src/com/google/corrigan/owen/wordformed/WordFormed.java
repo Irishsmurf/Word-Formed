@@ -2,9 +2,7 @@ package com.google.corrigan.owen.wordformed;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -25,7 +23,6 @@ public class WordFormed extends Activity implements OnClickListener
 		Dictionary dict = new Dictionary(this);
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
         TextView tv = (TextView) findViewById(R.id.CustomFontText);
-        Sounds sound = new Sounds(this);
         //TODO: Add this, but at the moment it crashes the program
         tv.setTypeface(tf);
         //Set up click listeners for all the buttons

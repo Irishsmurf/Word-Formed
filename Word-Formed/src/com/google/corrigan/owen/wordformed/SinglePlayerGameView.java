@@ -18,9 +18,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.WindowManager;
-import android.media.AudioManager;
 import android.media.SoundPool;
-import android.media.SoundPool.OnLoadCompleteListener;
 import android.os.CountDownTimer;
 
 
@@ -119,7 +117,7 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		create.setContext(context);
 		create.setRef(db);
 		
-		this.context = context;
+		SinglePlayerGameView.context = context;
 		
 		for(int i = 0; i < 7; i++)
 		{
@@ -185,8 +183,7 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		}
 		catch(Exception e)
 		{
-			String out = e.toString();
-			//Log.d(TAG, out);
+		//TODO	
 		}
 		
 		return true;
