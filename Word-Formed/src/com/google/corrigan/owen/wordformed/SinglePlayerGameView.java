@@ -17,10 +17,13 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.Log;
 import android.view.Display;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.media.SoundPool;
 import android.os.CountDownTimer;
 
@@ -40,6 +43,8 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 	
 	
 	private final String TAG = "SINGLEPLAYERGAMEVIEW";
+	
+	final EditText input;
 	
 	private SoundPool sound;
 	private int soundID;
@@ -74,7 +79,7 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		}
 	};
 	
-	private CountDownTimer clock = new CountDownTimer(180000, 1000)
+	private CountDownTimer clock = new CountDownTimer(10000, 1000)
 	{
 		public void onTick(long millisUntilFinished)
 		{
@@ -86,6 +91,7 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		
 		public void onFinish()
 		{
+			
 			DraggableBox.playSound(DraggableBox.finishID);
 			List<Word> wordsByScore = new ArrayList<Word>(SinglePlayerGame.wordList);
 			Collections.sort(wordsByScore, new Comparator<Word>() {
@@ -99,14 +105,16 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 				Log.d("Words Used", p.word + ": "+p.score);
 			}
 			new AlertDialog.Builder(context)
-		      .setMessage("Congratulations, you acheived a score of " + score)
+		      .setMessage("Congratulations, you acheived a score of " + score
+		    		  + "\n Please enter your tag:")
 		      .setTitle("Game Over")
 		      .setCancelable(false)
+		      .setView(input)
 		      .setNeutralButton("Ok",
 		         new DialogInterface.OnClickListener() {
 		         public void onClick(DialogInterface dialog, int whichButton){
 		        	 //Close this window
-		        	 datasource.createHiScore("Paddez", score);
+		        	 datasource.createHiScore(input.getText().toString(), score);
 		        	 Log.d("HISCORES", "In SinglePlayerGame, score = " + score);
 		        	 datasource.close();
 		        	 sv.setVisibility(INVISIBLE);
@@ -130,7 +138,7 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		holdBox = new RectF(0, 0, display.getWidth(), 180);
 		Log.d(TAG, "Width = " + display.getWidth() + ", Height = " + display.getHeight());
 		thread = new GameThread(getHolder(), this);
-		
+		input = new EditText(this.getContext());
 		datasource = new HiScoreDataSource(this.getContext());
 		datasource.open();
 		
