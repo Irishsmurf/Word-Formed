@@ -100,7 +100,8 @@ public class Button extends Application
 						if(Dictionary.isWord(answer.tilesToString()))
 						{
 							score += answer.getScore();
-							SinglePlayerGame.wordList.add(new Word(answer.tilesToString(), answer.getScore()));
+							String s = answer.tilesToString();
+							SinglePlayerGame.wordList.add(new Word(s.substring(0,1).toUpperCase() + s.substring(1).toLowerCase(), answer.getScore()));
 							try
 							{
 								answer.removeAll();

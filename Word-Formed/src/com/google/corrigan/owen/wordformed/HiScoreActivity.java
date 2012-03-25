@@ -22,8 +22,8 @@ public class HiScoreActivity extends ListActivity {
 
 		// Use the SimpleCursorAdapter to show the
 		// elements in a ListView
-		ArrayAdapter<HiScore> adapter = new ArrayAdapter<HiScore>(this,
-				android.R.layout.simple_list_item_1, values);
+		HiScoreAdapter adapter = new HiScoreAdapter(this,
+				values);
 		setListAdapter(adapter);
 	}
 

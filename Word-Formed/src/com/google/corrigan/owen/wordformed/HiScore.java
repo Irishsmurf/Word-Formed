@@ -27,7 +27,7 @@ public class HiScore implements Comparable<HiScore>
 		// Will be used by the ArrayAdapter in the ListView
 		@Override
 		public String toString() {
-			return name + " score: " + score;
+			return name;
 		}
 		
 		public void setScore(int score)
@@ -35,14 +35,13 @@ public class HiScore implements Comparable<HiScore>
 			this.score = score;
 		}
 		
-		public int getScore(int score)
+		public int getScore()
 		{
 			return score;
 		}
 
 		public int compareTo(HiScore other)
 		{
-			Log.d("HISCORES", "Comparing");
 			return other.score - score;
 		}
 	}
