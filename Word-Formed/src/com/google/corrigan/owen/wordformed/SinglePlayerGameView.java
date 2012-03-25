@@ -11,6 +11,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -46,6 +47,7 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 	
 	final EditText input;
 	
+	private static List<Word> wordsByScore;
 	private SoundPool sound;
 	private int soundID;
 	private boolean loaded = false;
@@ -57,9 +59,19 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 	private Dropbox answer = new Dropbox(10, 500, 460, 70);
 	private Display display;
 	private Button submit = new Button(answer, 150, 650, 200, 100);
-	private int score = 0;
+	static private int score = 0;
 	static Context context;
 	SurfaceView sv = this;
+	
+	static int getScore()
+	{
+		return score;
+	}
+	
+	static List<Word> getWords()
+	{
+		return wordsByScore;
+	}
 	
 	//private Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
 	private String timeLeft = "3:00";
@@ -93,7 +105,7 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		{
 			
 			DraggableBox.playSound(DraggableBox.finishID);
-			List<Word> wordsByScore = new ArrayList<Word>(SinglePlayerGame.wordList);
+			wordsByScore = new ArrayList<Word>(SinglePlayerGame.wordList);
 			Collections.sort(wordsByScore, new Comparator<Word>() {
 				public int compare(Word o1, Word o2)
 				{
@@ -104,27 +116,45 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 			{
 				Log.d("Words Used", p.word + ": "+p.score);
 			}
-			new AlertDialog.Builder(context)
-		      .setMessage("Congratulations, you acheived a score of " + score
-		    		  + "\n Please enter your tag:")
-		      .setTitle("Game Over")
-		      .setCancelable(false)
-		      .setView(input)
-		      .setNeutralButton("Ok",
-		         new DialogInterface.OnClickListener() {
-		         public void onClick(DialogInterface dialog, int whichButton){
-		        	 //Close this window
-		        	 datasource.createHiScore(input.getText().toString(), score);
-		        	 Log.d("HISCORES", "In SinglePlayerGame, score = " + score);
-		        	 datasource.close();
-		        	 sv.setVisibility(INVISIBLE);
-		         }
-		         })
-		      .show();
-			timeLeft = "Done!";
-
-			finished = true;
+			if(score > 0)
+			{
+				new AlertDialog.Builder(context)
+			      .setMessage("Congratulations, you acheived a score of " + score
+			    		  + "\n Please enter your tag:")
+			      .setTitle("Game Over")
+			      .setView(input)
+			      .setCancelable(false)
+			      .setNeutralButton("Ok",
+			         new DialogInterface.OnClickListener() {
+			         public void onClick(DialogInterface dialog, int whichButton){
+			        	 //Close this window
+			        	 String name = input.getText().toString();
+			        	 if(name.length() > 0)
+			        		 datasource.createHiScore(name, score);
+			        	 Log.d("HISCORES", "In SinglePlayerGame, score = " + score);
+			        	 datasource.close();
+			        	 sv.setVisibility(INVISIBLE);
+			         }
+			         })
+			      .show();
 			}
+			else
+			{
+				new AlertDialog.Builder(context)
+			      .setMessage("You didn't make a single word. Your failures insult me.")
+			      .setTitle("Game Over")
+			      .setCancelable(false)
+			      .setNeutralButton("Ok",
+			         new DialogInterface.OnClickListener() {
+			         public void onClick(DialogInterface dialog, int whichButton){
+			        	 sv.setVisibility(INVISIBLE);
+			         }
+			         }) 
+			      .show();
+			}
+			timeLeft = "Done!";
+			finished = true;
+		}
 	};
 	
 	LinkedList<DraggableBox> db = new LinkedList<DraggableBox>();
@@ -149,6 +179,8 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		getHolder().addCallback(this);
 		create.setContext(context);
 		create.setRef(db);
+		
+		score = 0;
 		
 		SinglePlayerGameView.context = context;
 		

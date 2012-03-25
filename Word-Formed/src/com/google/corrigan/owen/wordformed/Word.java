@@ -10,5 +10,10 @@ public class Word
 		this.word = word;
 		this.score = score;
 	}
+	
+	public String toString()
+	{
+		return word + "\t\t" + score;
+	}
 
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,9 +14,7 @@ import android.view.WindowManager;
 public class SinglePlayerGame extends Activity
 {
 	private static final String TAG = SinglePlayerGame.class.getSimpleName();
-	static ArrayList<Word> wordList = new ArrayList<Word>();
-	
-	
+	static ArrayList<Word> wordList;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -25,6 +24,7 @@ public class SinglePlayerGame extends Activity
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);		
 		setContentView(new SinglePlayerGameView(this));
+		wordList = new ArrayList<Word>();
 		//game.requestFocus();
 	}
 	
@@ -32,6 +32,7 @@ public class SinglePlayerGame extends Activity
 	protected void onDestroy()
 	{
 		Log.d(TAG, "Destroyed");
+		startActivity(new Intent(this, GameOverActivity.class));
 		super.onDestroy();
 	}
 	
