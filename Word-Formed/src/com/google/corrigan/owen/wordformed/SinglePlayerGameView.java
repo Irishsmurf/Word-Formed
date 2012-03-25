@@ -49,7 +49,7 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 	private SoundPool sound;
 	private int soundID;
 	private boolean loaded = false;
-	
+	public boolean finished = false;
 	private RectF holdBox;
 	private RectF scoreBox;
 	private CreateBox create = new CreateBox(10, 200, 460, 70);
@@ -121,9 +121,10 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		         }
 		         })
 		      .show();
-			
 			timeLeft = "Done!";
-		}
+
+			finished = true;
+			}
 	};
 	
 	LinkedList<DraggableBox> db = new LinkedList<DraggableBox>();

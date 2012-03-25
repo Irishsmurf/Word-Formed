@@ -21,16 +21,21 @@ public class Button extends Application
 	static Paint borderColor = new Paint();
 	static Paint bgColor = new Paint();
 	static Paint textPaint = new Paint();
+	static boolean opaque;
 	
 	public static void checkWord()
 	{
 		if(Dictionary.isWord(answer.tilesToString()))
 		{
+			
 			Button.opaque();
-			DraggableBox.playSound(DraggableBox.submitID);
+			if(!opaque)
+				DraggableBox.playSound(DraggableBox.submitID);
+			opaque = true;
 		}
 		else
 		{
+			opaque = false;
 			Button.fade();
 		}
 		
@@ -54,6 +59,7 @@ public class Button extends Application
 	
 	public Button(Dropbox answer, int x, int y, int width, int height)
 	{
+		opaque = false;
 		Button.answer = answer;
 		outer = new RectF(x, y, x + width, y + height);
 		inner = new RectF(x + borderWidth, y + borderWidth, x + width - borderWidth, y + height - borderWidth);

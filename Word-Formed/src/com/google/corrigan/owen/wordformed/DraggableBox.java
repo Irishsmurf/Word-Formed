@@ -49,6 +49,7 @@ public class DraggableBox
 	private Paint paint;
 	private float speed = 5;
 	private float velX;
+	private int color;
 	private float velY;
 	//True when user lets go
 	private boolean flinging = false;
@@ -76,7 +77,11 @@ public class DraggableBox
 		context = context0;	
 		tile = BitmapFactory.decodeResource(context.getResources(), R.drawable.tile);
 		paint = new Paint();
-		paint.setColor(Color.BLACK);
+		if(value > 4)
+			color = Color.rgb(255, 0, 0);
+		else
+			color = Color.BLACK;
+		paint.setColor(color);
 		paint.setTextSize(30);
 		paint.setTypeface(Typeface.MONOSPACE);
 		

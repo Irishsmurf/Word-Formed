@@ -47,7 +47,10 @@ public class GameThread extends Thread
 					beginTime = System.currentTimeMillis();//Begin timing
 					framesSkipped = 0;
 					//this.gamePanel.update(); 
-					this.gamePanel.render(canvas); //Render Canvas
+					if(!this.gamePanel.finished)
+						this.gamePanel.render(canvas); //Render Canvas
+					else
+						break;
 					timeDiff = System.currentTimeMillis() - beginTime;//Time for rendering
 					sleepTime = (int)(FRAME_PERIOD - timeDiff);
 					
