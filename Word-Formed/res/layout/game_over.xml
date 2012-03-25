@@ -7,16 +7,17 @@
     android:background="@color/background">
 
    <TextView
-	        android:id="@+id/score_result"
-	        android:textColor="@color/white"
-	        android:textSize="25dp"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="Hi Scores" />
+        android:id="@+id/title"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hi Scores" />
 
     <TextView
         android:id="@+id/score_result"
         android:textColor="@color/white"
+        android:textSize="15dp"
         android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,6 +27,7 @@
         android:id="@android:id/list"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="hello"
         android:background="@color/background"
         android:cacheColorHint="@color/background" />

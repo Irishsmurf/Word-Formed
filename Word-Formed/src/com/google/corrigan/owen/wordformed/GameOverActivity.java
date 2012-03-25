@@ -22,8 +22,7 @@ public class GameOverActivity extends ListActivity
 
 		// Use the SimpleCursorAdapter to show the
 		// elements in a ListView
-		ArrayAdapter<Word> adapter = new ArrayAdapter<Word>(this,
-				android.R.layout.simple_list_item_1, values);
+		WordAdapter adapter = new WordAdapter(this, values);
 		setListAdapter(adapter);
 	}
 }

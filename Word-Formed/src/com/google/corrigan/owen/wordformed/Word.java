@@ -15,5 +15,15 @@ public class Word
 	{
 		return word + "\t\t" + score;
 	}
+	
+	public String getWord()
+	{
+		return word;
+	}
+	
+	public int getScore()
+	{
+		return score;
+	}
 
 }

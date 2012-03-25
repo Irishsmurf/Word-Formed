@@ -13,24 +13,25 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import java.util.List;
 
-class HiScoreAdapterView extends LinearLayout {        
-        public HiScoreAdapterView(Context context, 
-								HiScore hiScore ) {
+class WordAdapterView extends LinearLayout {        
+        public WordAdapterView(Context context, 
+								Word hiScore ) {
             super( context );
 
-            this.setOrientation(HORIZONTAL);        
+            this.setOrientation(HORIZONTAL);   
+            
             LinearLayout.LayoutParams nameParams = 
-                new LinearLayout.LayoutParams(300, 80);
+                new LinearLayout.LayoutParams(300, 40);
             nameParams.setMargins(20, 20, 60, 1);
             
             TextView nameControl = new TextView( context );
-			nameControl.setText( hiScore.getName() );
+			nameControl.setText( hiScore.getWord() );
             nameControl.setTextSize(14f);
             nameControl.setTextColor(Color.WHITE);
             addView(nameControl, nameParams);       
 
             LinearLayout.LayoutParams scoreParams = 
-                new LinearLayout.LayoutParams(160, LayoutParams.WRAP_CONTENT);
+                new LinearLayout.LayoutParams(160, 40);
             scoreParams.setMargins(1, 1, 1, 1);
 
             TextView scoreControl = new TextView(context);
@@ -42,12 +43,12 @@ class HiScoreAdapterView extends LinearLayout {
         }
 }
 
-public class HiScoreAdapter extends BaseAdapter {
+public class WordAdapter extends BaseAdapter {
 
     private Context context;
-    private List<HiScore> hiScoreList;
+    private List<Word> hiScoreList;
 
-    public HiScoreAdapter(Context context, List<HiScore> hiScoreList ) { 
+    public WordAdapter(Context context, List<Word> hiScoreList ) { 
         this.context = context;
         this.hiScoreList = hiScoreList;
     }
@@ -65,8 +66,8 @@ public class HiScoreAdapter extends BaseAdapter {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) { 
-        HiScore hiScore = hiScoreList.get(position);
-        return new HiScoreAdapterView(this.context, hiScore );
+        Word hiScore = hiScoreList.get(position);
+        return new WordAdapterView(this.context, hiScore );
     }
 
 }
