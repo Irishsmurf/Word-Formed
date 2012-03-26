@@ -10,7 +10,9 @@
     <application
         android:icon="@drawable/word2"
         android:label="@string/app_name" >
+         
         <activity
+            android:theme="@android:style/Theme.NoTitleBar"
             android:name=".WordFormed"
             android:screenOrientation="portrait"
             android:label="@string/app_name" >
@@ -20,6 +22,7 @@
             </intent-filter>
         </activity>
         <activity
+            android:theme="@android:style/Theme.NoTitleBar"
             android:name=".HiScoreActivity"
             android:screenOrientation="portrait"
             android:label="@string/high_score_title"/>
@@ -31,15 +34,18 @@
         <activity
             android:name=".MultiplayerGame"
             android:screenOrientation="portrait"
-            android:label="@string/multiplayer_game_title"/>
+            android:label="@string/multiplayer_game_title"
+            android:theme="@android:style/Theme.NoTitleBar"/>
         <activity
             android:name=".SinglePlayerGame"
             android:screenOrientation="portrait"
-            android:label="@string/single_player_title"/>
+            android:label="@string/single_player_title"
+            android:theme="@android:style/Theme.NoTitleBar"/>
         <activity
             android:name=".GameOverActivity"
             android:screenOrientation="portrait"
-            android:label="@string/single_player_title"/>
+            android:label="@string/single_player_title"
+            android:theme="@android:style/Theme.NoTitleBar"/>
     </application>
 
 </manifest>

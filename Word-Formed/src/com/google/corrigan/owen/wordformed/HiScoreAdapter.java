@@ -56,12 +56,12 @@ public class HiScoreAdapter extends BaseAdapter {
         return hiScoreList.size();
     }
 
-    public Object getItem(int position) {     
+    public Object getItem(int position) { 
         return hiScoreList.get(position);
     }
 
     public long getItemId(int position) {  
-        return position;
+    	return position;
     }
 
     public View getView(int position, View convertView, ViewGroup parent) { 

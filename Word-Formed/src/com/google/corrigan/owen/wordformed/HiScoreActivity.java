@@ -4,6 +4,7 @@ import java.util.List;
 import android.app.ListActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 
 public class HiScoreActivity extends ListActivity {
@@ -13,6 +14,8 @@ public class HiScoreActivity extends ListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.hiscore);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
 
 		datasource = new HiScoreDataSource(this);
 		datasource.open();
