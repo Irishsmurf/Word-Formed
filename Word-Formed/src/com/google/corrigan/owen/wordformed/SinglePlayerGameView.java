@@ -18,6 +18,7 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.Log;
 import android.view.Display;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -76,7 +77,7 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 	//private Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
 	private String timeLeft = "3:00";
 	
-	private CountDownTimer anim = new CountDownTimer(180000, 10)
+	private CountDownTimer anim = new CountDownTimer(10000, 10)
 	{
 		public void onTick(long millisUntilFinished)
 		{
@@ -103,8 +104,6 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		
 		public void onFinish()
 		{
-			
-			DraggableBox.playSound(DraggableBox.finishID);
 			wordsByScore = new ArrayList<Word>(SinglePlayerGame.wordList);
 			Collections.sort(wordsByScore, new Comparator<Word>() {
 				public int compare(Word o1, Word o2)
@@ -116,44 +115,53 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 			{
 				Log.d("Words Used", p.word + ": "+p.score);
 			}
-			if(score > 0)
+			Log.d("WORDFORMED", "In single player game, got here");
+			Log.d("WORDFORMED", context.toString());
+			try
 			{
-				new AlertDialog.Builder(context)
-			      .setMessage("Congratulations, you acheived a score of " + score
-			    		  + "\n Please enter your tag:")
-			      .setTitle("Game Over")
-			      .setView(input)
-			      .setCancelable(false)
-			      .setNeutralButton("Ok",
-			         new DialogInterface.OnClickListener() {
-			         public void onClick(DialogInterface dialog, int whichButton){
-			        	 //Close this window
-			        	 String name = input.getText().toString();
-			        	 if(name.length() > 0)
-			        		 datasource.createHiScore(name, score);
-			        	 Log.d("HISCORES", "In SinglePlayerGame, score = " + score);
-			        	 datasource.close();
-			        	 sv.setVisibility(INVISIBLE);
-			        	 context.startActivity(new Intent(context, GameOverActivity.class));
-
-			         }
-			         })
-			      .show();
+				if(score > 0)
+				{
+					new AlertDialog.Builder(context)
+				      .setMessage("Congratulations, you acheived a score of " + score
+				    		  + "\n Please enter your tag:")
+				      .setTitle("Game Over")
+				      .setView(input)
+				      .setCancelable(false)
+				      .setNeutralButton("Ok",
+				         new DialogInterface.OnClickListener() {
+				         public void onClick(DialogInterface dialog, int whichButton){
+				        	 //Close this window
+				        	 String name = input.getText().toString();
+				        	 if(name.length() > 0)
+				        		 datasource.createHiScore(name, score);
+				        	 Log.d("HISCORES", "In SinglePlayerGame, score = " + score);
+				        	 datasource.close();
+				        	 sv.setVisibility(INVISIBLE);
+				        	 context.startActivity(new Intent(context, GameOverActivity.class));
+	
+				         }
+				         })
+				      .show();
+					DraggableBox.playSound(DraggableBox.finishID);
+				}
+				else
+				{
+					new AlertDialog.Builder(context)
+				      .setMessage("You didn't make a single word. Your failures offend me.")
+				      .setTitle("Game Over")
+				      .setCancelable(false)
+				      .setNeutralButton("Ok",
+				         new DialogInterface.OnClickListener() {
+				         public void onClick(DialogInterface dialog, int whichButton){
+				        	 sv.setVisibility(INVISIBLE);
+				         }
+				         }) 
+				      .show();
+					DraggableBox.playSound(DraggableBox.finishID);
+				}
 			}
-			else
-			{
-				new AlertDialog.Builder(context)
-			      .setMessage("You didn't make a single word. Your failures offend me.")
-			      .setTitle("Game Over")
-			      .setCancelable(false)
-			      .setNeutralButton("Ok",
-			         new DialogInterface.OnClickListener() {
-			         public void onClick(DialogInterface dialog, int whichButton){
-			        	 sv.setVisibility(INVISIBLE);
-			         }
-			         }) 
-			      .show();
-			}
+			catch(Exception e){}
+			Log.d("WORDFORMED", "Got here too (Dialog Box ok)");
 			timeLeft = "Done!";
 			finished = true;
 		}
@@ -166,6 +174,8 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 	public SinglePlayerGameView(Context context)
 	{
 		super(context);
+		Log.d("WORDFORMED", "resetting context");
+		this.context = context;
 		display = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
 		scoreBox = new RectF(30, 580, display.getWidth() - 30, 640);
 		holdBox = new RectF(0, 0, display.getWidth(), 180);
@@ -174,7 +184,6 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		input = new EditText(this.getContext());
 		datasource = new HiScoreDataSource(this.getContext());
 		datasource.open();
-		this.context = context;
 		clock.start();
 		anim.start();
 		setFocusable(true);
