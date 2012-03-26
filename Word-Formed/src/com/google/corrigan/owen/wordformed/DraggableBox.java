@@ -77,10 +77,17 @@ public class DraggableBox
 		context = context0;	
 		tile = BitmapFactory.decodeResource(context.getResources(), R.drawable.tile);
 		paint = new Paint();
-		if(value > 4)
-			color = Color.rgb(255, 0, 0);
-		else
+		if(value == 1)
 			color = Color.BLACK;
+		else if(value == 2)
+			color = Color.rgb(60, 0, 0);
+		else if(value == 3)
+			color = Color.rgb(120, 0, 0);
+		else if(value == 4)
+			color = Color.rgb(180, 0, 0);
+		else if(value > 4)
+			color = Color.rgb(255, 0, 0);
+			
 		paint.setColor(color);
 		paint.setTextSize(30);
 		paint.setTypeface(Typeface.MONOSPACE);
