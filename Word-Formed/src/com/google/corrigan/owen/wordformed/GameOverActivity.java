@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.app.ListActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
@@ -17,7 +18,8 @@ public class GameOverActivity extends ListActivity
 		setContentView(R.layout.game_over);
 		TextView t=(TextView)findViewById(R.id.score_result);
 		t.setText("Congratulations, you acheived a score of " + SinglePlayerGameView.getScore());
-		
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);		
+
 		List<Word> values = SinglePlayerGameView.getWords();
 
 		// Use the SimpleCursorAdapter to show the

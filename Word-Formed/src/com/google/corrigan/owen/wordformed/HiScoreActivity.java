@@ -16,7 +16,6 @@ public class HiScoreActivity extends ListActivity {
 		setContentView(R.layout.hiscore);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-
 		datasource = new HiScoreDataSource(this);
 		datasource.open();
 
