@@ -77,7 +77,7 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 	//private Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
 	private String timeLeft = "3:00";
 	
-	private CountDownTimer anim = new CountDownTimer(10000, 10)
+	private CountDownTimer anim = new CountDownTimer(180000, 10)
 	{
 		public void onTick(long millisUntilFinished)
 		{
@@ -92,7 +92,7 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		}
 	};
 	
-	private CountDownTimer clock = new CountDownTimer(10000, 1000)
+	private CountDownTimer clock = new CountDownTimer(180000, 1000)
 	{
 		public void onTick(long millisUntilFinished)
 		{

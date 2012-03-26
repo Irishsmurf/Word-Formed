@@ -12,7 +12,7 @@
         android:textSize="25dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hi Scores" />
+        android:text="Game Over" />
 
     <TextView
         android:id="@+id/score_result"

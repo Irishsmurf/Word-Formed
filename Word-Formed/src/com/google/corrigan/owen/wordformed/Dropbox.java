@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.graphics.Typeface;
 import android.util.Log;
 
 public class Dropbox
@@ -19,12 +20,21 @@ public class Dropbox
 	private LinkedList<DraggableBox> tiles = new LinkedList<DraggableBox>();
 	@SuppressWarnings("unused")
 	private final String TAG = "DRAGGABLEBOX";
-	 
+	Paint paint = new Paint();
+	String instructions;
 	//Constructor. Takes x, y, height and width and parameters
 	public Dropbox(int x, int y, int width, int height)
 	{
 		dragBorder = new RectF(x, y, x + width, y + height);
 		dragFill = new RectF(x + border, y + border, x + width - border, y + height - border);
+		if(y == 350)
+			instructions = "Save letters here";
+		else
+			instructions = "Form words here";
+		paint.setColor(R.color.black);
+		paint.setTextSize(30);
+		paint.setTypeface(Typeface.MONOSPACE);
+		paint.setAlpha(150);
 	}
 	
 	public String tilesToString()
@@ -106,6 +116,7 @@ public class Dropbox
 		canvas.drawRect(dragBorder, dragRectangle);
 		dragRectangle.setColor(Color.rgb(68, 89, 108));
 		canvas.drawRect(dragFill, dragRectangle);
+		canvas.drawText(instructions, dragBorder.left + 80, dragBorder.top + 45, paint);
 	}
 	
 	//Contains method. Returns true is point is within bounds of drop box
