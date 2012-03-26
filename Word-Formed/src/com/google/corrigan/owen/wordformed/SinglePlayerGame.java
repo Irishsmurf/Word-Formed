@@ -33,7 +33,7 @@ public class SinglePlayerGame extends Activity
 	protected void onDestroy()
 	{
 		Log.d(TAG, "Destroyed");
-		startActivity(new Intent(this, GameOverActivity.class));
+		
 		super.onDestroy();
 	}
 	

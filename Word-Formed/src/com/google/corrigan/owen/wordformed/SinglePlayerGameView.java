@@ -31,6 +31,7 @@ import android.os.CountDownTimer;
 
 public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.Callback
 {
+	private Context context;
 	private HiScoreDataSource datasource;
 	
 	public void draw(Canvas canvas)
@@ -60,7 +61,6 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 	private Display display;
 	private Button submit = new Button(answer, 150, 650, 200, 100);
 	static private int score = 0;
-	static Context context;
 	SurfaceView sv = this;
 	
 	static int getScore()
@@ -134,6 +134,8 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 			        	 Log.d("HISCORES", "In SinglePlayerGame, score = " + score);
 			        	 datasource.close();
 			        	 sv.setVisibility(INVISIBLE);
+			        	 context.startActivity(new Intent(context, GameOverActivity.class));
+
 			         }
 			         })
 			      .show();
@@ -141,7 +143,7 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 			else
 			{
 				new AlertDialog.Builder(context)
-			      .setMessage("You didn't make a single word. Your failures insult me.")
+			      .setMessage("You didn't make a single word. Your failures offend me.")
 			      .setTitle("Game Over")
 			      .setCancelable(false)
 			      .setNeutralButton("Ok",
@@ -172,7 +174,7 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		input = new EditText(this.getContext());
 		datasource = new HiScoreDataSource(this.getContext());
 		datasource.open();
-		
+		this.context = context;
 		clock.start();
 		anim.start();
 		setFocusable(true);
@@ -181,9 +183,7 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 		create.setRef(db);
 		
 		score = 0;
-		
-		SinglePlayerGameView.context = context;
-		
+			
 		for(int i = 0; i < 7; i++)
 		{
 			DraggableBox d = new DraggableBox(context, i * 65 + 20, 60);
