@@ -27,7 +27,7 @@ public class Dropbox
 	{
 		dragBorder = new RectF(x, y, x + width, y + height);
 		dragFill = new RectF(x + border, y + border, x + width - border, y + height - border);
-		if(y == 350)
+		if(y == 325)
 			instructions = "Save letters here";
 		else
 			instructions = "Form words here";
@@ -65,7 +65,7 @@ public class Dropbox
 		if(tiles.size() == 7)
 		{
 			DraggableBox tmp = getFirst();
-			tmp.move(-100, dragBorder.bottom - 60);
+			tmp.move(-100, dragBorder.bottom - 75);
 			tiles.remove(tmp);
 		}
 		tiles.add(d);
@@ -77,7 +77,7 @@ public class Dropbox
 	public void updatePositions()
 	{
 		for(int i = 0; i < tiles.size(); i++)
-			tiles.get(i).move(i*65+20, dragBorder.bottom - 60);
+			tiles.get(i).move(i*65+20, dragBorder.bottom - 75);
 	}
 	
 	//Remove a tile from the Box.
@@ -116,7 +116,7 @@ public class Dropbox
 		canvas.drawRect(dragBorder, dragRectangle);
 		dragRectangle.setColor(Color.rgb(68, 89, 108));
 		canvas.drawRect(dragFill, dragRectangle);
-		canvas.drawText(instructions, dragBorder.left + 80, dragBorder.top + 45, paint);
+		canvas.drawText(instructions, dragBorder.left + 80, dragBorder.top + 60, paint);
 	}
 	
 	//Contains method. Returns true is point is within bounds of drop box

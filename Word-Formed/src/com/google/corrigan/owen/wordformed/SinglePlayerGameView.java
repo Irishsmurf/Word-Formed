@@ -56,9 +56,9 @@ public class SinglePlayerGameView extends SurfaceView implements SurfaceHolder.C
 	public boolean finished = false;
 	private RectF holdBox;
 	private RectF scoreBox;
-	private CreateBox create = new CreateBox(10, 200, 460, 70);
-	private Dropbox drop = new Dropbox(10, 350, 460, 70);
-	private Dropbox answer = new Dropbox(10, 500, 460, 70);
+	private CreateBox create = new CreateBox(10, 200, 460, 100);
+	private Dropbox drop = new Dropbox(10, 325, 460, 100);
+	private Dropbox answer = new Dropbox(10, 450, 460, 100);
 	private Display display;
 	private Button submit = new Button(answer, 150, 650, 200, 100);
 	static private int score = 0;
