@@ -11,11 +11,6 @@ public class Word
 		this.score = score;
 	}
 	
-	public String toString()
-	{
-		return word + "\t\t" + score;
-	}
-	
 	public String getWord()
 	{
 		return word;
@@ -25,5 +20,4 @@ public class Word
 	{
 		return score;
 	}
-
 }
