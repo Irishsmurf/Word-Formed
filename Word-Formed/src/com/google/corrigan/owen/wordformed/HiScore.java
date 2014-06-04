@@ -1,7 +1,5 @@
 package com.google.corrigan.owen.wordformed;
 
-import android.util.Log;
-
 public class HiScore implements Comparable<HiScore>
 	{
 		private long id;

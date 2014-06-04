@@ -5,7 +5,6 @@ import android.app.ListActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
 
 public class HiScoreActivity extends ListActivity {
 	private HiScoreDataSource datasource;
