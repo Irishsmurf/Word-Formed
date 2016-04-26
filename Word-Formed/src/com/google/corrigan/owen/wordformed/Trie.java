@@ -155,7 +155,7 @@ public class Trie
             char[] chars = new char[maxDepth];
             for (int i = 0; i < offset; i++)
                 chars[i] = word.charAt(i);
-            //getAll(root, words, chars, offset); //Where the fuck is the getall function?
+            //getAll(root, words, chars, offset); //Where the f*** is the getall function?
             return words.toArray(new String[words.size()]);
         }
         int c = word.charAt(offset);
