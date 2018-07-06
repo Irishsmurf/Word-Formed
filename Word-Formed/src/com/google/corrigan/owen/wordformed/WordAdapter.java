@@ -14,37 +14,34 @@ import android.widget.ImageView;
 import java.util.List;
 
 class WordAdapterView extends LinearLayout {        
-        public WordAdapterView(Context context, 
-								Word hiScore ) {
-            super( context );
-
-            this.setOrientation(HORIZONTAL);   
-            
-            LinearLayout.LayoutParams nameParams = 
-                new LinearLayout.LayoutParams(300, 40);
-            nameParams.setMargins(20, 20, 60, 1);
-            
-            TextView nameControl = new TextView( context );
-			nameControl.setText( hiScore.getWord() );
-            nameControl.setTextSize(14f);
-            nameControl.setTextColor(Color.WHITE);
-            addView(nameControl, nameParams);       
-
-            LinearLayout.LayoutParams scoreParams = 
-                new LinearLayout.LayoutParams(160, 40);
-            scoreParams.setMargins(1, 1, 1, 1);
-
-            TextView scoreControl = new TextView(context);
-            scoreControl.setText( ""+hiScore.getScore());
-            scoreControl.setTextSize( 14f );
-           
-            scoreControl.setTextColor(Color.WHITE);
-            addView( scoreControl, scoreParams);
-        }
+    public WordAdapterView(Context context, Word hiScore) {
+        TextView nameControl, scoreControl;
+        LinearLayout.LayoutParams nameParams, scoreParams;
+        
+        super(context);
+        this.setOrientation(HORIZONTAL);
+        
+        nameParams = new LinearLayout.LayoutParams(300, 40);
+        nameParams.setMargins(20, 20, 60, 1);
+        
+        scoreParams = new LinearLayout.LayoutParams(160, 40);
+        scoreParams.setMargins(1, 1, 1, 1);
+        
+        nameControl = new TextView(context);
+        nameControl.setText(hiScore.getWord());
+        nameControl.setTextSize(14f);
+        nameControl.setTextColor(Color.WHITE);
+        addView(nameControl, nameParams);       
+               
+        scoreControl = new TextView(context);
+        scoreControl.setText("" + hiScore.getScore());
+        scoreControl.setTextSize(14f);          
+        scoreControl.setTextColor(Color.WHITE);
+        addView(scoreControl, scoreParams);
+    }
 }
 
 public class WordAdapter extends BaseAdapter {
-
     private Context context;
     private List<Word> hiScoreList;
 
@@ -69,5 +66,4 @@ public class WordAdapter extends BaseAdapter {
         Word hiScore = hiScoreList.get(position);
         return new WordAdapterView(this.context, hiScore );
     }
-
 }
