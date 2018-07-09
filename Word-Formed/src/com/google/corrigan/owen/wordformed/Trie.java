@@ -2,8 +2,7 @@ package com.google.corrigan.owen.wordformed;
 
 import java.util.ArrayList;
 
-public class Trie
-{
+public class Trie {
     /**
      * The delimiter used in this word to tell where words end. Without a proper delimiter either A.
      * a lookup for 'win' would return false if the list also contained 'windows', or B. a lookup
@@ -13,11 +12,14 @@ public class Trie
      */
     public final static char DELIMITER = '\u0001';
 
+    private Node root;
+    private int size;
+    private int maxDepth; // Not exact, but bounding for the maximum
+
     /**
      * Creates a new Trie.
      */
-    public Trie()
-    {
+    public Trie() {
         root = new Node('r');
         size = 0;
     }
@@ -27,16 +29,15 @@ public class Trie
      * @param word The word to add.
      * @return True if the word wasn't in the list yet
      */
-    public boolean add(String word)
-    {
-        if (add(root, word + DELIMITER, 0))
-        {
+    public boolean add(String word) {
+        if (add(root, word + DELIMITER, 0)) {
             size++;
             int n = word.length();
             if (n > maxDepth) maxDepth = n;
             return true;
-        }
-        return false;
+        } else {
+        	return false;
+		}
     }
 
     /*
@@ -205,20 +206,26 @@ public class Trie
     /*
      * Finds the longest matching word in the trie that starts at the given offset...
      */
-    private int longestMatch(Node root, String word, int offset, int depth, int maxFound)
-    {
+    private int longestMatch(Node root, String word, int offset, int depth, int maxFound) {
         // Uses delimiter = first in the list!
         Node next = root.firstChild;
-        if (next.value == DELIMITER) maxFound = depth;
-        if (offset == word.length()) return maxFound;
+        if (next.value == DELIMITER) {
+            maxFound = depth;
+        }
+        if (offset == word.length()) {
+            return maxFound;
+        }
         int c = word.charAt(offset);
 
-        while (next != null)
-        {
-            if (next.value < c) next = next.nextSibling;
-            else if (next.value == c) return longestMatch(next, word,
-                offset + 1, depth + 1, maxFound);
-            else return maxFound;
+        while (next != null) {
+            if (next.value < c) {
+                next = next.nextSibling;
+            } else if (next.value == c) {
+                return longestMatch(next, word, offset + 1, 
+									depth + 1, maxFound);
+            } else {
+                return maxFound;
+            }
         }
         return maxFound;
     }
@@ -227,22 +234,15 @@ public class Trie
      * Represents a node in the trie. Because a node's children are stored in a linked list this
      * data structure takes the odd structure of node with a firstChild and a nextSibling.
      */
-    private class Node
-    {
+    private class Node {
         public int value;
         public Node firstChild;
         public Node nextSibling;
 
-        public Node(int value)
-        {
-            this.value = value;
+        public Node(int value) {
+        	this.value = value;
             firstChild = null;
             nextSibling = null;
         }
     }
-
-
-    private Node root;
-    private int size;
-    private int maxDepth; // Not exact, but bounding for the maximum
 }
