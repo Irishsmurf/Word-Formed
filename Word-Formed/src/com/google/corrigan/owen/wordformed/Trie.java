@@ -7,7 +7,7 @@ public class Trie {
      * The delimiter used in this word to tell where words end. Without a proper delimiter either A.
      * a lookup for 'win' would return false if the list also contained 'windows', or B. a lookup
      * for 'mag' would return true if the only word in the list was 'magnolia'
-     *
+     * <p>
      * The delimiter should never occur in a word added to the trie.
      */
     public final static char DELIMITER = '\u0001';
@@ -26,6 +26,7 @@ public class Trie {
 
     /**
      * Adds a word to the list.
+     *
      * @param word The word to add.
      * @return True if the word wasn't in the list yet
      */
@@ -36,30 +37,25 @@ public class Trie {
             if (n > maxDepth) maxDepth = n;
             return true;
         } else {
-        	return false;
-		}
+            return false;
+        }
     }
 
     /*
      * Does the real work of adding a word to the trie
      */
-    private boolean add(Node root, String word, int offset)
-    {
+    private boolean add(Node root, String word, int offset) {
         if (offset == word.length()) return false;
         int c = word.charAt(offset);
 
         // Search for node to add to
         Node last = null, next = root.firstChild;
-        while (next != null)
-        {
-            if (next.value < c)
-            {
+        while (next != null) {
+            if (next.value < c) {
                 // Not found yet, continue searching
                 last = next;
                 next = next.nextSibling;
-            }
-            else if (next.value == c)
-            {
+            } else if (next.value == c) {
                 // Match found, add remaining word to this node
                 return add(next, word, offset + 1);
             }
@@ -70,23 +66,19 @@ public class Trie {
 
         // No match found, create a new node and insert
         Node node = new Node(c);
-        if (last == null)
-        {
+        if (last == null) {
             // Insert node at the beginning of the list (Works for next == null
             // too)
             root.firstChild = node;
             node.nextSibling = next;
-        }
-        else
-        {
+        } else {
             // Insert between last and next
             last.nextSibling = node;
             node.nextSibling = next;
         }
 
         // Add remaining letters
-        for (int i = offset + 1; i < word.length(); i++)
-        {
+        for (int i = offset + 1; i < word.length(); i++) {
             node.firstChild = new Node(word.charAt(i));
             node = node.firstChild;
         }
@@ -99,8 +91,7 @@ public class Trie {
      * @param word The word to search for.
      * @return True if the word was found.
      */
-    public boolean isEntry(String word)
-    {
+    public boolean isEntry(String word) {
         if (word.length() == 0)
             throw new IllegalArgumentException("Word can't be empty");
         return isEntry(root, word + DELIMITER, 0);
@@ -109,15 +100,13 @@ public class Trie {
     /*
      * Does the real work of determining if a word is in the list
      */
-    private boolean isEntry(Node root, String word, int offset)
-    {
+    private boolean isEntry(Node root, String word, int offset) {
         if (offset == word.length()) return true;
         int c = word.charAt(offset);
 
         // Search for node to add to
         Node next = root.firstChild;
-        while (next != null)
-        {
+        while (next != null) {
             if (next.value < c) next = next.nextSibling;
             else if (next.value == c) return isEntry(next, word, offset + 1);
             else return false;
@@ -128,8 +117,7 @@ public class Trie {
     /**
      * Returns the size of this list;
      */
-    public int size()
-    {
+    public int size() {
         return size;
     }
 
@@ -138,20 +126,17 @@ public class Trie {
      *
      * @param prefix The prefix to search for.
      * @return All words in this list starting with the given prefix, or if no such words are found,
-     *         an array containing only the suggested prefix.
+     * an array containing only the suggested prefix.
      */
-    public String[] suggest(String prefix)
-    {
+    public String[] suggest(String prefix) {
         return suggest(root, prefix, 0);
     }
 
     /*
      * Recursive function for finding all words starting with the given prefix
      */
-    private String[] suggest(Node root, String word, int offset)
-    {
-        if (offset == word.length())
-        {
+    private String[] suggest(Node root, String word, int offset) {
+        if (offset == word.length()) {
             ArrayList<String> words = new ArrayList<String>(size);
             char[] chars = new char[maxDepth];
             for (int i = 0; i < offset; i++)
@@ -163,40 +148,34 @@ public class Trie {
 
         // Search for node to add to
         Node next = root.firstChild;
-        while (next != null)
-        {
+        while (next != null) {
             if (next.value < c) next = next.nextSibling;
             else if (next.value == c) return suggest(next, word, offset + 1);
             else break;
         }
-        return new String[] { word };
+        return new String[]{word};
     }
 
     /**
      * Searches a string for words present in the trie and replaces them with stars (asterixes).
+     *
      * @param z The string to censor
      */
-    public String censor(String s)
-    {
-        if (size == 0) return s;       
-        String z = s.toLowerCase();    
+    public String censor(String s) {
+        if (size == 0) return s;
+        String z = s.toLowerCase();
         int n = z.length();
         StringBuilder buffer = new StringBuilder(n);
         int match;
         char star = '*';
-        for (int i = 0; i < n;)
-        {
+        for (int i = 0; i < n; ) {
             match = longestMatch(root, z, i, 0, 0);
-            if (match > 0)
-            {
-                for (int j = 0; j < match; j++)
-                {
+            if (match > 0) {
+                for (int j = 0; j < match; j++) {
                     buffer.append(star);
                     i++;
                 }
-            }
-            else
-            {
+            } else {
                 buffer.append(s.charAt(i++));
             }
         }
@@ -221,8 +200,8 @@ public class Trie {
             if (next.value < c) {
                 next = next.nextSibling;
             } else if (next.value == c) {
-                return longestMatch(next, word, offset + 1, 
-									depth + 1, maxFound);
+                return longestMatch(next, word, offset + 1,
+                        depth + 1, maxFound);
             } else {
                 return maxFound;
             }
@@ -240,7 +219,7 @@ public class Trie {
         public Node nextSibling;
 
         public Node(int value) {
-        	this.value = value;
+            this.value = value;
             firstChild = null;
             nextSibling = null;
         }

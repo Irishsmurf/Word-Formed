@@ -15,14 +15,14 @@ public class GameOverActivity extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_over);
-        
+
         TextView t = (TextView) findViewById(R.id.score_result);
-        t.setText("Congratulations, you acheived a score of " + 
-                  SinglePlayerGameView.getScore());
+        t.setText("Congratulations, you acheived a score of " +
+                SinglePlayerGameView.getScore());
 
         getWindow().setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN, 
-            WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         List<Word> values = SinglePlayerGameView.getWords();
 
