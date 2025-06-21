@@ -2,14 +2,14 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@color/background"
-    android:layout_height="fill_parent"
-    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
     android:padding="15dip"
     android:orientation="horizontal">
     <LinearLayout
         android:orientation="vertical"
         android:layout_height="wrap_content"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_gravity="center"
         android:paddingLeft="20dip"
         android:paddingRight="20dip">
@@ -28,18 +28,26 @@
         	<TableRow>
         	    <Button 
         	        android:id="@+id/new_game_button"
-        	        android:text="@string/new_game_label"/>
+		        android:text="@string/new_game_label"
+		        android:textSize="17sp"
+		        android:background="@drawable/button"/>
         	    <Button 
         	        android:id="@+id/multiplayer_button"
-        	        android:text="@string/multiplayer_label"/>
+		        android:text="@string/multiplayer_label"
+		        android:textSize="17sp"
+		        android:background="@drawable/button"/>
         	</TableRow>
         	<TableRow>
         	    <Button
         	    	android:id="@+id/how_to_play_button"
-        	    	android:text="@string/how_to_play_label"/>
+			android:text="@string/how_to_play_label"
+		        android:textSize="17sp"
+		        android:background="@drawable/button"/>
         	    <Button 
         	        android:id="@+id/high_scores_button"
-        	        android:text="@string/high_scores_label"/>
+		        android:text="@string/high_scores_label"
+		        android:textSize="17sp"
+		        android:background="@drawable/button"/>
         	</TableRow>
         </TableLayout>
     </LinearLayout>

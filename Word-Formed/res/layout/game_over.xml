@@ -9,7 +9,7 @@
    <TextView
         android:id="@+id/title"
         android:textColor="@color/white"
-        android:textSize="25dp"
+        android:textSize="25sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Game Over" />
@@ -17,7 +17,7 @@
     <TextView
         android:id="@+id/score_result"
         android:textColor="@color/white"
-        android:textSize="15dp"
+        android:textSize="15sp"
         android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
