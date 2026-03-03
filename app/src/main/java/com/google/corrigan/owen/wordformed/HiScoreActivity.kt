@@ -1,41 +1,94 @@
 package com.google.corrigan.owen.wordformed
 
 import android.os.Bundle
-import android.util.Log
 import android.view.WindowManager
-import android.widget.ListView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.viewModels
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material3.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
-class HiScoreActivity : AppCompatActivity() {
-    private lateinit var listView: ListView
+class HiScoreActivity : ComponentActivity() {
+    private val viewModel: HiScoreViewModel by viewModels {
+        HiScoreViewModelFactory(AppDatabase.getDatabase(this).hiScoreDao())
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.hiscore)
         
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
 
-        listView = findViewById(android.R.id.list)
-
-        loadHighScores()
-    }
-
-    private fun loadHighScores() {
-        lifecycleScope.launch {
-            Log.d("HISCORES", "In HiScoreActivity, reading all scores")
-            val scores = withContext(Dispatchers.IO) {
-                AppDatabase.getDatabase(this@HiScoreActivity).hiScoreDao().getAllHiScores()
+        setContent {
+            WordFormedTheme {
+                HiScoreScreen(viewModel)
             }
-            
-            val adapter = HiScoreAdapter(this@HiScoreActivity, scores)
-            listView.adapter = adapter
         }
+    }
+}
+
+@Composable
+fun HiScoreScreen(viewModel: HiScoreViewModel) {
+    val scores by viewModel.hiScores.collectAsState()
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color(0xFF38546E))
+            .padding(16.dp)
+    ) {
+        Text(
+            text = stringResource(R.string.high_score_title),
+            fontSize = 32.sp,
+            color = Color.White,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(bottom = 24.dp)
+        )
+
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            itemsIndexed(scores) { index, hiScore ->
+                HiScoreRow(index + 1, hiScore)
+            }
+        }
+    }
+}
+
+@Composable
+fun HiScoreRow(rank: Int, hiScore: HiScore) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Text(
+            text = "$rank. ${hiScore.name}",
+            color = Color.White,
+            fontSize = 18.sp,
+            modifier = Modifier.weight(1f)
+        )
+        Text(
+            text = hiScore.score.toString(),
+            color = Color.White,
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold
+        )
     }
 }
