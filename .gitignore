@@ -16,6 +16,7 @@ Thumbs.db
 *.apk
 *.aar
 *.jar
+!gradle/wrapper/gradle-wrapper.jar
 
 # Log files
 *.log
