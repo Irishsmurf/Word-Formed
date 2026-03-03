@@ -11,7 +11,8 @@
             android:theme="@android:style/Theme.NoTitleBar"
             android:name=".WordFormed"
             android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -21,27 +22,32 @@
             android:theme="@android:style/Theme.NoTitleBar"
             android:name=".HiScoreActivity"
             android:screenOrientation="portrait"
-            android:label="@string/high_score_title"/>
+            android:label="@string/high_score_title"
+            android:exported="false"/>
         <activity
             android:name=".HowToPlay"
             android:label="@string/how_to_play_title"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Dialog"/>
+            android:theme="@android:style/Theme.Dialog"
+            android:exported="false"/>
         <activity
             android:name=".MultiplayerGame"
             android:screenOrientation="portrait"
             android:label="@string/multiplayer_game_title"
-            android:theme="@android:style/Theme.NoTitleBar"/>
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:exported="false"/>
         <activity
             android:name=".SinglePlayerGame"
             android:screenOrientation="portrait"
             android:label="@string/single_player_title"
-            android:theme="@android:style/Theme.NoTitleBar"/>
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:exported="false"/>
         <activity
             android:name=".GameOverActivity"
             android:screenOrientation="portrait"
             android:label="@string/single_player_title"
-            android:theme="@android:style/Theme.NoTitleBar"/>
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:exported="false"/>
     </application>
 
 </manifest>

@@ -22,7 +22,7 @@ class MultiplayerGame : AppCompatActivity() {
         )
         setContentView(R.layout.multiplayer_game)
 
-        val bluetoothManager = getSystemService(Context.BLUETOOTH_MANAGER_SERVICE) as BluetoothManager
+        val bluetoothManager = getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
         bluetoothAdapter = bluetoothManager.adapter
 
         bluetoothAdapter?.let {

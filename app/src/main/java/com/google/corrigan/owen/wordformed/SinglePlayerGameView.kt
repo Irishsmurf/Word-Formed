@@ -115,8 +115,7 @@ class SinglePlayerGameView(context: Context) : SurfaceView(context), SurfaceHold
             .setCancelable(false)
 
         if (score > 0) {
-            builder.setMessage("Congratulations, you achieved a score of $score
-Please enter your tag:")
+            builder.setMessage("Congratulations, you achieved a score of $score\nPlease enter your tag:")
                 .setView(input)
                 .setNeutralButton("Ok") { _, _ ->
                     val name = input.text.toString()

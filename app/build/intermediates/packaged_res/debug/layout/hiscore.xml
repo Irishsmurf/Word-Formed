@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+     >
+
+    <LinearLayout
+        android:id="@+id/group"
+        android:gravity="center"
+        android:background="@color/background"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp">
+        <TextView
+	        android:id="@+id/score_result"
+	        android:textColor="@color/white"
+	        android:textSize="25dp"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="Hi Scores" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:typeface="monospace"
+        android:layout_height="wrap_content"
+        android:background="@color/background"
+        android:cacheColorHint="@color/background" />
+
+</LinearLayout>

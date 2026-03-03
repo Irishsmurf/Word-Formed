@@ -1,0 +1,110 @@
+[
+    {
+        "merged": "com.google.corrigan.owen.wordformed.app-merged_res-68:/drawable-hdpi_word.png.flat",
+        "source": "com.google.corrigan.owen.wordformed.app-main-70:/drawable-hdpi/word.png"
+    },
+    {
+        "merged": "com.google.corrigan.owen.wordformed.app-merged_res-68:/raw_finish.mp3.flat",
+        "source": "com.google.corrigan.owen.wordformed.app-main-70:/raw/finish.mp3"
+    },
+    {
+        "merged": "com.google.corrigan.owen.wordformed.app-merged_res-68:/layout_game_over.xml.flat",
+        "source": "com.google.corrigan.owen.wordformed.app-main-70:/layout/game_over.xml"
+    },
+    {
+        "merged": "com.google.corrigan.owen.wordformed.app-merged_res-68:/drawable_main_button.png.flat",
+        "source": "com.google.corrigan.owen.wordformed.app-main-70:/drawable/main_button.png"
+    },
+    {
+        "merged": "com.google.corrigan.owen.wordformed.app-merged_res-68:/drawable_tile.png.flat",
+        "source": "com.google.corrigan.owen.wordformed.app-main-70:/drawable/tile.png"
+    },
+    {
+        "merged": "com.google.corrigan.owen.wordformed.app-merged_res-68:/layout-land_main.xml.flat",
+        "source": "com.google.corrigan.owen.wordformed.app-main-70:/layout-land/main.xml"
+    },
+    {
+        "merged": "com.google.corrigan.owen.wordformed.app-merged_res-68:/drawable_splash.png.flat",
+        "source": "com.google.corrigan.owen.wordformed.app-main-70:/drawable/splash.png"
+    },
+    {
+        "merged": "com.google.corrigan.owen.wordformed.app-merged_res-68:/raw_words.dict.flat",
+        "source": "com.google.corrigan.owen.wordformed.app-main-70:/raw/words.dict"
+    },
+    {
+        "merged": "com.google.corrigan.owen.wordformed.app-merged_res-68:/drawable_button.xml.flat",
+        "source": "com.google.corrigan.owen.wordformed.app-main-70:/drawable/button.xml"
+    },
+    {
+        "merged": "com.google.corrigan.owen.wordformed.app-merged_res-68:/layout_multiplayer_game.xml.flat",
+        "source": "com.google.corrigan.owen.wordformed.app-main-70:/layout/multiplayer_game.xml"
+    },
+    {
+        "merged": "com.google.corrigan.owen.wordformed.app-merged_res-68:/drawable_submit_button.png.flat",
+        "source": "com.google.corrigan.owen.wordformed.app-main-70:/drawable/submit_button.png"
+    },
+    {
+        "merged": "com.google.corrigan.owen.wordformed.app-merged_res-68:/layout_hiscore.xml.flat",
+        "source": "com.google.corrigan.owen.wordformed.app-main-70:/layout/hiscore.xml"
+    },
+    {
+        "merged": "com.google.corrigan.owen.wordformed.app-merged_res-68:/layout_splash.xml.flat",
+        "source": "com.google.corrigan.owen.wordformed.app-main-70:/layout/splash.xml"
+    },
+    {
+        "merged": "com.google.corrigan.owen.wordformed.app-merged_res-68:/drawable-hdpi_word2.png.flat",
+        "source": "com.google.corrigan.owen.wordformed.app-main-70:/drawable-hdpi/word2.png"
+    },
+    {
+        "merged": "com.google.corrigan.owen.wordformed.app-merged_res-68:/layout_main.xml.flat",
+        "source": "com.google.corrigan.owen.wordformed.app-main-70:/layout/main.xml"
+    },
+    {
+        "merged": "com.google.corrigan.owen.wordformed.app-merged_res-68:/raw_word_list.txt.flat",
+        "source": "com.google.corrigan.owen.wordformed.app-main-70:/raw/word_list.txt"
+    },
+    {
+        "merged": "com.google.corrigan.owen.wordformed.app-merged_res-68:/raw_submit.wav.flat",
+        "source": "com.google.corrigan.owen.wordformed.app-main-70:/raw/submit.wav"
+    },
+    {
+        "merged": "com.google.corrigan.owen.wordformed.app-merged_res-68:/drawable-ldpi_word.png.flat",
+        "source": "com.google.corrigan.owen.wordformed.app-main-70:/drawable-ldpi/word.png"
+    },
+    {
+        "merged": "com.google.corrigan.owen.wordformed.app-merged_res-68:/drawable-mdpi_word2.png.flat",
+        "source": "com.google.corrigan.owen.wordformed.app-main-70:/drawable-mdpi/word2.png"
+    },
+    {
+        "merged": "com.google.corrigan.owen.wordformed.app-merged_res-68:/layout_how_to_play.xml.flat",
+        "source": "com.google.corrigan.owen.wordformed.app-main-70:/layout/how_to_play.xml"
+    },
+    {
+        "merged": "com.google.corrigan.owen.wordformed.app-merged_res-68:/drawable-mdpi_word.png.flat",
+        "source": "com.google.corrigan.owen.wordformed.app-main-70:/drawable-mdpi/word.png"
+    },
+    {
+        "merged": "com.google.corrigan.owen.wordformed.app-merged_res-68:/drawable-ldpi_word2.png.flat",
+        "source": "com.google.corrigan.owen.wordformed.app-main-70:/drawable-ldpi/word2.png"
+    },
+    {
+        "merged": "com.google.corrigan.owen.wordformed.app-merged_res-68:/font_roboto_thin.ttf.flat",
+        "source": "com.google.corrigan.owen.wordformed.app-main-70:/font/roboto_thin.ttf"
+    },
+    {
+        "merged": "com.google.corrigan.owen.wordformed.app-merged_res-68:/raw_pop_sound.mp3.flat",
+        "source": "com.google.corrigan.owen.wordformed.app-main-70:/raw/pop_sound.mp3"
+    },
+    {
+        "merged": "com.google.corrigan.owen.wordformed.app-merged_res-68:/raw_entered.mp3.flat",
+        "source": "com.google.corrigan.owen.wordformed.app-main-70:/raw/entered.mp3"
+    },
+    {
+        "merged": "com.google.corrigan.owen.wordformed.app-merged_res-68:/raw_pop.ogg.flat",
+        "source": "com.google.corrigan.owen.wordformed.app-main-70:/raw/pop.ogg"
+    },
+    {
+        "merged": "com.google.corrigan.owen.wordformed.app-merged_res-68:/drawable-hdpi_ic_launcher.png.flat",
+        "source": "com.google.corrigan.owen.wordformed.app-main-70:/drawable-hdpi/ic_launcher.png"
+    }
+]

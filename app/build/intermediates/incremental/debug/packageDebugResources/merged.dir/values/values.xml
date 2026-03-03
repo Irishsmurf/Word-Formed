@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="background">#38546E</color>
+    <color name="black">#000000</color>
+    <color name="light_blue">#ADD8E6</color>
+    <color name="light_grey">#C0C0C0</color>
+    <color name="white">#ffffff</color>
+    <string name="app_name">WordFormed</string>
+    <string name="high_score_title">High Scores</string>
+    <string name="high_scores_label">High scores</string>
+    <string name="how_to_play_label">How to play</string>
+    <string name="how_to_play_text">This game is based on the popular scrabble game.\nThe objective is simple: drag letters into the bottom box to form words, then press the button that lights up to get the score for that word. If you see a useful letter you can store it in the middle box. \n\n\n<b>Developers:</b> Owen Corrigan and David Kernan.</string>
+    <string name="how_to_play_title">How to play</string>
+    <string name="main_title">WordFormed</string>
+    <string name="multiplayer_game_title">Multiplayer Game</string>
+    <string name="multiplayer_label">Start multiplayer game</string>
+    <string name="new_game_label">New Game</string>
+    <string name="single_player_title">Single Player Game</string>
+    <string name="your_score"/>
+    <style name="Button" parent="@android:style/Widget.Button">
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+        <item name="android:textColor">#FFFFFFFF</item>
+        <item name="android:shadowColor">#FF000000</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">-1</item>
+        <item name="android:shadowRadius">0.2</item>
+        <item name="android:textSize">16dip</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:background">#FF000000</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+        </style>
+    <style name="CustomButton" parent="android:style/Theme.NoTitleBar">
+    	    <item name="android:buttonStyle">@style/Button</item>
+    	</style>
+</resources>
