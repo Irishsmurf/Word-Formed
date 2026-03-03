@@ -28,8 +28,8 @@ class GameOverActivity : ComponentActivity() {
         setContent {
             WordFormedTheme {
                 GameOverScreen(
-                    score = SinglePlayerGameView.score,
-                    words = SinglePlayerGameView.wordsByScore
+                    score = SinglePlayerGame.wordList.sumOf { it.score },
+                    words = SinglePlayerGame.wordList.sortedByDescending { it.score }
                 )
             }
         }
