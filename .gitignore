@@ -1,0 +1,28 @@
+# Gradle files
+.gradle/
+build/
+
+# Android Studio files
+.idea/
+*.iml
+local.properties
+captures/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Output files
+*.apk
+*.aar
+*.jar
+
+# Log files
+*.log
+
+# Unit test reports
+app/build/reports/
+app/build/test-results/
+
+# Android Studio 3.0+
+*.hprof
