@@ -26,3 +26,4 @@ app/build/test-results/
 
 # Android Studio 3.0+
 *.hprof
+android-sdk/
