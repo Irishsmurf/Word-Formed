@@ -6,14 +6,15 @@ Word-Formed is a Scrabble-inspired mobile game for Android. It features tile-bas
 
 - **Type:** Modern Android Application
 - **Language:** Kotlin (1.9.22)
-- **Target SDK:** 34 (Android 14)
+- **Target SDK:** 35 (Android 15)
 - **Min SDK:** 24 (Android 7.0)
-- **Main Package:** \`com.paddez.wordformed\`
+- **Main Package:** `com.paddez.wordformed`
 - **Architecture:** 
     - MVVM with Jetpack Compose for UI.
     - ViewModel-based state management.
-    - Word validation via a serialized dictionary.
+    - Word validation via a Trie-based dictionary.
     - Persistent storage using Room for high scores.
+    - Automated CI/CD with GitHub Actions and Google Play Store integration.
 
 ## Key Components
 
@@ -23,20 +24,27 @@ Word-Formed is a Scrabble-inspired mobile game for Android. It features tile-bas
 - **`HiScoreActivity`**: Activity for displaying persistent high scores.
 - **`GameOverActivity`**: Final score display and post-game navigation.
 - **`HowToPlay`**: Instruction screen.
-- **`MultiplayerGame`**: (Possible future or simplified) multiplayer mode activity.
+- **`MultiplayerGame`**: (Experimental) Bluetooth/Local multiplayer mode activity.
 
 ### Game Logic
-- **`GameViewModel`**: Manages game state, timer, scoring, and tile selection logic.
-- **`TileGenerator`**: Generates random tiles for the game board.
-- **`Dictionary`**: Loads and validates words against the serialized `words.dict` file.
+- **`GameViewModel`**: Manages game state, countdown timer (ms), scoring, and tile selection logic.
+- **`TileGenerator`**: Generates random tiles for the game board based on English frequency distributions.
+- **`Dictionary`**: Loads and validates words against the `word_list.txt` file.
 - **`Trie`**: Efficient prefix searching and dictionary data structure.
-- **`Word`**: Data model representing a word entry.
+- **`Word`**: Data model representing a word entry and its associated score.
 
 ### Data & Resources
 - **`AppDatabase`**, **`HiScoreDao`**, **`HiScore`**: Room database components for persisting high scores.
-- **`res/raw/words.dict`**: Primary dictionary file (serialized Java object).
 - **`res/raw/word_list.txt`**: Raw text version of the dictionary.
-- **`assets/fonts/roboto_thin.ttf`**: Custom font used for UI elements.
+- **`res/values-*/strings.xml`**: Localized strings for English, Irish, Japanese, Spanish, and German.
+- **`distribution/whatsnew/`**: Release notes for the Google Play Store.
+
+## CI/CD and Release
+
+The project features a fully automated pipeline in `.github/workflows/android.yml`:
+- **Build & Test:** Runs unit tests and builds the App Bundle (AAB).
+- **Signing:** Uses a native `jarsigner` script to sign the AAB securely.
+- **Deployment:** Automatically pushes tagged releases (`v*`) to the Google Play **Internal Track** in `draft` status.
 
 ## Building and Running
 
@@ -51,28 +59,24 @@ This project uses the Gradle Build System (Kotlin DSL).
   ```bash
   ./gradlew assembleDebug
   ```
+- **Build Release Bundle (AAB):**
+  ```bash
+  ./gradlew bundleRelease
+  ```
 - **Run Unit Tests:**
   ```bash
   ./gradlew test
   ```
-- **Install to Device/Emulator:**
-  ```bash
-  ./gradlew installDebug
-  ```
-- **Clean Project:**
-  ```bash
-  ./gradlew clean
-  ```
 
 ## Development Conventions
 
-- **UI/UX:** Primarily Jetpack Compose-based UI.
-- **Navigation:** Uses standard Intent-based Activity navigation for main screens, with Compose components for internal layouts.
-- **Styling:** Material 3 with custom colors defined in `res/values/colors.xml`.
+- **UI/UX:** Primarily Jetpack Compose-based UI with Material 3 components.
+- **Localization:** All UI strings must be stored in `strings.xml` to support the multilingual setup.
+- **Navigation:** Uses Intent-based Activity navigation for main screens, with Compose for layout and internal state.
 - **Concurrency:** Kotlin Coroutines for asynchronous tasks (e.g., dictionary loading, DB operations).
 
 ## Troubleshooting
 
-- **Dictionary Loading:** The dictionary is loaded asynchronously. Ensure initialization completes before word validation is attempted.
-- **Database:** Room schema changes require proper migrations or database version increments in `AppDatabase.kt`.
-- **Gradle Version:** The wrapper is at Gradle 8.5; ensure the build environment supports it.
+- **SDK Warning:** The project uses `compileSdk 35` and is compatible with AGP 8.8.2 and Gradle 8.10.2.
+- **Google Play Conflict:** Ensure the `versionCode` in `app/build.gradle.kts` is incremented before every release push.
+- **Signing:** Keystore and API secrets are stored in GitHub Secrets; local builds use a placeholder if those environment variables are missing.
