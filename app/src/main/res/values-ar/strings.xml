@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WordFormed</string>
+    <string name="high_score_title">أعلى النتائج</string>
+    <string name="main_title">WordFormed</string>
+    <string name="new_game_label">لعبة جديدة</string>
+    <string name="multiplayer_label">بدء لعبة متعددة اللاعبين</string>
+    <string name="high_scores_label">أعلى النتائج</string>
+    <string name="how_to_play_label">كيفية اللعب</string>
+    <string name="single_player_title">لعبة لاعب واحد</string>
+    <string name="how_to_play_title">كيفية اللعب</string>
+    <string name="multiplayer_game_title">لعبة متعددة اللاعبين</string>
+    <string name="how_to_play_text">مرحباً بك في <b>WordFormed</b>!\n\n<b>الهدف:</b> قم بتكوين أكبر عدد ممكن من الكلمات الصحيحة خلال 3 دقائق.\n\n<b>كيفية اللعب:</b>\n\n• <b>السحب:</b> تبدأ بـ 7 بلاطات أحرف عشوائية في المربع العلوي.\n\n• <b>البناء:</b> اسحب الأحرف من الأعلى إلى المربع السفلي لتكوين كلمة.\n\n• <b>النتيجة:</b> اضغط على زر <b>إرسال الكلمة</b> لجمع النقاط. الكلمات الصحيحة تمسح المربع وتسحب أحرفاً جديدة.\n\n• <b>الاحتفاظ:</b> لست مستعداً لاستخدام حرف؟ اسحبه إلى المربع الأوسط لحفظه لوقت لاحق!\n\n<b>المطورون:</b> أوين كوريجان وديفيد كيرنان.</string>
+    <string name="your_score"></string>
+    <string name="score_label">النتيجة: %1$d</string>
+    <string name="time_label">الوقت: %1$s</string>
+    <string name="time_done">انتهى!</string>
+    <string name="new_letters_label">أحرف جديدة</string>
+    <string name="hold_letters_label">أحرف محفوظة</string>
+    <string name="form_word_label">تكوين كلمة</string>
+    <string name="submit_word_label">إرسال الكلمة</string>
+    <string name="game_over_label">انتهت اللعبة</string>
+    <string name="congratulations_label">تهانينا، لقد حققت نتيجة %1$d</string>
+    <string name="words_used_label">الكلمات المستخدمة:</string>
+    <string name="hiscore_format">%1$d. %2$s</string>
+    <string name="coming_soon_title">قريباً!</string>
+    <string name="multiplayer_coming_soon_text">تعدد اللاعبين عبر البلوتوث قيد التطوير حالياً. ابقوا على اطلاع للتحديثات القادمة!</string>
+    <string name="hiscores_empty_text">لا توجد نتائج عالية بعد. العب لعبة لترى اسمك هنا!</string>
+</resources>

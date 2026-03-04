@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WordFormed</string>
+    <string name="high_score_title">उच्च स्कोर</string>
+    <string name="main_title">WordFormed</string>
+    <string name="new_game_label">नया खेल</string>
+    <string name="multiplayer_label">मल्टीप्लेयर गेम शुरू करें</string>
+    <string name="high_scores_label">उच्च स्कोर</string>
+    <string name="how_to_play_label">कैसे खेलें</string>
+    <string name="single_player_title">सिंगल प्लेयर गेम</string>
+    <string name="how_to_play_title">कैसे खेलें</string>
+    <string name="multiplayer_game_title">मल्टीप्लेयर गेम</string>
+    <string name="how_to_play_text"><b>WordFormed</b> में आपका स्वागत है!\n\n<b>लक्ष्य:</b> 3 मिनट के भीतर अधिक से अधिक मान्य शब्द बनाएं।\n\n<b>कैसे खेलें:</b>\n\n• <b>निकालें:</b> आप ऊपर के बॉक्स में 7 यादृच्छिक अक्षर टाइल्स के साथ शुरुआत करते हैं।\n\n• <b>बनाएं:</b> एक शब्द बनाने के लिए अक्षरों को ऊपर से नीचे के बॉक्स में खींचें।\n\n• <b>स्कोर:</b> अंक एकत्र करने के लिए <b>शब्द सबमिट करें</b> बटन दबाएं। मान्य शब्द बॉक्स को साफ़ करते हैं और नए अक्षर निकालते हैं।\n\n• <b>रोकें:</b> अक्षर का उपयोग करने के लिए तैयार नहीं हैं? इसे बाद के लिए सहेजने के लिए बीच के बॉक्स में खींचें!\n\n<b>डेवलपर्स:</b> ओवेन कॉरिगन और डेविड कर्नन।</string>
+    <string name="your_score"></string>
+    <string name="score_label">स्कोर: %1$d</string>
+    <string name="time_label">समय: %1$s</string>
+    <string name="time_done">हो गया!</string>
+    <string name="new_letters_label">नए अक्षर</string>
+    <string name="hold_letters_label">अक्षरों को रोकें</string>
+    <string name="form_word_label">शब्द बनाएं</string>
+    <string name="submit_word_label">शब्द सबमिट करें</string>
+    <string name="game_over_label">खेल खत्म</string>
+    <string name="congratulations_label">बधाई हो, आपने %1$d का स्कोर हासिल किया</string>
+    <string name="words_used_label">उपयोग किए गए शब्द:</string>
+    <string name="hiscore_format">%1$d. %2$s</string>
+    <string name="coming_soon_title">जल्द ही आ रहा है!</string>
+    <string name="multiplayer_coming_soon_text">ब्लूटूथ मल्टीप्लेयर वर्तमान में विकास के अधीन है। भविष्य के अपडेट के लिए बने रहें!</string>
+    <string name="hiscores_empty_text">अभी तक कोई उच्च स्कोर नहीं है। अपना नाम यहाँ देखने के लिए एक खेल खेलें!</string>
+</resources>

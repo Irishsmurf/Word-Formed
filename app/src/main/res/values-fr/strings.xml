@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WordFormed</string>
+    <string name="high_score_title">Meilleurs scores</string>
+    <string name="main_title">WordFormed</string>
+    <string name="new_game_label">Nouvelle partie</string>
+    <string name="multiplayer_label">Démarrer une partie multijoueur</string>
+    <string name="high_scores_label">Meilleurs scores</string>
+    <string name="how_to_play_label">Comment jouer</string>
+    <string name="single_player_title">Partie solo</string>
+    <string name="how_to_play_title">Comment jouer</string>
+    <string name="multiplayer_game_title">Partie multijoueur</string>
+    <string name="how_to_play_text">Bienvenue dans <b>WordFormed</b> !\n\n<b>Objectif :</b> Formez autant de mots valides que possible en 3 minutes.\n\n<b>Comment jouer :</b>\n\n• <b>Tirage :</b> Vous commencez avec 7 tuiles de lettres aléatoires dans la boîte du haut.\n\n• <b>Construction :</b> Faites glisser les lettres du haut vers la boîte du bas pour former un mot.\n\n• <b>Score :</b> Appuyez sur le bouton <b>SOUMETTRE LE MOT</b> pour collecter des points. Les mots valides vident la boîte et tirent de nouvelles lettres.\n\n• <b>Réserve :</b> Vous n\'êtes pas prêt à utiliser une lettre ? Faites-la glisser dans la boîte du milieu pour la sauvegarder pour plus tard !\n\n<b>Développeurs :</b> Owen Corrigan et David Kernan.</string>
+    <string name="your_score"></string>
+    <string name="score_label">Score : %1$d</string>
+    <string name="time_label">Temps : %1$s</string>
+    <string name="time_done">Terminé !</string>
+    <string name="new_letters_label">Nouvelles lettres</string>
+    <string name="hold_letters_label">Lettres en réserve</string>
+    <string name="form_word_label">Former un mot</string>
+    <string name="submit_word_label">SOUMETTRE LE MOT</string>
+    <string name="game_over_label">Partie terminée</string>
+    <string name="congratulations_label">Félicitations, vous avez obtenu un score de %1$d</string>
+    <string name="words_used_label">Mots utilisés :</string>
+    <string name="hiscore_format">%1$d. %2$s</string>
+    <string name="coming_soon_title">Bientôt disponible !</string>
+    <string name="multiplayer_coming_soon_text">Le mode multijoueur via Bluetooth est actuellement en cours de développement. Restez à l\'écoute pour les prochaines mises à jour !</string>
+    <string name="hiscores_empty_text">Aucun record pour le moment. Jouez une partie pour voir votre nom ici !</string>
+</resources>

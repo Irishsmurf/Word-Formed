@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WordFormed</string>
+    <string name="high_score_title">최고 점수</string>
+    <string name="main_title">WordFormed</string>
+    <string name="new_game_label">새 게임</string>
+    <string name="multiplayer_label">멀티플레이어 게임 시작</string>
+    <string name="high_scores_label">최고 점수</string>
+    <string name="how_to_play_label">게임 방법</string>
+    <string name="single_player_title">싱글 플레이어 게임</string>
+    <string name="how_to_play_title">게임 방법</string>
+    <string name="multiplayer_game_title">멀티플레이어 게임</string>
+    <string name="how_to_play_text"><b>WordFormed</b>에 오신 것을 환영합니다!\n\n<b>목표:</b> 3분 이내에 가능한 한 많은 유효한 단어를 만드세요.\n\n<b>게임 방법:</b>\n\n• <b>뽑기:</b> 상단 상자에 무작위 문자 타일 7개로 시작합니다.\n\n• <b>만들기:</b> 상단의 문자를 하단 상자로 드래그하여 단어를 만드세요.\n\n• <b>점수:</b> <b>단어 제출</b> 버튼을 눌러 점수를 획득하세요. 유효한 단어는 상자를 비우고 새 문자를 뽑습니다.\n\n• <b>보관:</b> 문자를 바로 사용하고 싶지 않으신가요? 중간 상자로 드래그하여 나중에 사용하기 위해 저장하세요!\n\n<b>개발자:</b> Owen Corrigan 및 David Kernan.</string>
+    <string name="your_score"></string>
+    <string name="score_label">점수: %1$d</string>
+    <string name="time_label">시간: %1$s</string>
+    <string name="time_done">완료!</string>
+    <string name="new_letters_label">새 문자</string>
+    <string name="hold_letters_label">보관 문자</string>
+    <string name="form_word_label">단어 만들기</string>
+    <string name="submit_word_label">단어 제출</string>
+    <string name="game_over_label">게임 종료</string>
+    <string name="congratulations_label">축하합니다! %1$d점을 획득하셨습니다.</string>
+    <string name="words_used_label">사용된 단어:</string>
+    <string name="hiscore_format">%1$d. %2$s</string>
+    <string name="coming_soon_title">곧 출시 예정!</string>
+    <string name="multiplayer_coming_soon_text">블루투스 멀티플레이어는 현재 개발 중입니다. 향후 업데이트를 기대해 주세요!</string>
+    <string name="hiscores_empty_text">아직 최고 점수가 없습니다. 게임을 플레이하여 여기에 이름을 올리세요!</string>
+</resources>

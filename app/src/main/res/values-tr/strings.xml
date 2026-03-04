@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WordFormed</string>
+    <string name="high_score_title">Yüksek Skorlar</string>
+    <string name="main_title">WordFormed</string>
+    <string name="new_game_label">Yeni Oyun</string>
+    <string name="multiplayer_label">Çok oyunculu oyun başlat</string>
+    <string name="high_scores_label">Yüksek Skorlar</string>
+    <string name="how_to_play_label">Nasıl Oynanır</string>
+    <string name="single_player_title">Tek Oyunculu Oyun</string>
+    <string name="how_to_play_title">Nasıl Oynanır</string>
+    <string name="multiplayer_game_title">Çok Oyunculu Oyun</string>
+    <string name="how_to_play_text"><b>WordFormed</b>\'a Hoş Geldiniz!\n\n<b>Amaç:</b> 3 dakika içinde mümkün olduğunca çok geçerli kelime oluşturun.\n\n<b>Nasıl Oynanır:</b>\n\n• <b>Çekme:</b> Üst kutuda 7 rastgele harf karosu ile başlarsınız.\n\n• <b>Oluşturma:</b> Bir kelime oluşturmak için harfleri üstten alttaki kutuya sürükleyin.\n\n• <b>Skor:</b> Puan toplamak için <b>KELİMEYİ GÖNDER</b> düğmesine basın. Geçerli kelimeler kutuyu temizler ve yeni harfler çeker.\n\n• <b>Bekletme:</b> Bir harfi kullanmaya hazır değil misiniz? Daha sonra kullanmak üzere kaydetmek için orta kutuya sürükleyin!\n\n<b>Geliştiriciler:</b> Owen Corrigan ve David Kernan.</string>
+    <string name="your_score"></string>
+    <string name="score_label">Skor: %1$d</string>
+    <string name="time_label">Süre: %1$s</string>
+    <string name="time_done">Tamamlandı!</string>
+    <string name="new_letters_label">Yeni Harfler</string>
+    <string name="hold_letters_label">Harfleri Beklet</string>
+    <string name="form_word_label">Kelime Oluştur</string>
+    <string name="submit_word_label">KELİMEYİ GÖNDER</string>
+    <string name="game_over_label">Oyun Bitti</string>
+    <string name="congratulations_label">Tebrikler, %1$d skoruna ulaştınız</string>
+    <string name="words_used_label">Kullanılan Kelimeler:</string>
+    <string name="hiscore_format">%1$d. %2$s</string>
+    <string name="coming_soon_title">Yakında!</string>
+    <string name="multiplayer_coming_soon_text">Bluetooth üzerinden çok oyunculu mod şu anda geliştirilme aşamasındadır. Gelecek güncellemeler için takipte kalın!</string>
+    <string name="hiscores_empty_text">Henüz yüksek skor yok. Adınızı burada görmek için bir oyun oynayın!</string>
+</resources>

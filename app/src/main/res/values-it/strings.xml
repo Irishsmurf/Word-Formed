@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WordFormed</string>
+    <string name="high_score_title">Classifica</string>
+    <string name="main_title">WordFormed</string>
+    <string name="new_game_label">Nuova Partita</string>
+    <string name="multiplayer_label">Inizia partita multigiocatore</string>
+    <string name="high_scores_label">Classifica</string>
+    <string name="how_to_play_label">Come giocare</string>
+    <string name="single_player_title">Partita Giocatore Singolo</string>
+    <string name="how_to_play_title">Come giocare</string>
+    <string name="multiplayer_game_title">Partita Multigiocatore</string>
+    <string name="how_to_play_text">Benvenuto in <b>WordFormed</b>!\n\n<b>Obiettivo:</b> Forma quante più parole valide possibile entro 3 minuti.\n\n<b>Come giocare:</b>\n\n• <b>Pesca:</b> Inizi con 7 tessere lettera casuali nella casella in alto.\n\n• <b>Costruisci:</b> Trascina le lettere dall\'alto verso la casella in basso per formare una parola.\n\n• <b>Punteggio:</b> Premi il pulsante <b>INVIA PAROLA</b> per accumulare punti. Le parole valide svuotano la casella e fanno pescare nuove lettere.\n\n• <b>Riserva:</b> Non sei pronto per usare una lettera? Trascinala nella casella centrale per salvarla per dopo!\n\n<b>Sviluppatori:</b> Owen Corrigan e David Kernan.</string>
+    <string name="your_score"></string>
+    <string name="score_label">Punteggio: %1$d</string>
+    <string name="time_label">Tempo: %1$s</string>
+    <string name="time_done">Fatto!</string>
+    <string name="new_letters_label">Nuove lettere</string>
+    <string name="hold_letters_label">Lettere in riserva</string>
+    <string name="form_word_label">Forma parola</string>
+    <string name="submit_word_label">INVIA PAROLA</string>
+    <string name="game_over_label">Game Over</string>
+    <string name="congratulations_label">Congratulazioni, hai ottenuto un punteggio di %1$d</string>
+    <string name="words_used_label">Parole utilizzate:</string>
+    <string name="hiscore_format">%1$d. %2$s</string>
+    <string name="coming_soon_title">Prossimamente!</string>
+    <string name="multiplayer_coming_soon_text">Il multigiocatore Bluetooth è attualmente in fase di sviluppo. Resta sintonizzato per futuri aggiornamenti!</string>
+    <string name="hiscores_empty_text">Nessun record ancora. Gioca una partita per vedere il tuo nome qui!</string>
+</resources>

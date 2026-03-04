@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WordFormed</string>
+    <string name="high_score_title">Skor Tertinggi</string>
+    <string name="main_title">WordFormed</string>
+    <string name="new_game_label">Permainan Baru</string>
+    <string name="multiplayer_label">Mulai permainan multipemain</string>
+    <string name="high_scores_label">Skor Tertinggi</string>
+    <string name="how_to_play_label">Cara Bermain</string>
+    <string name="single_player_title">Permainan Pemain Tunggal</string>
+    <string name="how_to_play_title">Cara Bermain</string>
+    <string name="multiplayer_game_title">Permainan Multipemain</string>
+    <string name="how_to_play_text">Selamat datang di <b>WordFormed</b>!\n\n<b>Tujuan:</b> Bentuk kata valid sebanyak mungkin dalam waktu 3 menit.\n\n<b>Cara Bermain:</b>\n\n• <b>Ambil:</b> Anda memulai dengan 7 ubin huruf acak di kotak atas.\n\n• <b>Susun:</b> Seret huruf dari atas ke kotak bawah untuk membentuk kata.\n\n• <b>Skor:</b> Tekan tombol <b>KIRIM KATA</b> untuk mengumpulkan poin. Kata yang valid akan mengosongkan kotak dan mengambil huruf baru.\n\n• <b>Simpan:</b> Belum siap menggunakan huruf? Seret ke kotak tengah untuk menyimpannya nanti!\n\n<b>Pengembang:</b> Owen Corrigan dan David Kernan.</string>
+    <string name="your_score"></string>
+    <string name="score_label">Skor: %1$d</string>
+    <string name="time_label">Waktu: %1$s</string>
+    <string name="time_done">Selesai!</string>
+    <string name="new_letters_label">Huruf Baru</string>
+    <string name="hold_letters_label">Simpan Huruf</string>
+    <string name="form_word_label">Bentuk Kata</string>
+    <string name="submit_word_label">KIRIM KATA</string>
+    <string name="game_over_label">Permainan Berakhir</string>
+    <string name="congratulations_label">Selamat, Anda mencapai skor %1$d</string>
+    <string name="words_used_label">Kata yang Digunakan:</string>
+    <string name="hiscore_format">%1$d. %2$s</string>
+    <string name="coming_soon_title">Segera Hadir!</string>
+    <string name="multiplayer_coming_soon_text">Multipemain Bluetooth sedang dalam pengembangan. Nantikan pembaruan di masa mendatang!</string>
+    <string name="hiscores_empty_text">Belum ada skor tertinggi. Mainkan permainan untuk melihat nama Anda di sini!</string>
+</resources>

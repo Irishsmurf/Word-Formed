@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WordFormed</string>
+    <string name="high_score_title">Recordes</string>
+    <string name="main_title">WordFormed</string>
+    <string name="new_game_label">Novo Jogo</string>
+    <string name="multiplayer_label">Iniciar jogo multijogador</string>
+    <string name="high_scores_label">Recordes</string>
+    <string name="how_to_play_label">Como jogar</string>
+    <string name="single_player_title">Jogo Single Player</string>
+    <string name="how_to_play_title">Como jogar</string>
+    <string name="multiplayer_game_title">Jogo Multijogador</string>
+    <string name="how_to_play_text">Bem-vindo ao <b>WordFormed</b>!\n\n<b>Objetivo:</b> Forme o máximo de palavras válidas possível em 3 minutos.\n\n<b>Como Jogar:</b>\n\n• <b>Sorteio:</b> Você começa com 7 peças de letras aleatórias na caixa superior.\n\n• <b>Construir:</b> Arraste as letras do topo para a caixa inferior para formar uma palavra.\n\n• <b>Pontuação:</b> Pressione o botão <b>ENVIAR PALAVRA</b> para coletar pontos. Palavras válidas limpam a caixa e sorteiam novas letras.\n\n• <b>Reserva:</b> Não está pronto para usar uma letra? Arraste-a para a caixa do meio para salvá-la para depois!\n\n<b>Desenvolvedores:</b> Owen Corrigan e David Kernan.</string>
+    <string name="your_score"></string>
+    <string name="score_label">Pontuação: %1$d</string>
+    <string name="time_label">Tempo: %1$s</string>
+    <string name="time_done">Feito!</string>
+    <string name="new_letters_label">Novas Letras</string>
+    <string name="hold_letters_label">Letras em Reserva</string>
+    <string name="form_word_label">Formar Palavra</string>
+    <string name="submit_word_label">ENVIAR PALAVRA</string>
+    <string name="game_over_label">Fim de Jogo</string>
+    <string name="congratulations_label">Parabéns, você alcançou uma pontuação de %1$d</string>
+    <string name="words_used_label">Palavras Utilizadas:</string>
+    <string name="hiscore_format">%1$d. %2$s</string>
+    <string name="coming_soon_title">Em Breve!</string>
+    <string name="multiplayer_coming_soon_text">O modo multijogador via Bluetooth está atualmente em desenvolvimento. Fique atento às atualizações futuras!</string>
+    <string name="hiscores_empty_text">Ainda não há recordes. Jogue uma partida para ver seu nome aqui!</string>
+</resources>

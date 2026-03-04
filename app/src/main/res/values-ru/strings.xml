@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WordFormed</string>
+    <string name="high_score_title">Рекорды</string>
+    <string name="main_title">WordFormed</string>
+    <string name="new_game_label">Новая игра</string>
+    <string name="multiplayer_label">Начать многопользовательскую игру</string>
+    <string name="high_scores_label">Рекорды</string>
+    <string name="how_to_play_label">Как играть</string>
+    <string name="single_player_title">Одиночная игра</string>
+    <string name="how_to_play_title">Как играть</string>
+    <string name="multiplayer_game_title">Многопользовательская игра</string>
+    <string name="how_to_play_text">Добро пожаловать в <b>WordFormed</b>!\n\n<b>Цель:</b> Сформируйте как можно больше правильных слов за 3 минуты.\n\n<b>Как играть:</b>\n\n• <b>Набор:</b> Вы начинаете с 7 случайных плиток с буквами в верхнем поле.\n\n• <b>Сборка:</b> Перетаскивайте буквы сверху в нижнее поле, чтобы составить слово.\n\n• <b>Счет:</b> Нажмите кнопку <b>ОТПРАВИТЬ СЛОВО</b>, чтобы набрать очки. Правильные слова очищают поле и добавляют новые буквы.\n\n• <b>Удержание:</b> Не готовы использовать букву? Перетащите ее в среднее поле, чтобы сохранить на потом!\n\n<b>Разработчики:</b> Оуэн Корриган и Дэвид Кернан.</string>
+    <string name="your_score"></string>
+    <string name="score_label">Счет: %1$d</string>
+    <string name="time_label">Время: %1$s</string>
+    <string name="time_done">Готово!</string>
+    <string name="new_letters_label">Новые буквы</string>
+    <string name="hold_letters_label">Удержанные буквы</string>
+    <string name="form_word_label">Составить слово</string>
+    <string name="submit_word_label">ОТПРАВИТЬ СЛОВО</string>
+    <string name="game_over_label">Игра окончена</string>
+    <string name="congratulations_label">Поздравляем, ваш результат: %1$d</string>
+    <string name="words_used_label">Использованные слова:</string>
+    <string name="hiscore_format">%1$d. %2$s</string>
+    <string name="coming_soon_title">Скоро!</string>
+    <string name="multiplayer_coming_soon_text">Многопользовательская игра по Bluetooth находится в стадии разработки. Следите за обновлениями!</string>
+    <string name="hiscores_empty_text">Рекордов пока нет. Сыграйте, чтобы увидеть здесь свое имя!</string>
+</resources>

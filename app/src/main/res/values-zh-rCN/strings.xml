@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WordFormed</string>
+    <string name="high_score_title">高分榜</string>
+    <string name="main_title">WordFormed</string>
+    <string name="new_game_label">新游戏</string>
+    <string name="multiplayer_label">开始多人游戏</string>
+    <string name="high_scores_label">高分榜</string>
+    <string name="how_to_play_label">玩法介绍</string>
+    <string name="single_player_title">单人游戏</string>
+    <string name="how_to_play_title">玩法介绍</string>
+    <string name="multiplayer_game_title">多人游戏</string>
+    <string name="how_to_play_text">欢迎来到 <b>WordFormed</b>！\n\n<b>目标：</b>在3分钟内拼出尽可能多的有效单词。\n\n<b>玩法：</b>\n\n• <b>抽取：</b>开始时，顶部的方框内会有7块随机字母方块。\n\n• <b>拼词：</b>将顶部的字母拖动到底部方框中拼成一个单词。\n\n• <b>得分：</b>按下 <b>提交单词</b> 按钮以获取积分。有效的单词将清空方框并抽取新的字母。\n\n• <b>保留：</b>还没准备好使用某个字母？将其拖到中间方框以备后用！\n\n<b>开发者：</b>Owen Corrigan 和 David Kernan。</string>
+    <string name="your_score"></string>
+    <string name="score_label">得分：%1$d</string>
+    <string name="time_label">时间：%1$s</string>
+    <string name="time_done">结束！</string>
+    <string name="new_letters_label">新字母</string>
+    <string name="hold_letters_label">保留字母</string>
+    <string name="form_word_label">拼词</string>
+    <string name="submit_word_label">提交单词</string>
+    <string name="game_over_label">游戏结束</string>
+    <string name="congratulations_label">恭喜你，获得了 %1$d 分</string>
+    <string name="words_used_label">使用的单词：</string>
+    <string name="hiscore_format">%1$d. %2$s</string>
+    <string name="coming_soon_title">敬请期待！</string>
+    <string name="multiplayer_coming_soon_text">蓝牙多人游戏目前正在开发中。敬请关注未来的更新！</string>
+    <string name="hiscores_empty_text">暂无高分记录。玩一局游戏，让你的名字出现在这里！</string>
+</resources>
