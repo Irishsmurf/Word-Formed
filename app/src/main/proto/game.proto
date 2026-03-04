@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+package com.paddez.wordformed;
+
+option java_multiple_files = true;
+option java_package = "com.paddez.wordformed.proto";
+option java_outer_classname = "GameProto";
+
+service GameService {
+  // Join a lobby and receive real-time updates.
+  rpc JoinLobby(stream JoinLobbyRequest) returns (stream JoinLobbyResponse);
+
+  // Submit a word to the server for validation and scoring.
+  rpc SubmitWord(SubmitWordRequest) returns (SubmitWordResponse);
+
+  // Get the current game leaderboard.
+  rpc GetLeaderboard(GetLeaderboardRequest) returns (GetLeaderboardResponse);
+}
+
+message Player {
+  string id = 1;
+  string name = 2;
+  int32 score = 3;
+}
+
+message Tile {
+  string letter = 1;
+  int32 value = 2;
+}
+
+message GameState {
+  repeated Player players = 1;
+  repeated Tile tiles = 2;
+  int64 timer_ms = 3;
+  bool is_started = 4;
+}
+
+message JoinLobbyRequest {
+  string player_name = 1;
+}
+
+message JoinLobbyResponse {
+  oneof event {
+    Player player_joined = 1;
+    bool game_started = 2;
+    GameState state_update = 3;
+    string game_over = 4;
+  }
+}
+
+message SubmitWordRequest {
+  string player_id = 1;
+  string word = 2;
+}
+
+message SubmitWordResponse {
+  bool is_valid = 1;
+  int32 score_added = 2;
+  string error_message = 3;
+}
+
+message GetLeaderboardRequest {
+  string game_id = 1;
+}
+
+message GetLeaderboardResponse {
+  repeated Player rankings = 1;
+}

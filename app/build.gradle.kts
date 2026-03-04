@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.protobuf")
 }
 
 android {
@@ -11,8 +12,8 @@ android {
         applicationId = "com.paddez.wordformed"
         minSdk = 24
         targetSdk = 35
-        versionCode = 8
-        versionName = "1.2.1"
+        versionCode = 9
+        versionName = "1.2.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -68,6 +69,40 @@ android {
     }
 }
 
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.25.1"
+    }
+    plugins {
+        create("grpc") {
+            artifact = "io.grpc:protoc-gen-grpc-java:1.60.0"
+        }
+        create("grpckt") {
+            artifact = "io.grpc:protoc-gen-grpc-kotlin:1.4.1:jdk8@jar"
+        }
+    }
+    generateProtoTasks {
+        all().forEach {
+            it.plugins {
+                create("grpc") {
+                    option("lite")
+                }
+                create("grpckt") {
+                    option("lite")
+                }
+            }
+            it.builtins {
+                create("java") {
+                    option("lite")
+                }
+                create("kotlin") {
+                    option("lite")
+                }
+            }
+        }
+    }
+}
+
 dependencies {
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -97,6 +132,12 @@ dependencies {
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
+    
+    // gRPC and Protobuf
+    implementation("com.google.protobuf:protobuf-kotlin-lite:3.25.1")
+    implementation("io.grpc:grpc-okhttp:1.60.0")
+    implementation("io.grpc:grpc-protobuf-lite:1.60.0")
+    implementation("io.grpc:grpc-kotlin-stub:1.4.1")
     
     // Core testing dependencies
     testImplementation("junit:junit:4.13.2")
