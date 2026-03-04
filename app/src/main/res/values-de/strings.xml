@@ -10,7 +10,7 @@
 	<string name="single_player_title">Einzelspielermodus</string>
 	<string name="how_to_play_title">Spielanleitung</string>
 	<string name="multiplayer_game_title">Mehrspielerspiel</string>
-	<string name="how_to_play_text">Dieses Spiel basiert auf dem beliebten Scrabble-Spiel.\nDas Ziel ist einfach: Ziehe Buchstaben in das untere Feld, um Wörter zu bilden, und drücke dann die aufleuchtende Schaltfläche, um die Punktzahl für dieses Wort zu erhalten. Wenn du einen nützlichen Buchstaben siehst, kannst du ihn im mittleren Feld speichern.\n\n\n<b>Entwickler:</b> Owen Corrigan und David Kernan.</string>
+	<string name="how_to_play_text">Willkommen bei <b>WordFormed</b>!\n\n<b>Ziel:</b> Bilde in 3 Minuten so viele gültige Wörter wie möglich.\n\n<b>So wird gespielt:</b>\n\n• <b>Ziehen:</b> Du beginnst mit 7 zufälligen Buchstaben im oberen Feld.\n\n• <b>Bauen:</b> Ziehe Buchstaben von oben in das untere Feld, um ein Wort zu bilden.\n\n• <b>Punkten:</b> Drücke die Schaltfläche <b>WORT ABSCHICKEN</b>, um Punkte zu sammeln. Gültige Wörter leeren das Feld und neue Buchstaben werden gezogen.\n\n• <b>Behalten:</b> Möchtest du einen Buchstaben noch nicht verwenden? Ziehe ihn in das mittlere Feld, um ihn für später aufzubewahren!\n\n<b>Entwickler:</b> Owen Corrigan und David Kernan.</string>
 	<string name="your_score"></string>
 	<string name="score_label">Punktzahl: %1$d</string>
 	<string name="time_label">Zeit: %1$s</string>

@@ -10,7 +10,7 @@
 	<string name="single_player_title">Cluiche Aon Imreora</string>
 	<string name="how_to_play_title">Conas a imirt</string>
 	<string name="multiplayer_game_title">Cluiche Ilimreora</string>
-	<string name="how_to_play_text">Tá an cluiche seo bunaithe ar an gcluiche scrabble a bhfuil tóir air.\nIs é an cuspóir simplí: tarraing litreacha isteach sa bhosca bun chun focail a fhoirmiú, ansin brúigh an cnaipe a lasann suas chun an scór don fhocal sin a fháil. Má fheiceann tú litir úsáideach is féidir leat í a stóráil sa bhosca lár. \n\n\n<b>Forbróirí:</b> Owen Corrigan agus David Kernan.</string>
+	<string name="how_to_play_text">Fáilte go <b>WordFormed</b>!\n\n<b>Cuspóir:</b> Cruthaigh an oiread focal bailí agus is féidir laistigh de 3 nóiméad.\n\n<b>Conas a Imirt:</b>\n\n• <b>Tarraingt:</b> Tosaíonn tú le 7 dtíle litreach randamacha sa bhosca barr.\n\n• <b>Tógáil:</b> Tarraing litreacha ón mbarr isteach sa bhosca bun chun focal a fhoirmiú.\n\n• <b>Scór:</b> Brúigh an cnaipe <b>SEOL FOCAL</b> chun pointí a bhailiú. Glanann focail bhailí an bosca agus tarraingíonn siad litreacha nua.\n\n• <b>Coinneáil:</b> Níl tú réidh le litir a úsáid? Tarraing í go dtí an bosca lár chun í a shábháil níos déanaí!\n\n<b>Forbróirí:</b> Owen Corrigan agus David Kernan.</string>
 	<string name="your_score"></string>
 	<string name="score_label">Scór: %1$d</string>
 	<string name="time_label">Am: %1$s</string>

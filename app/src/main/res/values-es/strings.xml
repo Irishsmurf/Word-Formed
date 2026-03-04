@@ -10,7 +10,7 @@
 	<string name="single_player_title">Juego Individual</string>
 	<string name="how_to_play_title">Cómo jugar</string>
 	<string name="multiplayer_game_title">Juego Multijugador</string>
-	<string name="how_to_play_text">Este juego está basado en el popular juego Scrabble.\nEl objetivo es simple: arrastra letras al cuadro inferior para formar palabras, luego presiona el botón que se ilumina para obtener la puntuación de esa palabra. Si ves una letra útil, puedes guardarla en el cuadro central.\n\n\n<b>Desarrolladores:</b> Owen Corrigan y David Kernan.</string>
+	<string name="how_to_play_text">¡Bienvenido a <b>WordFormed</b>!\n\n<b>Objetivo:</b> Formar tantas palabras válidas como sea posible en 3 minutos.\n\n<b>Cómo jugar:</b>\n\n• <b>Repartir:</b> Comienzas con 7 fichas de letras aleatorias en el cuadro superior.\n\n• <b>Construir:</b> Arrastra letras desde arriba al cuadro inferior para formar una palabra.\n\n• <b>Puntuación:</b> Presiona el botón <b>ENVIAR PALABRA</b> para acumular puntos. Las palabras válidas limpian el cuadro y reparten nuevas letras.\n\n• <b>Guardar:</b> ¿Aún no quieres usar una letra? ¡Arrástrala al cuadro central para guardarla para después!\n\n<b>Desarrolladores:</b> Owen Corrigan y David Kernan.</string>
 	<string name="your_score"></string>
 	<string name="score_label">Puntuación: %1$d</string>
 	<string name="time_label">Tiempo: %1$s</string>

@@ -10,7 +10,7 @@
 	<string name="single_player_title">シングルプレイヤーゲーム</string>
 	<string name="how_to_play_title">遊び方</string>
 	<string name="multiplayer_game_title">マルチプレイヤーゲーム</string>
-	<string name="how_to_play_text">このゲームは人気のスクラブルゲームに基づいています。\n目的は簡単です。文字を下のボックスにドラッグして単語を作り、ライトアップされたボタンを押してその単語のスコアを獲得します。役に立つ文字を見つけたら、中央のボックスに保存できます。\n\n\n<b>開発者:</b> Owen Corrigan と David Kernan。</string>
+	<string name="how_to_play_text"><b>WordFormed</b> へようこそ！\n\n<b>目的：</b> 3 分以内にできるだけ多くの有効な単語を作ります。\n\n<b>遊び方：</b>\n\n• <b>ドロー：</b> 上のボックスにある 7 つのランダムな文字タイルから始めます。\n\n• <b>ビルド：</b> 上から下のボックスに文字をドラッグして単語を作ります。\n\n• <b>スコア：</b> <b>送信</b> ボタンを押してポイントを獲得します。有効な単語はボックスをクリアし、新しい文字をドローします。\n\n• <b>キープ：</b> まだ文字を使う準備ができていませんか？中央のボックスにドラッグして後で保存してください！\n\n<b>開発者:</b> Owen Corrigan と David Kernan。</string>
 	<string name="your_score"></string>
 	<string name="score_label">スコア: %1$d</string>
 	<string name="time_label">残り時間: %1$s</string>

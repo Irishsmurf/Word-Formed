@@ -10,7 +10,7 @@
 	<string name="single_player_title">Single Player Game</string>
 	<string name="how_to_play_title">How to play</string>
 	<string name="multiplayer_game_title">Multiplayer Game</string>
-	<string name="how_to_play_text">This game is based on the popular scrabble game.\nThe objective is simple: drag letters into the bottom box to form words, then press the button that lights up to get the score for that word. If you see a useful letter you can store it in the middle box. \n\n\n<b>Developers:</b> Owen Corrigan and David Kernan.</string>
+	<string name="how_to_play_text">Welcome to <b>WordFormed</b>!\n\n<b>Objective:</b> Form as many valid words as possible within 3 minutes.\n\n<b>How to Play:</b>\n\n• <b>Draw:</b> You start with 7 random letter tiles in the top box.\n\n• <b>Build:</b> Drag letters from the top into the bottom box to form a word.\n\n• <b>Score:</b> Press the <b>SUBMIT WORD</b> button to collect points. Valid words clear the box and draw new letters.\n\n• <b>Hold:</b> Not ready to use a letter? Drag it to the middle box to save it for later!\n\n<b>Developers:</b> Owen Corrigan and David Kernan.</string>
 	<string name="your_score"></string>
 	<string name="score_label">Score: %1$d</string>
 	<string name="time_label">Time: %1$s</string>
