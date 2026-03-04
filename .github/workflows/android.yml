@@ -1,8 +1,10 @@
-name: Android CI
+name: Android CI/CD
 
 on:
   push:
     branches: [ master ]
+    tags:
+      - 'v*'
   pull_request:
     branches: [ master ]
 
@@ -27,5 +29,26 @@ jobs:
     - name: Run unit tests
       run: ./gradlew test
 
-    - name: Build debug APK
+    - name: Build Debug APK
       run: ./gradlew assembleDebug
+
+    - name: Build Release AAB
+      run: ./gradlew bundleRelease
+
+    - name: Sign Release AAB
+      if: startsWith(github.ref, 'refs/tags/v')
+      uses: r0adkll/sign-android-release@v1
+      id: sign_app
+      with:
+        releaseDirectory: app/build/outputs/bundle/release
+        signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+        alias: ${{ secrets.ALIAS }}
+        keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
+        keyPassword: ${{ secrets.KEY_PASSWORD }}
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: signed-app-bundle
+        path: ${{ steps.sign_app.outputs.signedReleaseFile }}
+        if-no-files-found: ignore
