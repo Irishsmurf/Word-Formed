@@ -25,6 +25,8 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.input.pointer.util.VelocityTracker
 import androidx.compose.ui.layout.boundsInRoot
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.layout.positionInRoot
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.IntOffset
@@ -108,27 +110,40 @@ fun GameScreen(viewModel: GameViewModel, onGameOver: () -> Unit) {
         }
 
         // Game Board Area
+        var parentOffset by remember { mutableStateOf(Offset.Zero) }
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f)
+                .onGloballyPositioned { layoutCoordinates ->
+                    parentOffset = layoutCoordinates.positionInRoot()
+                }
         ) {
             Column(verticalArrangement = Arrangement.spacedBy(20.dp)) {
                 GameBox(
                     label = stringResource(R.string.new_letters_label),
                     color = Color(0x22000000),
-                    onPositioned = { rect -> viewModel.updateBoxBoundaries(BoxType.NEW_LETTERS, rect) }
+                    onPositioned = { rect -> 
+                        viewModel.updateBoxBoundaries(BoxType.NEW_LETTERS, rect.translate(-parentOffset)) 
+                    },
+                    modifier = Modifier.testTag("box_NEW_LETTERS")
                 )
                 GameBox(
                     label = stringResource(R.string.hold_letters_label),
                     color = Color(0x22000000),
-                    onPositioned = { rect -> viewModel.updateBoxBoundaries(BoxType.HOLD_LETTERS, rect) }
+                    onPositioned = { rect -> 
+                        viewModel.updateBoxBoundaries(BoxType.HOLD_LETTERS, rect.translate(-parentOffset)) 
+                    },
+                    modifier = Modifier.testTag("box_HOLD_LETTERS")
                 )
                 GameBox(
                     label = stringResource(R.string.form_word_label),
                     color = Color(0x33000000),
                     height = 120.dp,
-                    onPositioned = { rect -> viewModel.updateBoxBoundaries(BoxType.FORM_WORD, rect) }
+                    onPositioned = { rect -> 
+                        viewModel.updateBoxBoundaries(BoxType.FORM_WORD, rect.translate(-parentOffset)) 
+                    },
+                    modifier = Modifier.testTag("box_FORM_WORD")
                 )
             }
 
@@ -140,7 +155,8 @@ fun GameScreen(viewModel: GameViewModel, onGameOver: () -> Unit) {
                     onDragStarted = { viewModel.onTileDragStarted(tile.id) },
                     onDragEnded = { viewModel.onTileDragEnded(tile.id) },
                     onFling = { viewModel.onTileFling(tile.id) },
-                    onPositioned = { size -> viewModel.updateTileSize(size) }
+                    onPositioned = { size -> viewModel.updateTileSize(size) },
+                    modifier = Modifier.testTag("tile_${tile.id}")
                 )
             }
         }
@@ -174,10 +190,11 @@ fun GameBox(
     label: String,
     color: Color,
     height: androidx.compose.ui.unit.Dp = 100.dp,
-    onPositioned: (androidx.compose.ui.geometry.Rect) -> Unit
+    onPositioned: (androidx.compose.ui.geometry.Rect) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .height(height)
             .onGloballyPositioned { layoutCoordinates ->
@@ -202,7 +219,8 @@ fun DraggableTile(
     onDragStarted: () -> Unit,
     onDragEnded: () -> Unit,
     onFling: () -> Unit,
-    onPositioned: (androidx.compose.ui.unit.IntSize) -> Unit
+    onPositioned: (androidx.compose.ui.unit.IntSize) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     val animatedOffset = remember { Animatable(tile.position, Offset.VectorConverter) }
     val velocityTracker = remember { VelocityTracker() }
@@ -216,7 +234,7 @@ fun DraggableTile(
     }
 
     Box(
-        modifier = Modifier
+        modifier = modifier
             .onGloballyPositioned { layoutCoordinates ->
                 onPositioned(layoutCoordinates.size)
             }

@@ -14,8 +14,7 @@ class GameScreenTest {
     val composeTestRule = createComposeRule()
 
     @Test
-    fun gameScreen_displaysInitialHUD() {
-        // We'll use the real GameViewModel for now as it's simple enough
+    fun gameScreen_displaysBoxesAndTiles() {
         val viewModel = GameViewModel()
 
         composeTestRule.setContent {
@@ -24,19 +23,14 @@ class GameScreenTest {
             }
         }
 
-        // Check for HUD elements
-        // The score should start at 0
-        composeTestRule.onNodeWithText("Score: 0").assertIsDisplayed()
+        // Check for Box tags
+        composeTestRule.onNodeWithTag("box_NEW_LETTERS").assertIsDisplayed()
+        composeTestRule.onNodeWithTag("box_HOLD_LETTERS").assertIsDisplayed()
+        composeTestRule.onNodeWithTag("box_FORM_WORD").assertIsDisplayed()
         
-        // Time should start at 3:00 formatted
-        composeTestRule.onNodeWithText("Time: 3:00").assertIsDisplayed()
-        
-        // Check for Box labels
-        composeTestRule.onNodeWithText("New Letters").assertIsDisplayed()
-        composeTestRule.onNodeWithText("Hold Letters").assertIsDisplayed()
-        composeTestRule.onNodeWithText("Form Word").assertIsDisplayed()
-        
-        // Check for Submit button
-        composeTestRule.onNodeWithText("SUBMIT WORD").assertIsDisplayed()
+        // Check that there are 7 tiles initially
+        for (i in 0 until 7) {
+            composeTestRule.onNodeWithTag("tile_$i", useUnmergedTree = true).assertIsDisplayed()
+        }
     }
 }

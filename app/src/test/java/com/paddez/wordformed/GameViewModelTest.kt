@@ -80,4 +80,28 @@ class GameViewModelTest {
         val updatedTile = viewModel.tiles.first { it.id == tileId }
         assertEquals(BoxType.HOLD_LETTERS, updatedTile.currentBox)
     }
+
+    @Test
+    fun testInitialTilesInNewLettersBox() {
+        assertEquals(7, viewModel.tiles.size)
+        assertTrue(viewModel.tiles.all { it.currentBox == BoxType.NEW_LETTERS })
+    }
+
+    @Test
+    fun testRefillTilesInNewLettersBox() {
+        // Remove 3 tiles
+        val oldTiles = viewModel.tiles.toList()
+        for (i in 0 until 3) {
+            viewModel.onTileFling(oldTiles[i].id)
+        }
+        
+        assertEquals(7, viewModel.tiles.size)
+        
+        // Check that any new tiles (not in the old list) are in NEW_LETTERS
+        val oldIds = oldTiles.map { it.id }.toSet()
+        val newTiles = viewModel.tiles.filter { it.id !in oldIds }
+        
+        assertEquals(3, newTiles.size)
+        assertTrue(newTiles.all { it.currentBox == BoxType.NEW_LETTERS })
+    }
 }

@@ -122,7 +122,7 @@ fun HowToPlayScreen(onBack: () -> Unit) {
                 )
 
                 InstructionStep(
-                    icon = Icons.Default.Timer,
+                    icon = Icons.Default.Refresh,
                     title = "Beat the Clock",
                     description = "You have 3 minutes to achieve your highest score possible.",
                     iconColor = Color(0xFFE57373)
