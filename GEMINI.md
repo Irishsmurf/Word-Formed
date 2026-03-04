@@ -43,7 +43,7 @@ Word-Formed is a Scrabble-inspired mobile game for Android. It features tile-bas
 This project uses the Gradle Build System (Kotlin DSL).
 
 ### Prerequisites
-- Android SDK with API 34 platform.
+- Android SDK with API 35 platform.
 - Java 17+.
 
 ### Build Commands
