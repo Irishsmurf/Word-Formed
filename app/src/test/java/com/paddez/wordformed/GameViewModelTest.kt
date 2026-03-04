@@ -65,11 +65,14 @@ class GameViewModelTest {
         // Mock boundaries
         viewModel.updateBoxBoundaries(BoxType.NEW_LETTERS, Rect(0f, 0f, 1000f, 100f))
         viewModel.updateBoxBoundaries(BoxType.HOLD_LETTERS, Rect(0f, 200f, 1000f, 300f))
+        
+        // Set a tile size
+        viewModel.updateTileSize(androidx.compose.ui.unit.IntSize(140, 140))
 
         val tileId = viewModel.tiles[0].id
         
         // Drag to Hold Letters (Rect is 0f, 200f, 1000f, 300f)
-        // Tile position + 70f center offset should fall within this.
+        // Tile center offset (140/2 = 70f)
         // If pos is 100, 180 -> center is 170, 250 -> Inside!
         viewModel.onTileMoved(tileId, Offset(100f, 180f))
         viewModel.onTileDragEnded(tileId)

@@ -30,6 +30,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 import kotlin.math.abs
 import kotlin.math.roundToInt
@@ -138,7 +139,8 @@ fun GameScreen(viewModel: GameViewModel, onGameOver: () -> Unit) {
                     onMove = { newOffset -> viewModel.onTileMoved(tile.id, newOffset) },
                     onDragStarted = { viewModel.onTileDragStarted(tile.id) },
                     onDragEnded = { viewModel.onTileDragEnded(tile.id) },
-                    onFling = { viewModel.onTileFling(tile.id) }
+                    onFling = { viewModel.onTileFling(tile.id) },
+                    onPositioned = { size -> viewModel.updateTileSize(size) }
                 )
             }
         }
@@ -199,10 +201,12 @@ fun DraggableTile(
     onMove: (Offset) -> Unit,
     onDragStarted: () -> Unit,
     onDragEnded: () -> Unit,
-    onFling: () -> Unit
+    onFling: () -> Unit,
+    onPositioned: (androidx.compose.ui.unit.IntSize) -> Unit
 ) {
     val animatedOffset = remember { Animatable(tile.position, Offset.VectorConverter) }
     val velocityTracker = remember { VelocityTracker() }
+    val scope = rememberCoroutineScope()
 
     // Sync animation with ViewModel position when not dragging
     LaunchedEffect(tile.position) {
@@ -213,6 +217,9 @@ fun DraggableTile(
 
     Box(
         modifier = Modifier
+            .onGloballyPositioned { layoutCoordinates ->
+                onPositioned(layoutCoordinates.size)
+            }
             .offset {
                 IntOffset(
                     animatedOffset.value.x.roundToInt(),
@@ -229,8 +236,15 @@ fun DraggableTile(
                     },
                     onDragEnd = {
                         val velocity = velocityTracker.calculateVelocity()
-                        if (abs(velocity.y) > 2000f) {
-                            onFling()
+                        if (abs(velocity.y) > 1500f || abs(velocity.x) > 1500f) {
+                            scope.launch {
+                                // Animate the fling visually before removing
+                                animatedOffset.animateTo(
+                                    targetValue = animatedOffset.value + Offset(velocity.x / 4, velocity.y / 4),
+                                    initialVelocity = Offset(velocity.x, velocity.y)
+                                )
+                                onFling()
+                            }
                         } else {
                             onDragEnded()
                         }
@@ -239,14 +253,7 @@ fun DraggableTile(
                     onDrag = { change, dragAmount ->
                         change.consume()
                         velocityTracker.addPosition(change.uptimeMillis, change.position)
-                        
-                        // Use scope to jump position immediately during drag
-                        val newOffset = animatedOffset.value + dragAmount
-                        onMove(newOffset)
-                        
-                        // Update animation state immediately without animation during drag
-                        // Launch so it doesn't block
-                        // Actually, just snap the value
+                        onMove(animatedOffset.value + dragAmount)
                     }
                 )
             },
@@ -270,15 +277,8 @@ fun DraggableTile(
         }
     }
 
-    // Secondary effect to sync offset DURING drag without launching heavy animations
+    // Sync offset DURING drag
     if (tile.isDragging) {
-        SideEffect {
-            animatedOffset.updateBounds(null, null) // reset
-            // We need a way to snap the value. Animatable.snapTo is suspend.
-            // Using a separate state for drag might be easier, but let's try to make this work.
-        }
-        
-        // Since snapTo is suspend, we use LaunchedEffect triggered by the position change
         LaunchedEffect(tile.position) {
             animatedOffset.snapTo(tile.position)
         }

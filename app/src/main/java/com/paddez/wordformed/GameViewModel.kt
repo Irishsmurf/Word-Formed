@@ -137,7 +137,6 @@ class GameViewModel : ViewModel() {
         val answerTiles = tiles.filter { it.currentBox == BoxType.FORM_WORD }.sortedBy { it.position.x }
         val word = answerTiles.joinToString("") { it.letter.toString() }.lowercase()
         isValidWord = word.length >= 2 && Dictionary.isWord(word)
-        android.util.Log.d("GameViewModel", "Word checked: $word, valid: $isValidWord")
     }
 
     fun onTileDragStarted(tileId: Int) {
@@ -215,13 +214,11 @@ class GameViewModel : ViewModel() {
     fun submitWord(): Int {
         val answerTiles = tiles.filter { it.currentBox == BoxType.FORM_WORD }.sortedBy { it.position.x }
         val word = answerTiles.joinToString("") { it.letter.toString() }.lowercase()
-        android.util.Log.d("GameViewModel", "Submitting word: $word")
-
+        
         if (word.isNotEmpty() && Dictionary.isWord(word)) {
             val wordScore = answerTiles.sumOf { it.value }
-            android.util.Log.d("GameViewModel", "Word valid, score: $wordScore")
             score += wordScore
-    ...
+            
             SinglePlayerGame.wordList.add(Word(word.lowercase().replaceFirstChar { it.uppercase() }, wordScore))
             
             // Remove submitted tiles
