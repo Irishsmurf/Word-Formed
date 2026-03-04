@@ -8,7 +8,7 @@ The future development of Word-Formed focuses on enhancing the user experience, 
 - **Dynamic Themes:** Introduce light/dark mode support and custom color palettes.
 
 ## Phase 2: Game Modes
-- **Multiplayer Mode:** Complete the implementation of Bluetooth/Local multiplayer support.
+- **Multiplayer Mode:** Complete the implementation of the gRPC-based client-server multiplayer system. See [Multiplayer Documentation](MULTIPLAYER.md) for architecture, status, and configuration details.
 - **Timed vs. Endless Mode:** Add game variants to allow players to choose between timed challenges and more relaxed play.
 - **Global Leaderboards:** Integrate a centralized backend or Google Play Games Services for cross-platform competition.
 
