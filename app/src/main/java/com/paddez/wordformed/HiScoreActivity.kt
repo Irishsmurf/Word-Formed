@@ -13,6 +13,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -56,12 +57,24 @@ fun HiScoreScreen(viewModel: HiScoreViewModel) {
             modifier = Modifier.padding(bottom = 24.dp)
         )
 
-        LazyColumn(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            itemsIndexed(scores) { index, hiScore ->
-                HiScoreRow(index + 1, hiScore)
+        if (scores.isEmpty()) {
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Text(
+                    text = stringResource(R.string.hiscores_empty_text),
+                    color = Color.LightGray,
+                    fontSize = 18.sp,
+                    textAlign = androidx.compose.ui.text.style.TextAlign.Center,
+                    modifier = Modifier.padding(32.dp)
+                )
+            }
+        } else {
+            LazyColumn(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                itemsIndexed(scores) { index, hiScore ->
+                    HiScoreRow(index + 1, hiScore)
+                }
             }
         }
     }

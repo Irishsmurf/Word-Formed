@@ -23,4 +23,7 @@
 	<string name="congratulations_label">Glückwunsch, du hast eine Punktzahl von %1$d erreicht</string>
 	<string name="words_used_label">Verwendete Wörter:</string>
 	<string name="hiscore_format">%1$d. %2$s</string>
+	<string name="coming_soon_title">Demnächst verfügbar!</string>
+	<string name="multiplayer_coming_soon_text">Der Bluetooth-Mehrspielermodus wird derzeit entwickelt. Bleiben Sie gespannt auf zukünftige Updates!</string>
+	<string name="hiscores_empty_text">Noch keine Highscores. Spiele ein Spiel, um deinen Namen hier zu sehen!</string>
 </resources>

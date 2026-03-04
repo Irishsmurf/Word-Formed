@@ -23,4 +23,7 @@
 	<string name="congratulations_label">Felicidades, lograste una puntuación de %1$d</string>
 	<string name="words_used_label">Palabras Usadas:</string>
 	<string name="hiscore_format">%1$d. %2$s</string>
+	<string name="coming_soon_title">¡Próximamente!</string>
+	<string name="multiplayer_coming_soon_text">El multijugador por Bluetooth está actualmente en desarrollo. ¡Mantente al tanto de las futuras actualizaciones!</string>
+	<string name="hiscores_empty_text">Aún no hay puntuaciones altas. ¡Juega una partida para ver tu nombre aquí!</string>
 </resources>

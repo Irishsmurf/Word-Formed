@@ -23,4 +23,7 @@
 	<string name="congratulations_label">おめでとうございます！スコアは %1$d でした。</string>
 	<string name="words_used_label">使用した単語:</string>
 	<string name="hiscore_format">%1$d. %2$s</string>
+	<string name="coming_soon_title">近日公開！</string>
+	<string name="multiplayer_coming_soon_text">Bluetooth マルチプレイヤーは現在開発中です。今後のアップデートをお楽しみに！</string>
+	<string name="hiscores_empty_text">ハイスコアはまだありません。ゲームをプレイして、ここに名前を表示させましょう！</string>
 </resources>

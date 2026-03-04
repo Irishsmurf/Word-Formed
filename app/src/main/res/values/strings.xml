@@ -23,4 +23,7 @@
 	<string name="congratulations_label">Congratulations, you achieved a score of %1$d</string>
 	<string name="words_used_label">Words Used:</string>
 	<string name="hiscore_format">%1$d. %2$s</string>
+	<string name="coming_soon_title">Coming Soon!</string>
+	<string name="multiplayer_coming_soon_text">Bluetooth multiplayer is currently under development. Stay tuned for future updates!</string>
+	<string name="hiscores_empty_text">No high scores yet. Play a game to see your name here!</string>
 </resources>

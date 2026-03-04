@@ -23,4 +23,7 @@
 	<string name="congratulations_label">Comhghairdeas, bhain tú scór de %1$d amach</string>
 	<string name="words_used_label">Focail a Úsáideadh:</string>
 	<string name="hiscore_format">%1$d. %2$s</string>
+	<string name="coming_soon_title">Ag Teacht Go Luath!</string>
+	<string name="multiplayer_coming_soon_text">Tá ilimreoir Bluetooth á fhorbairt faoi láthair. Bígí linn le haghaidh nuashonruithe amach anseo!</string>
+	<string name="hiscores_empty_text">Níl aon scóir arda fós. Imigh cluiche chun d\'ainm a fheiceáil anseo!</string>
 </resources>
