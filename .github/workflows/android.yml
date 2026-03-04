@@ -61,5 +61,5 @@ jobs:
         packageName: com.paddez.wordformed
         releaseFiles: ${{ steps.sign_app.outputs.signedReleaseFile || 'app/build/outputs/bundle/release/*.aab' }}
         track: internal
-        status: completed
+        status: draft
         whatsNewDirectory: distribution/whatsnew
