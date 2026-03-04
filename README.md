@@ -1,46 +1,54 @@
 # Word-Formed
 
-Word-Formed is a Scrabble-inspired word game for Android. Test your vocabulary and speed by forming words from a pool of letter tiles before the timer runs out!
+A modern, Scrabble-inspired mobile word game for Android. Form words, score points, and challenge yourself in a fast-paced tile-based environment.
 
-## Features
+[![Android CI/CD](https://github.com/Irishsmurf/Word-Formed/actions/workflows/android.yml/badge.svg)](https://github.com/Irishsmurf/Word-Formed/actions/workflows/android.yml)
 
-- **Dynamic Gameplay:** Drag and drop letter tiles to form words.
-- **Scoring:** Points awarded based on word length and letter rarity.
-- **High Scores:** Track your best performances with a local persistent leaderboard.
-- **Timer:** Race against the clock to maximize your score.
-- **Dictionary Validation:** Real-time word verification using a built-in dictionary.
+## 🎮 Features
 
-## Technical Details
+- **Dynamic Tile Generation:** Letters generated based on English frequency distributions.
+- **Multilingual Support:** Fully localized in **English**, **Irish (Gaeilge)**, **Japanese**, **Spanish**, and **German**.
+- **Real-time Scoring:** Instant word validation and score calculation.
+- **Persistent High Scores:** Local storage using Room Database.
+- **Modern UI:** Built entirely with **Jetpack Compose** and Material 3.
 
-- **Platform:** Android 7.0+ (API Level 24+)
-- **Language:** 100% Kotlin
-- **Build System:** Gradle (Kotlin DSL)
-- **UI:** Jetpack Compose & Material 3
+## 🛠 Tech Stack
+
+- **Language:** Kotlin 1.9.22
+- **UI Framework:** Jetpack Compose (Material 3)
 - **Architecture:** MVVM (Model-View-ViewModel)
-- **Storage:** Room Database for persistent high scores
-- **Concurrency:** Kotlin Coroutines & Flow
+- **Database:** Room Persistence Library
+- **Build System:** Gradle 8.10.2 (Kotlin DSL)
+- **AGP Version:** 8.8.2
+- **Target SDK:** 34 (Android 14) / Compile SDK: 35 (Android 15)
 
-## Setup & Build
+## 📂 Documentation
 
-1. **Clone the repository:**
-   ```bash
-   git clone <repo-url>
-   cd Word-Formed
-   ```
+- [Architecture Overview](docs/ARCHITECTURE.md) - Deep dive into the MVVM structure and logic.
+- [Release Process](docs/RELEASE_PROCESS.md) - Automated CI/CD and Play Store deployment guide.
+- [Testing Strategy](docs/TESTING.md) - Unit testing and validation procedures.
+- [Project Roadmap](docs/ROADMAP.md) - Future features and planned improvements.
 
-2. **Open with Android Studio:**
-   Import the project into Android Studio (Hedgehog or newer recommended).
+## 🚀 Getting Started
 
-3. **Build from CLI:**
-   ```bash
-   ./gradlew assembleDebug
-   ```
+### Prerequisites
 
-4. **Run Tests:**
-   ```bash
-   ./gradlew test
-   ```
+- Android Studio Ladybug (2024.2.1) or newer.
+- JDK 17.
 
-## License
+### Building from Source
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details (or your preferred license).
+```bash
+# Clone the repository
+git clone https://github.com/Irishsmurf/Word-Formed.git
+
+# Build the debug APK
+./gradlew assembleDebug
+
+# Run unit tests
+./gradlew test
+```
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
