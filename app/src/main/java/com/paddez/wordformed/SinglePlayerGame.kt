@@ -7,16 +7,22 @@ import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.VectorConverter
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.foundation.gestures.detectDragGesturesAfterLongPress
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.input.pointer.util.VelocityTracker
 import androidx.compose.ui.layout.boundsInRoot
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.stringResource
@@ -25,6 +31,7 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import java.util.concurrent.TimeUnit
+import kotlin.math.abs
 import kotlin.math.roundToInt
 
 class SinglePlayerGame : ComponentActivity() {
@@ -130,7 +137,8 @@ fun GameScreen(viewModel: GameViewModel, onGameOver: () -> Unit) {
                     tile = tile,
                     onMove = { newOffset -> viewModel.onTileMoved(tile.id, newOffset) },
                     onDragStarted = { viewModel.onTileDragStarted(tile.id) },
-                    onDragEnded = { viewModel.onTileDragEnded(tile.id) }
+                    onDragEnded = { viewModel.onTileDragEnded(tile.id) },
+                    onFling = { viewModel.onTileFling(tile.id) }
                 )
             }
         }
@@ -188,36 +196,57 @@ fun GameBox(
 @Composable
 fun DraggableTile(
     tile: TileState,
-    onMove: (androidx.compose.ui.geometry.Offset) -> Unit,
+    onMove: (Offset) -> Unit,
     onDragStarted: () -> Unit,
-    onDragEnded: () -> Unit
+    onDragEnded: () -> Unit,
+    onFling: () -> Unit
 ) {
-    var offsetX by remember { mutableStateOf(tile.position.x) }
-    var offsetY by remember { mutableStateOf(tile.position.y) }
+    val animatedOffset = remember { Animatable(tile.position, Offset.VectorConverter) }
+    val velocityTracker = remember { VelocityTracker() }
 
-    // Update local state when ViewModel state changes (for snapping)
+    // Sync animation with ViewModel position when not dragging
     LaunchedEffect(tile.position) {
         if (!tile.isDragging) {
-            offsetX = tile.position.x
-            offsetY = tile.position.y
+            animatedOffset.animateTo(tile.position, spring())
         }
     }
 
     Box(
         modifier = Modifier
-            .offset { IntOffset(offsetX.roundToInt(), offsetY.roundToInt()) }
+            .offset {
+                IntOffset(
+                    animatedOffset.value.x.roundToInt(),
+                    animatedOffset.value.y.roundToInt()
+                )
+            }
             .size(60.dp)
             .background(Color.White, RoundedCornerShape(8.dp))
             .pointerInput(Unit) {
                 detectDragGestures(
-                    onDragStart = { onDragStarted() },
-                    onDragEnd = { onDragEnded() },
+                    onDragStart = { 
+                        velocityTracker.resetTracking()
+                        onDragStarted() 
+                    },
+                    onDragEnd = {
+                        val velocity = velocityTracker.calculateVelocity()
+                        if (abs(velocity.y) > 2000f) {
+                            onFling()
+                        } else {
+                            onDragEnded()
+                        }
+                    },
                     onDragCancel = { onDragEnded() },
                     onDrag = { change, dragAmount ->
                         change.consume()
-                        offsetX += dragAmount.x
-                        offsetY += dragAmount.y
-                        onMove(androidx.compose.ui.geometry.Offset(offsetX, offsetY))
+                        velocityTracker.addPosition(change.uptimeMillis, change.position)
+                        
+                        // Use scope to jump position immediately during drag
+                        val newOffset = animatedOffset.value + dragAmount
+                        onMove(newOffset)
+                        
+                        // Update animation state immediately without animation during drag
+                        // Launch so it doesn't block
+                        // Actually, just snap the value
                     }
                 )
             },
@@ -238,6 +267,20 @@ fun DraggableTile(
                 fontSize = 12.sp,
                 modifier = Modifier.align(Alignment.BottomEnd).padding(end = 4.dp, bottom = 2.dp)
             )
+        }
+    }
+
+    // Secondary effect to sync offset DURING drag without launching heavy animations
+    if (tile.isDragging) {
+        SideEffect {
+            animatedOffset.updateBounds(null, null) // reset
+            // We need a way to snap the value. Animatable.snapTo is suspend.
+            // Using a separate state for drag might be easier, but let's try to make this work.
+        }
+        
+        // Since snapTo is suspend, we use LaunchedEffect triggered by the position change
+        LaunchedEffect(tile.position) {
+            animatedOffset.snapTo(tile.position)
         }
     }
 }

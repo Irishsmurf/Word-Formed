@@ -23,6 +23,7 @@ data class TileState(
     val letter: Char,
     val value: Int,
     var position: Offset,
+    var lastStablePosition: Offset = Offset.Zero,
     var currentBox: BoxType = BoxType.NEW_LETTERS,
     var isDragging: Boolean = false,
     var targetPosition: Offset? = null
@@ -128,7 +129,7 @@ class GameViewModel : ViewModel() {
     fun onTileDragStarted(tileId: Int) {
         val index = tiles.indexOfFirst { it.id == tileId }
         if (index != -1) {
-            tiles[index] = tiles[index].copy(isDragging = true)
+            tiles[index] = tiles[index].copy(isDragging = true, lastStablePosition = tiles[index].position)
         }
     }
 
@@ -145,7 +146,7 @@ class GameViewModel : ViewModel() {
             val tile = tiles[index]
             val center = Offset(tile.position.x + 70f, tile.position.y + 70f) // Half of 140f
 
-            var targetBox = tile.currentBox
+            var targetBox: BoxType? = null
             for ((boxType, rect) in boxBoundaries) {
                 if (rect.contains(center)) {
                     targetBox = boxType
@@ -153,15 +154,44 @@ class GameViewModel : ViewModel() {
                 }
             }
 
-            val oldBox = tile.currentBox
-            tiles[index] = tiles[index].copy(isDragging = false, currentBox = targetBox)
-            
-            reorganizeTilesInBox(targetBox)
-            if (oldBox != targetBox) {
-                reorganizeTilesInBox(oldBox)
+            if (targetBox != null) {
+                val oldBox = tile.currentBox
+                tiles[index] = tiles[index].copy(isDragging = false, currentBox = targetBox)
+                reorganizeTilesInBox(targetBox)
+                if (oldBox != targetBox) {
+                    reorganizeTilesInBox(oldBox)
+                }
+            } else {
+                // Animate back to original position
+                tiles[index] = tiles[index].copy(isDragging = false, position = tile.lastStablePosition)
             }
             checkWordValidity()
         }
+    }
+
+    fun onTileFling(tileId: Int) {
+        val index = tiles.indexOfFirst { it.id == tileId }
+        if (index != -1) {
+            val oldBox = tiles[index].currentBox
+            tiles.removeAt(index)
+            refillTiles()
+            reorganizeTilesInBox(oldBox)
+        }
+    }
+
+    private fun refillTiles() {
+        var nextId = (tiles.maxOfOrNull { it.id } ?: 0) + 1
+        while (tiles.size < 7) {
+            val letter = TileGenerator.nextTile()
+            tiles.add(TileState(
+                id = nextId++,
+                letter = letter,
+                value = TileGenerator.getValue(letter),
+                position = Offset(0f, 0f),
+                currentBox = BoxType.NEW_LETTERS
+            ))
+        }
+        reorganizeTilesInBox(BoxType.NEW_LETTERS)
     }
 
     fun submitWord(): Int {
@@ -176,25 +206,10 @@ class GameViewModel : ViewModel() {
             
             // Remove submitted tiles
             val submittedIds = answerTiles.map { it.id }.toSet()
-            val remainingTiles = tiles.filter { it.id !in submittedIds }.toMutableList()
+            tiles.removeAll { it.id in submittedIds }
             
-            // Refill to 7 tiles
-            var nextId = (tiles.maxOfOrNull { it.id } ?: 0) + 1
-            while (remainingTiles.size < 7) {
-                val letter = TileGenerator.nextTile()
-                remainingTiles.add(TileState(
-                    id = nextId++,
-                    letter = letter,
-                    value = TileGenerator.getValue(letter),
-                    position = Offset(0f, 0f),
-                    currentBox = BoxType.NEW_LETTERS
-                ))
-            }
+            refillTiles()
             
-            tiles.clear()
-            tiles.addAll(remainingTiles)
-            
-            reorganizeTilesInBox(BoxType.NEW_LETTERS)
             reorganizeTilesInBox(BoxType.FORM_WORD)
             reorganizeTilesInBox(BoxType.HOLD_LETTERS)
             return wordScore
