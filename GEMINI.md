@@ -43,8 +43,11 @@ Word-Formed is a Scrabble-inspired mobile game for Android. It features tile-bas
 
 The project features a fully automated pipeline in `.github/workflows/android.yml`:
 - **Build & Test:** Runs unit tests and builds the App Bundle (AAB).
-- **Signing:** Uses a native `jarsigner` script to sign the AAB securely.
+- **Signing & Artifacts:** Release AAB is signed and uploaded as an artifact ONLY for tagged releases (`v*`).
 - **Deployment:** Automatically pushes tagged releases (`v*`) to the Google Play **Internal Track** in `draft` status.
+
+### Release Mandate
+- **Always Bump Version:** Before pushing a new tag (`v*`), you MUST increment both `versionCode` and `versionName` in `app/build.gradle.kts`. Failure to do so will cause the Google Play deployment step to fail.
 
 ## Building and Running
 

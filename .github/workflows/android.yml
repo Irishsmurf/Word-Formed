@@ -36,25 +36,20 @@ jobs:
       run: ./gradlew bundleRelease
 
     - name: Sign Release AAB
-      if: github.event_name == 'push' && (github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/v'))
+      if: startsWith(github.ref, 'refs/tags/v')
       run: |
         echo "${{ secrets.SIGNING_KEY }}" | base64 -d > release.jks
-        # Note: Bundle signing is usually done via jarsigner for AABs, then verified by apksigner
-        # Modern AGP can also do this, but for a standalone CI step, jarsigner is standard for AAB.
         jarsigner -keystore release.jks \
           -storepass "${{ secrets.KEYSTORE_PASSWORD }}" \
           -keypass "${{ secrets.KEY_PASSWORD }}" \
           app/build/outputs/bundle/release/app-release.aab \
           "${{ secrets.ALIAS }}"
-        
-        # Clean up keystore
         rm release.jks
-        
-        # Set output for next steps
         echo "signed_bundle=app/build/outputs/bundle/release/app-release.aab" >> $GITHUB_OUTPUT
       id: sign_app
 
     - name: Upload Artifact
+      if: startsWith(github.ref, 'refs/tags/v')
       uses: actions/upload-artifact@v4
       with:
         name: signed-app-bundle
