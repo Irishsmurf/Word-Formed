@@ -25,7 +25,10 @@ class GameViewModel : ViewModel() {
     var score by mutableStateOf(0)
         private set
 
-    var timeLeft by mutableStateOf("3:00")
+    var millisRemaining by mutableStateOf(180000L)
+        private set
+
+    var isTimeDone by mutableStateOf(false)
         private set
 
     var isGameOver by mutableStateOf(false)
@@ -73,16 +76,13 @@ class GameViewModel : ViewModel() {
     private fun startTimer() {
         timerJob?.cancel()
         timerJob = viewModelScope.launch {
-            var millis = 180000L
-            while (millis > 0) {
-                val minutes = TimeUnit.MILLISECONDS.toMinutes(millis)
-                val seconds = TimeUnit.MILLISECONDS.toSeconds(millis) - 
-                              TimeUnit.MINUTES.toSeconds(minutes)
-                timeLeft = "Time: ${String.format("%d:%02d", minutes, seconds)}"
+            millisRemaining = 180000L
+            isTimeDone = false
+            while (millisRemaining > 0) {
                 delay(1000)
-                millis -= 1000
+                millisRemaining -= 1000
             }
-            timeLeft = "Done!"
+            isTimeDone = true
             isGameOver = true
         }
     }

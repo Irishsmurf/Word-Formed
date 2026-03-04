@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WordFormed</string>
+    <string name="high_score_title">Puntuaciones Altas</string>
+	<string name="main_title">WordFormed</string>
+	<string name="new_game_label">Juego Nuevo</string>
+	<string name="multiplayer_label">Iniciar juego multijugador</string>
+	<string name="high_scores_label">Puntuaciones altas</string>
+	<string name="how_to_play_label">Cómo jugar</string>
+	<string name="single_player_title">Juego Individual</string>
+	<string name="how_to_play_title">Cómo jugar</string>
+	<string name="multiplayer_game_title">Juego Multijugador</string>
+	<string name="how_to_play_text">Este juego está basado en el popular juego Scrabble.\nEl objetivo es simple: arrastra letras al cuadro inferior para formar palabras, luego presiona el botón que se ilumina para obtener la puntuación de esa palabra. Si ves una letra útil, puedes guardarla en el cuadro central.\n\n\n<b>Desarrolladores:</b> Owen Corrigan y David Kernan.</string>
+	<string name="your_score"></string>
+	<string name="score_label">Puntuación: %1$d</string>
+	<string name="time_label">Tiempo: %1$s</string>
+	<string name="time_done">¡Listo!</string>
+	<string name="new_letters_label">Letras Nuevas</string>
+	<string name="hold_letters_label">Guardar Letras</string>
+	<string name="form_word_label">Formar Palabra</string>
+	<string name="submit_word_label">ENVIAR PALABRA</string>
+	<string name="game_over_label">Fin del Juego</string>
+	<string name="congratulations_label">Felicidades, lograste una puntuación de %1$d</string>
+	<string name="words_used_label">Palabras Usadas:</string>
+	<string name="hiscore_format">%1$d. %2$s</string>
+</resources>

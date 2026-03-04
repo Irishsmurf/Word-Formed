@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WordFormed</string>
+    <string name="high_score_title">Highscores</string>
+	<string name="main_title">WordFormed</string>
+	<string name="new_game_label">Neues Spiel</string>
+	<string name="multiplayer_label">Mehrspielerspiel starten</string>
+	<string name="high_scores_label">Highscores</string>
+	<string name="how_to_play_label">Spielanleitung</string>
+	<string name="single_player_title">Einzelspielermodus</string>
+	<string name="how_to_play_title">Spielanleitung</string>
+	<string name="multiplayer_game_title">Mehrspielerspiel</string>
+	<string name="how_to_play_text">Dieses Spiel basiert auf dem beliebten Scrabble-Spiel.\nDas Ziel ist einfach: Ziehe Buchstaben in das untere Feld, um Wörter zu bilden, und drücke dann die aufleuchtende Schaltfläche, um die Punktzahl für dieses Wort zu erhalten. Wenn du einen nützlichen Buchstaben siehst, kannst du ihn im mittleren Feld speichern.\n\n\n<b>Entwickler:</b> Owen Corrigan und David Kernan.</string>
+	<string name="your_score"></string>
+	<string name="score_label">Punktzahl: %1$d</string>
+	<string name="time_label">Zeit: %1$s</string>
+	<string name="time_done">Fertig!</string>
+	<string name="new_letters_label">Neue Buchstaben</string>
+	<string name="hold_letters_label">Buchstaben behalten</string>
+	<string name="form_word_label">Wort bilden</string>
+	<string name="submit_word_label">WORT ABSCHICKEN</string>
+	<string name="game_over_label">Spiel vorbei</string>
+	<string name="congratulations_label">Glückwunsch, du hast eine Punktzahl von %1$d erreicht</string>
+	<string name="words_used_label">Verwendete Wörter:</string>
+	<string name="hiscore_format">%1$d. %2$s</string>
+</resources>

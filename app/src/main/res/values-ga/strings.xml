@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WordFormed</string>
+    <string name="high_score_title">Scóir Arda</string>
+	<string name="main_title">WordFormed</string>
+	<string name="new_game_label">Cluiche Nua</string>
+	<string name="multiplayer_label">Tosaigh cluiche ilimreora</string>
+	<string name="high_scores_label">Scóir arda</string>
+	<string name="how_to_play_label">Conas a imirt</string>
+	<string name="single_player_title">Cluiche Aon Imreora</string>
+	<string name="how_to_play_title">Conas a imirt</string>
+	<string name="multiplayer_game_title">Cluiche Ilimreora</string>
+	<string name="how_to_play_text">Tá an cluiche seo bunaithe ar an gcluiche scrabble a bhfuil tóir air.\nIs é an cuspóir simplí: tarraing litreacha isteach sa bhosca bun chun focail a fhoirmiú, ansin brúigh an cnaipe a lasann suas chun an scór don fhocal sin a fháil. Má fheiceann tú litir úsáideach is féidir leat í a stóráil sa bhosca lár. \n\n\n<b>Forbróirí:</b> Owen Corrigan agus David Kernan.</string>
+	<string name="your_score"></string>
+	<string name="score_label">Scór: %1$d</string>
+	<string name="time_label">Am: %1$s</string>
+	<string name="time_done">Críochnaithe!</string>
+	<string name="new_letters_label">Litreacha Nua</string>
+	<string name="hold_letters_label">Coinnigh Litreacha</string>
+	<string name="form_word_label">Focail a Fhoirmiú</string>
+	<string name="submit_word_label">SEOL FOCAL</string>
+	<string name="game_over_label">Cluiche Thart</string>
+	<string name="congratulations_label">Comhghairdeas, bhain tú scór de %1$d amach</string>
+	<string name="words_used_label">Focail a Úsáideadh:</string>
+	<string name="hiscore_format">%1$d. %2$s</string>
+</resources>

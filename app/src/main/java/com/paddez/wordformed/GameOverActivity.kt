@@ -12,6 +12,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -42,7 +43,7 @@ fun GameOverScreen(score: Int, words: List<Word>) {
             .padding(16.dp)
     ) {
         Text(
-            text = "Game Over",
+            text = stringResource(R.string.game_over_label),
             fontSize = 32.sp,
             color = Color.White,
             fontWeight = FontWeight.Bold,
@@ -50,14 +51,14 @@ fun GameOverScreen(score: Int, words: List<Word>) {
         )
 
         Text(
-            text = "Congratulations, you achieved a score of $score",
+            text = stringResource(R.string.congratulations_label, score),
             fontSize = 20.sp,
             color = Color.White,
             modifier = Modifier.padding(bottom = 24.dp)
         )
 
         Text(
-            text = "Words Used:",
+            text = stringResource(R.string.words_used_label),
             fontSize = 18.sp,
             color = Color.LightGray,
             modifier = Modifier.padding(bottom = 8.dp)

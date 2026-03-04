@@ -17,9 +17,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import java.util.concurrent.TimeUnit
 import kotlin.math.roundToInt
 
 class SinglePlayerGame : ComponentActivity() {
@@ -68,8 +71,16 @@ fun GameScreen(viewModel: GameViewModel, onGameOver: () -> Unit) {
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Text(text = viewModel.timeLeft, color = Color.White, fontSize = 20.sp)
-            Text(text = "Score: ${viewModel.score}", color = Color.White, fontSize = 20.sp)
+            val timeLeftText = if (viewModel.isTimeDone) {
+                stringResource(R.string.time_done)
+            } else {
+                val minutes = TimeUnit.MILLISECONDS.toMinutes(viewModel.millisRemaining)
+                val seconds = TimeUnit.MILLISECONDS.toSeconds(viewModel.millisRemaining) -
+                        TimeUnit.MINUTES.toSeconds(minutes)
+                stringResource(R.string.time_label, String.format("%d:%02d", minutes, seconds))
+            }
+            Text(text = timeLeftText, color = Color.White, fontSize = 20.sp)
+            Text(text = stringResource(R.string.score_label, viewModel.score), color = Color.White, fontSize = 20.sp)
         }
 
         Spacer(modifier = Modifier.height(24.dp))
@@ -83,9 +94,9 @@ fun GameScreen(viewModel: GameViewModel, onGameOver: () -> Unit) {
             // Placeholder for the three boxes (Create, Hold, Answer)
             // In a full implementation, we'd define drop zones here.
             Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                GameBox("New Letters", Color(0x44000000))
-                GameBox("Hold Letters", Color(0x44000000))
-                GameBox("Form Word", Color(0x44000000))
+                GameBox(stringResource(R.string.new_letters_label), Color(0x44000000))
+                GameBox(stringResource(R.string.hold_letters_label), Color(0x44000000))
+                GameBox(stringResource(R.string.form_word_label), Color(0x44000000))
             }
 
             // Render Tiles
@@ -96,14 +107,13 @@ fun GameScreen(viewModel: GameViewModel, onGameOver: () -> Unit) {
             }
         }
 
-        // Submit Button
         Button(
             onClick = { viewModel.submitWord() },
             modifier = Modifier.fillMaxWidth().height(60.dp),
             shape = RoundedCornerShape(8.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color.White, contentColor = Color.Black)
         ) {
-            Text("SUBMIT WORD")
+            Text(stringResource(R.string.submit_word_label))
         }
     }
 }

@@ -76,7 +76,7 @@ fun HiScoreRow(rank: Int, hiScore: HiScore) {
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(
-            text = "$rank. ${hiScore.name}",
+            text = stringResource(R.string.hiscore_format, rank, hiScore.name),
             color = Color.White,
             fontSize = 18.sp,
             modifier = Modifier.weight(1f)

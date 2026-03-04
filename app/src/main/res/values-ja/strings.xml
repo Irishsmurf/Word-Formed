@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WordFormed</string>
+    <string name="high_score_title">ハイスコア</string>
+	<string name="main_title">WordFormed</string>
+	<string name="new_game_label">新しいゲーム</string>
+	<string name="multiplayer_label">マルチプレイヤーゲームを開始</string>
+	<string name="high_scores_label">ハイスコア</string>
+	<string name="how_to_play_label">遊び方</string>
+	<string name="single_player_title">シングルプレイヤーゲーム</string>
+	<string name="how_to_play_title">遊び方</string>
+	<string name="multiplayer_game_title">マルチプレイヤーゲーム</string>
+	<string name="how_to_play_text">このゲームは人気のスクラブルゲームに基づいています。\n目的は簡単です。文字を下のボックスにドラッグして単語を作り、ライトアップされたボタンを押してその単語のスコアを獲得します。役に立つ文字を見つけたら、中央のボックスに保存できます。\n\n\n<b>開発者:</b> Owen Corrigan と David Kernan。</string>
+	<string name="your_score"></string>
+	<string name="score_label">スコア: %1$d</string>
+	<string name="time_label">残り時間: %1$s</string>
+	<string name="time_done">終了！</string>
+	<string name="new_letters_label">新しい文字</string>
+	<string name="hold_letters_label">文字をキープ</string>
+	<string name="form_word_label">単語を作る</string>
+	<string name="submit_word_label">送信</string>
+	<string name="game_over_label">ゲームオーバー</string>
+	<string name="congratulations_label">おめでとうございます！スコアは %1$d でした。</string>
+	<string name="words_used_label">使用した単語:</string>
+	<string name="hiscore_format">%1$d. %2$s</string>
+</resources>

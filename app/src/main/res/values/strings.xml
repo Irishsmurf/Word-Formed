@@ -12,4 +12,15 @@
 	<string name="multiplayer_game_title">Multiplayer Game</string>
 	<string name="how_to_play_text">This game is based on the popular scrabble game.\nThe objective is simple: drag letters into the bottom box to form words, then press the button that lights up to get the score for that word. If you see a useful letter you can store it in the middle box. \n\n\n<b>Developers:</b> Owen Corrigan and David Kernan.</string>
 	<string name="your_score"></string>
+	<string name="score_label">Score: %1$d</string>
+	<string name="time_label">Time: %1$s</string>
+	<string name="time_done">Done!</string>
+	<string name="new_letters_label">New Letters</string>
+	<string name="hold_letters_label">Hold Letters</string>
+	<string name="form_word_label">Form Word</string>
+	<string name="submit_word_label">SUBMIT WORD</string>
+	<string name="game_over_label">Game Over</string>
+	<string name="congratulations_label">Congratulations, you achieved a score of %1$d</string>
+	<string name="words_used_label">Words Used:</string>
+	<string name="hiscore_format">%1$d. %2$s</string>
 </resources>
