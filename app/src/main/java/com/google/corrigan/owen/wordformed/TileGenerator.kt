@@ -2,7 +2,7 @@ package com.google.corrigan.owen.wordformed
 
 import java.util.Random
 
-class TileGenerator(seed: Long) {
+class TileGenerator() {
     
     companion object {
         private val tiles = intArrayOf(19, 12, 11, 11, 11, 12, 13, 5, 9, 4, 6, 3, 1, 5, 4, 4, 4, 5, 1, 2, 3, 1, 1, 1, 1, 1)

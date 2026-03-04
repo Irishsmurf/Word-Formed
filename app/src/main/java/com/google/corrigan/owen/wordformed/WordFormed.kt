@@ -61,10 +61,7 @@ class WordFormed : ComponentActivity() {
     private fun showSplashScreen() {
         mSplashDialog = Dialog(this, android.R.style.Theme).apply {
             requestWindowFeature(Window.FEATURE_NO_TITLE)
-            window?.setFlags(
-                WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN
-            )
+            window?.setFullscreen()
             setContentView(R.layout.splash)
             setCancelable(false)
             show()
