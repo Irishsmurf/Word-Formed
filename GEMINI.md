@@ -73,6 +73,7 @@ This project uses the Gradle Build System (Kotlin DSL).
 
 ## Development Conventions
 
+- **Testing:** ALWAYS run unit tests (`./gradlew test`) before committing any code changes to ensure no regressions are introduced.
 - **UI/UX:** Primarily Jetpack Compose-based UI with Material 3 components.
 - **Localization:** All UI strings must be stored in `strings.xml` to support the multilingual setup.
 - **Navigation:** Uses Intent-based Activity navigation for main screens, with Compose for layout and internal state.
