@@ -10,12 +10,27 @@ The unit tests are located in the `test` directory and focus on the following co
 - **`TileGeneratorTest`:** Ensures that the tile bag generates the expected frequencies and values.
 - **`TrieTest`:** Tests the prefix searching and word validation functionality of the Trie data structure.
 
-### Running Tests
+### Running Unit Tests
 
 To execute the unit tests from the command line:
 
 ```bash
 ./gradlew test
+```
+
+## 📱 UI Tests (`app/src/androidTest/java`)
+
+The UI tests use **Jetpack Compose Testing** and are located in the `androidTest` directory:
+
+- **`MainMenuTest`:** Verifies the presence and functionality of menu buttons.
+- **`GameScreenTest`:** Ensures HUD elements and game boxes are displayed correctly.
+
+### Running UI Tests
+
+UI tests require a connected Android device or an emulator. To run them:
+
+```bash
+./gradlew connectedAndroidTest
 ```
 
 ## 🛠️ Validation Framework
