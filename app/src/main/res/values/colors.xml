@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="background">#38546E</color>
-    <color name="white">#ffffff</color>
-    <color name="black">#000000</color>
-    <color name="light_blue">#ADD8E6</color>
-    <color name="light_grey">#C0C0C0</color>
+    <color name="tile_bg">#FFFFFF</color>
+    <color name="box_bg">#2A3F54</color>
+    <color name="accent">#4CAF50</color>
+    <color name="accent_disabled">#8BC34A</color>
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#B0BEC5</color>
 </resources>

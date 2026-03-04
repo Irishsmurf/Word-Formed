@@ -41,6 +41,9 @@ class GameViewModel : ViewModel() {
     var isGameOver by mutableStateOf(false)
         private set
 
+    var isValidWord by mutableStateOf(false)
+        private set
+
     val tiles = mutableStateListOf<TileState>()
     
     // Box boundaries (will be set by UI)
@@ -110,6 +113,16 @@ class GameViewModel : ViewModel() {
                 tiles[tileIndex] = tiles[tileIndex].copy(position = newPos)
             }
         }
+        
+        if (boxType == BoxType.FORM_WORD) {
+            checkWordValidity()
+        }
+    }
+
+    private fun checkWordValidity() {
+        val answerTiles = tiles.filter { it.currentBox == BoxType.FORM_WORD }.sortedBy { it.position.x }
+        val word = answerTiles.joinToString("") { it.letter.toString() }.lowercase()
+        isValidWord = word.length >= 2 && Dictionary.isWord(word)
     }
 
     fun onTileDragStarted(tileId: Int) {
@@ -147,6 +160,7 @@ class GameViewModel : ViewModel() {
             if (oldBox != targetBox) {
                 reorganizeTilesInBox(oldBox)
             }
+            checkWordValidity()
         }
     }
 

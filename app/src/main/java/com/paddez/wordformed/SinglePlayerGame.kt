@@ -69,23 +69,35 @@ fun GameScreen(viewModel: GameViewModel, onGameOver: () -> Unit) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         // HUD
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween
+        Card(
+            modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.White.copy(alpha = 0.1f))
         ) {
-            val timeLeftText = if (viewModel.isTimeDone) {
-                stringResource(R.string.time_done)
-            } else {
-                val minutes = TimeUnit.MILLISECONDS.toMinutes(viewModel.millisRemaining)
-                val seconds = TimeUnit.MILLISECONDS.toSeconds(viewModel.millisRemaining) -
-                        TimeUnit.MINUTES.toSeconds(minutes)
-                stringResource(R.string.time_label, String.format("%d:%02d", minutes, seconds))
-            }
-            Text(text = timeLeftText, color = Color.White, fontSize = 20.sp)
-            Text(text = stringResource(R.string.score_label, viewModel.score), color = Color.White, fontSize = 20.sp)
-        }
+            Row(
+                modifier = Modifier.fillMaxWidth().padding(16.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                val timeLeftText = if (viewModel.isTimeDone) {
+                    stringResource(R.string.time_done)
+                } else {
+                    val minutes = TimeUnit.MILLISECONDS.toMinutes(viewModel.millisRemaining)
+                    val seconds = TimeUnit.MILLISECONDS.toSeconds(viewModel.millisRemaining) -
+                            TimeUnit.MINUTES.toSeconds(minutes)
+                    String.format("%d:%02d", minutes, seconds)
+                }
+                
+                Column {
+                    Text(text = "TIME", color = Color.White.copy(alpha = 0.6f), fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                    Text(text = timeLeftText, color = Color.White, fontSize = 24.sp, fontWeight = FontWeight.Bold)
+                }
 
-        Spacer(modifier = Modifier.height(24.dp))
+                Column(horizontalAlignment = Alignment.End) {
+                    Text(text = "SCORE", color = Color.White.copy(alpha = 0.6f), fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                    Text(text = viewModel.score.toString(), color = Color.White, fontSize = 24.sp, fontWeight = FontWeight.Bold)
+                }
+            }
+        }
 
         // Game Board Area
         Box(
@@ -93,20 +105,21 @@ fun GameScreen(viewModel: GameViewModel, onGameOver: () -> Unit) {
                 .fillMaxWidth()
                 .weight(1f)
         ) {
-            Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+            Column(verticalArrangement = Arrangement.spacedBy(20.dp)) {
                 GameBox(
                     label = stringResource(R.string.new_letters_label),
-                    color = Color(0x44000000),
+                    color = Color(0x22000000),
                     onPositioned = { rect -> viewModel.updateBoxBoundaries(BoxType.NEW_LETTERS, rect) }
                 )
                 GameBox(
                     label = stringResource(R.string.hold_letters_label),
-                    color = Color(0x44000000),
+                    color = Color(0x22000000),
                     onPositioned = { rect -> viewModel.updateBoxBoundaries(BoxType.HOLD_LETTERS, rect) }
                 )
                 GameBox(
                     label = stringResource(R.string.form_word_label),
-                    color = Color(0x44000000),
+                    color = Color(0x33000000),
+                    height = 120.dp,
                     onPositioned = { rect -> viewModel.updateBoxBoundaries(BoxType.FORM_WORD, rect) }
                 )
             }
@@ -122,30 +135,53 @@ fun GameScreen(viewModel: GameViewModel, onGameOver: () -> Unit) {
             }
         }
 
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Submit Button
         Button(
             onClick = { viewModel.submitWord() },
-            modifier = Modifier.fillMaxWidth().height(60.dp),
-            shape = RoundedCornerShape(8.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = Color.White, contentColor = Color.Black)
+            enabled = viewModel.isValidWord,
+            modifier = Modifier.fillMaxWidth().height(64.dp),
+            shape = RoundedCornerShape(12.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = if (viewModel.isValidWord) Color(0xFF4CAF50) else Color.White.copy(alpha = 0.1f),
+                contentColor = if (viewModel.isValidWord) Color.White else Color.White.copy(alpha = 0.3f)
+            ),
+            elevation = ButtonDefaults.buttonElevation(defaultElevation = 4.dp)
         ) {
-            Text(stringResource(R.string.submit_word_label))
+            Text(
+                text = stringResource(R.string.submit_word_label),
+                fontSize = 18.sp,
+                fontWeight = FontWeight.ExtraBold,
+                letterSpacing = 2.sp
+            )
         }
     }
 }
 
 @Composable
-fun GameBox(label: String, color: Color, onPositioned: (androidx.compose.ui.geometry.Rect) -> Unit) {
+fun GameBox(
+    label: String,
+    color: Color,
+    height: androidx.compose.ui.unit.Dp = 100.dp,
+    onPositioned: (androidx.compose.ui.geometry.Rect) -> Unit
+) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(100.dp)
+            .height(height)
             .onGloballyPositioned { layoutCoordinates ->
                 onPositioned(layoutCoordinates.boundsInRoot())
             }
-            .background(color, RoundedCornerShape(8.dp)),
+            .background(color, RoundedCornerShape(12.dp)),
         contentAlignment = Alignment.Center
     ) {
-        Text(text = label, color = Color.White.copy(alpha = 0.3f))
+        Text(
+            text = label.uppercase(),
+            color = Color.White.copy(alpha = 0.15f),
+            fontWeight = FontWeight.ExtraBold,
+            letterSpacing = 1.sp
+        )
     }
 }
 
@@ -170,8 +206,8 @@ fun DraggableTile(
     Box(
         modifier = Modifier
             .offset { IntOffset(offsetX.roundToInt(), offsetY.roundToInt()) }
-            .size(50.dp)
-            .background(Color.White, RoundedCornerShape(4.dp))
+            .size(60.dp)
+            .background(Color.White, RoundedCornerShape(8.dp))
             .pointerInput(Unit) {
                 detectDragGestures(
                     onDragStart = { onDragStarted() },
@@ -187,18 +223,20 @@ fun DraggableTile(
             },
         contentAlignment = Alignment.Center
     ) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Box(modifier = Modifier.fillMaxSize().padding(2.dp)) {
             Text(
                 text = tile.letter.toString(),
-                color = Color.Black,
-                fontWeight = FontWeight.Bold,
-                fontSize = 20.sp
+                color = Color(0xFF2A3F54),
+                fontWeight = FontWeight.ExtraBold,
+                fontSize = 28.sp,
+                modifier = Modifier.align(Alignment.Center)
             )
             Text(
                 text = tile.value.toString(),
-                color = Color.Black,
-                fontSize = 10.sp,
-                modifier = Modifier.align(Alignment.End).padding(end = 4.dp)
+                color = Color(0xFF2A3F54).copy(alpha = 0.6f),
+                fontWeight = FontWeight.Bold,
+                fontSize = 12.sp,
+                modifier = Modifier.align(Alignment.BottomEnd).padding(end = 4.dp, bottom = 2.dp)
             )
         }
     }
