@@ -1,4 +1,4 @@
-package com.google.corrigan.owen.wordformed
+package com.paddez.wordformed
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

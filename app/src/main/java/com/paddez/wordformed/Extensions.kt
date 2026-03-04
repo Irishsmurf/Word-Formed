@@ -1,4 +1,4 @@
-package com.google.corrigan.owen.wordformed
+package com.paddez.wordformed
 
 import android.app.Activity
 import android.os.Build

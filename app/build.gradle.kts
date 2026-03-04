@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.google.corrigan.owen.wordformed"
+    namespace = "com.paddez.wordformed"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.google.corrigan.owen.wordformed"
+        applicationId = "com.paddez.wordformed"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

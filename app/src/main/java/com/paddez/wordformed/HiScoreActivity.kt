@@ -1,22 +1,30 @@
-package com.google.corrigan.owen.wordformed
+package com.paddez.wordformed
 
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-class GameOverActivity : ComponentActivity() {
+class HiScoreActivity : ComponentActivity() {
+    private val viewModel: HiScoreViewModel by viewModels {
+        HiScoreViewModelFactory(AppDatabase.getDatabase(this).hiScoreDao())
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
@@ -24,17 +32,16 @@ class GameOverActivity : ComponentActivity() {
 
         setContent {
             WordFormedTheme {
-                GameOverScreen(
-                    score = SinglePlayerGame.wordList.sumOf { it.score },
-                    words = SinglePlayerGame.wordList.sortedByDescending { it.score }
-                )
+                HiScoreScreen(viewModel)
             }
         }
     }
 }
 
 @Composable
-fun GameOverScreen(score: Int, words: List<Word>) {
+fun HiScoreScreen(viewModel: HiScoreViewModel) {
+    val scores by viewModel.hiScores.collectAsState()
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -42,56 +49,42 @@ fun GameOverScreen(score: Int, words: List<Word>) {
             .padding(16.dp)
     ) {
         Text(
-            text = "Game Over",
+            text = stringResource(R.string.high_score_title),
             fontSize = 32.sp,
             color = Color.White,
             fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(bottom = 8.dp)
-        )
-
-        Text(
-            text = "Congratulations, you achieved a score of $score",
-            fontSize = 20.sp,
-            color = Color.White,
             modifier = Modifier.padding(bottom = 24.dp)
-        )
-
-        Text(
-            text = "Words Used:",
-            fontSize = 18.sp,
-            color = Color.LightGray,
-            modifier = Modifier.padding(bottom = 8.dp)
         )
 
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.spacedBy(4.dp)
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            items(words) { word ->
-                WordRow(word)
+            itemsIndexed(scores) { index, hiScore ->
+                HiScoreRow(index + 1, hiScore)
             }
         }
     }
 }
 
 @Composable
-fun WordRow(word: Word) {
+fun HiScoreRow(rank: Int, hiScore: HiScore) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 4.dp),
+            .padding(vertical = 8.dp),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(
-            text = word.word,
+            text = "$rank. ${hiScore.name}",
             color = Color.White,
-            fontSize = 16.sp,
+            fontSize = 18.sp,
             modifier = Modifier.weight(1f)
         )
         Text(
-            text = word.score.toString(),
+            text = hiScore.score.toString(),
             color = Color.White,
-            fontSize = 16.sp,
+            fontSize = 18.sp,
             fontWeight = FontWeight.Bold
         )
     }

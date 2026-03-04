@@ -1,4 +1,4 @@
-package com.google.corrigan.owen.wordformed
+package com.paddez.wordformed
 
 import org.junit.Assert.*
 import org.junit.Before

@@ -1,4 +1,4 @@
-package com.google.corrigan.owen.wordformed
+package com.paddez.wordformed
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf

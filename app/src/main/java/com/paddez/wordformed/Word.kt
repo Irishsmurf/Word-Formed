@@ -1,4 +1,4 @@
-package com.google.corrigan.owen.wordformed
+package com.paddez.wordformed
 
 data class Word(
     val word: String,

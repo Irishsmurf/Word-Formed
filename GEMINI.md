@@ -8,7 +8,7 @@ Word-Formed is a Scrabble-inspired mobile game for Android. It features tile-bas
 - **Language:** Kotlin (1.9.22)
 - **Target SDK:** 34 (Android 14)
 - **Min SDK:** 24 (Android 7.0)
-- **Main Package:** `com.google.corrigan.owen.wordformed`
+- **Main Package:** \`com.paddez.wordformed\`
 - **Architecture:** 
     - MVVM with Jetpack Compose for UI.
     - ViewModel-based state management.

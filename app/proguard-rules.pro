@@ -11,10 +11,10 @@
 }
 
 # Keep the entity classes
--keep class com.google.corrigan.owen.wordformed.HiScore { *; }
+-keep class com.paddez.wordformed.HiScore { *; }
 
 # Keep the DAO interfaces
--keep interface com.google.corrigan.owen.wordformed.HiScoreDao { *; }
+-keep interface com.paddez.wordformed.HiScoreDao { *; }
 
 # Keep the ViewModels
 -keep class * extends androidx.lifecycle.ViewModel { *; }
