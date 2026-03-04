@@ -47,6 +47,8 @@ class GameViewModel : ViewModel() {
 
     val tiles = mutableStateListOf<TileState>()
     
+    private var tileSize by mutableStateOf(androidx.compose.ui.unit.IntSize.Zero)
+
     // Box boundaries (will be set by UI)
     private var boxBoundaries = mutableMapOf<BoxType, androidx.compose.ui.geometry.Rect>()
 
@@ -54,6 +56,14 @@ class GameViewModel : ViewModel() {
 
     init {
         startNewGame()
+    }
+
+    fun updateTileSize(size: androidx.compose.ui.unit.IntSize) {
+        tileSize = size
+        // If box boundaries are already set, we can reorganize
+        if (boxBoundaries.containsKey(BoxType.NEW_LETTERS)) {
+            reorganizeTilesInBox(BoxType.NEW_LETTERS)
+        }
     }
 
     private fun startNewGame() {
@@ -99,18 +109,21 @@ class GameViewModel : ViewModel() {
 
     private fun reorganizeTilesInBox(boxType: BoxType) {
         val rect = boxBoundaries[boxType] ?: return
+        if (tileSize == androidx.compose.ui.unit.IntSize.Zero) return
+
         val tilesInBox = tiles.filter { it.currentBox == boxType && !it.isDragging }
         
-        val tileSize = 140f // Adjust to match UI (approx 50dp * density)
-        val spacing = 20f
-        val totalWidth = tilesInBox.size * tileSize + (tilesInBox.size - 1) * spacing
+        val w = tileSize.width.toFloat()
+        val h = tileSize.height.toFloat()
+        val spacing = 30f // Increased spacing to prevent touching
+        val totalWidth = tilesInBox.size * w + (tilesInBox.size - 1) * spacing
         var startX = rect.center.x - totalWidth / 2
-        val centerY = rect.center.y - tileSize / 2
+        val centerY = rect.center.y - h / 2
 
         tilesInBox.sortedBy { it.position.x }.forEachIndexed { index, tile ->
             val tileIndex = tiles.indexOfFirst { it.id == tile.id }
             if (tileIndex != -1) {
-                val newPos = Offset(startX + index * (tileSize + spacing), centerY)
+                val newPos = Offset(startX + index * (w + spacing), centerY)
                 tiles[tileIndex] = tiles[tileIndex].copy(position = newPos)
             }
         }
@@ -124,6 +137,7 @@ class GameViewModel : ViewModel() {
         val answerTiles = tiles.filter { it.currentBox == BoxType.FORM_WORD }.sortedBy { it.position.x }
         val word = answerTiles.joinToString("") { it.letter.toString() }.lowercase()
         isValidWord = word.length >= 2 && Dictionary.isWord(word)
+        android.util.Log.d("GameViewModel", "Word checked: $word, valid: $isValidWord")
     }
 
     fun onTileDragStarted(tileId: Int) {
@@ -144,7 +158,9 @@ class GameViewModel : ViewModel() {
         val index = tiles.indexOfFirst { it.id == tileId }
         if (index != -1) {
             val tile = tiles[index]
-            val center = Offset(tile.position.x + 70f, tile.position.y + 70f) // Half of 140f
+            val w = tileSize.width.toFloat()
+            val h = tileSize.height.toFloat()
+            val center = Offset(tile.position.x + w / 2, tile.position.y + h / 2)
 
             var targetBox: BoxType? = null
             for ((boxType, rect) in boxBoundaries) {
@@ -162,8 +178,9 @@ class GameViewModel : ViewModel() {
                     reorganizeTilesInBox(oldBox)
                 }
             } else {
-                // Animate back to original position
-                tiles[index] = tiles[index].copy(isDragging = false, position = tile.lastStablePosition)
+                // Snap back to the box it was already in
+                tiles[index] = tiles[index].copy(isDragging = false)
+                reorganizeTilesInBox(tile.currentBox)
             }
             checkWordValidity()
         }
@@ -176,6 +193,7 @@ class GameViewModel : ViewModel() {
             tiles.removeAt(index)
             refillTiles()
             reorganizeTilesInBox(oldBox)
+            reorganizeTilesInBox(BoxType.NEW_LETTERS)
         }
     }
 
@@ -187,7 +205,7 @@ class GameViewModel : ViewModel() {
                 id = nextId++,
                 letter = letter,
                 value = TileGenerator.getValue(letter),
-                position = Offset(0f, 0f),
+                position = Offset(0f, 0f), // Will be positioned by reorganize call below
                 currentBox = BoxType.NEW_LETTERS
             ))
         }
@@ -197,11 +215,13 @@ class GameViewModel : ViewModel() {
     fun submitWord(): Int {
         val answerTiles = tiles.filter { it.currentBox == BoxType.FORM_WORD }.sortedBy { it.position.x }
         val word = answerTiles.joinToString("") { it.letter.toString() }.lowercase()
-        
+        android.util.Log.d("GameViewModel", "Submitting word: $word")
+
         if (word.isNotEmpty() && Dictionary.isWord(word)) {
             val wordScore = answerTiles.sumOf { it.value }
+            android.util.Log.d("GameViewModel", "Word valid, score: $wordScore")
             score += wordScore
-            
+    ...
             SinglePlayerGame.wordList.add(Word(word.lowercase().replaceFirstChar { it.uppercase() }, wordScore))
             
             // Remove submitted tiles
