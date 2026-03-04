@@ -11,12 +11,12 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 
 fun Activity.setFullscreen() {
+    val window = this.window
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-        window.setDecorFitsSystemWindows(false)
-        val controller = window.insetsController
-        if (controller != null) {
-            controller.hide(WindowInsets.Type.statusBars() or WindowInsets.Type.navigationBars())
-            controller.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        WindowInsetsControllerCompat(window, window.decorView).let { controller ->
+            controller.hide(WindowInsetsCompat.Type.systemBars())
+            controller.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
         }
     } else {
         @Suppress("DEPRECATION")
