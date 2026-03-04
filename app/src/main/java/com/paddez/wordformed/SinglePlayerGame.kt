@@ -17,6 +17,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.boundsInRoot
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.IntOffset
@@ -91,19 +93,32 @@ fun GameScreen(viewModel: GameViewModel, onGameOver: () -> Unit) {
                 .fillMaxWidth()
                 .weight(1f)
         ) {
-            // Placeholder for the three boxes (Create, Hold, Answer)
-            // In a full implementation, we'd define drop zones here.
             Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                GameBox(stringResource(R.string.new_letters_label), Color(0x44000000))
-                GameBox(stringResource(R.string.hold_letters_label), Color(0x44000000))
-                GameBox(stringResource(R.string.form_word_label), Color(0x44000000))
+                GameBox(
+                    label = stringResource(R.string.new_letters_label),
+                    color = Color(0x44000000),
+                    onPositioned = { rect -> viewModel.updateBoxBoundaries(BoxType.NEW_LETTERS, rect) }
+                )
+                GameBox(
+                    label = stringResource(R.string.hold_letters_label),
+                    color = Color(0x44000000),
+                    onPositioned = { rect -> viewModel.updateBoxBoundaries(BoxType.HOLD_LETTERS, rect) }
+                )
+                GameBox(
+                    label = stringResource(R.string.form_word_label),
+                    color = Color(0x44000000),
+                    onPositioned = { rect -> viewModel.updateBoxBoundaries(BoxType.FORM_WORD, rect) }
+                )
             }
 
             // Render Tiles
             viewModel.tiles.forEach { tile ->
-                DraggableTile(tile) { newOffset ->
-                    viewModel.onTileMoved(tile.id, newOffset)
-                }
+                DraggableTile(
+                    tile = tile,
+                    onMove = { newOffset -> viewModel.onTileMoved(tile.id, newOffset) },
+                    onDragStarted = { viewModel.onTileDragStarted(tile.id) },
+                    onDragEnded = { viewModel.onTileDragEnded(tile.id) }
+                )
             }
         }
 
@@ -119,11 +134,14 @@ fun GameScreen(viewModel: GameViewModel, onGameOver: () -> Unit) {
 }
 
 @Composable
-fun GameBox(label: String, color: Color) {
+fun GameBox(label: String, color: Color, onPositioned: (androidx.compose.ui.geometry.Rect) -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .height(100.dp)
+            .onGloballyPositioned { layoutCoordinates ->
+                onPositioned(layoutCoordinates.boundsInRoot())
+            }
             .background(color, RoundedCornerShape(8.dp)),
         contentAlignment = Alignment.Center
     ) {
@@ -132,9 +150,22 @@ fun GameBox(label: String, color: Color) {
 }
 
 @Composable
-fun DraggableTile(tile: TileState, onMove: (androidx.compose.ui.geometry.Offset) -> Unit) {
+fun DraggableTile(
+    tile: TileState,
+    onMove: (androidx.compose.ui.geometry.Offset) -> Unit,
+    onDragStarted: () -> Unit,
+    onDragEnded: () -> Unit
+) {
     var offsetX by remember { mutableStateOf(tile.position.x) }
     var offsetY by remember { mutableStateOf(tile.position.y) }
+
+    // Update local state when ViewModel state changes (for snapping)
+    LaunchedEffect(tile.position) {
+        if (!tile.isDragging) {
+            offsetX = tile.position.x
+            offsetY = tile.position.y
+        }
+    }
 
     Box(
         modifier = Modifier
@@ -142,15 +173,33 @@ fun DraggableTile(tile: TileState, onMove: (androidx.compose.ui.geometry.Offset)
             .size(50.dp)
             .background(Color.White, RoundedCornerShape(4.dp))
             .pointerInput(Unit) {
-                detectDragGestures { change, dragAmount ->
-                    change.consume()
-                    offsetX += dragAmount.x
-                    offsetY += dragAmount.y
-                    onMove(androidx.compose.ui.geometry.Offset(offsetX, offsetY))
-                }
+                detectDragGestures(
+                    onDragStart = { onDragStarted() },
+                    onDragEnd = { onDragEnded() },
+                    onDragCancel = { onDragEnded() },
+                    onDrag = { change, dragAmount ->
+                        change.consume()
+                        offsetX += dragAmount.x
+                        offsetY += dragAmount.y
+                        onMove(androidx.compose.ui.geometry.Offset(offsetX, offsetY))
+                    }
+                )
             },
         contentAlignment = Alignment.Center
     ) {
-        Text(text = tile.letter.toString(), color = Color.Black, fontWeight = androidx.compose.ui.text.font.FontWeight.Bold)
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Text(
+                text = tile.letter.toString(),
+                color = Color.Black,
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp
+            )
+            Text(
+                text = tile.value.toString(),
+                color = Color.Black,
+                fontSize = 10.sp,
+                modifier = Modifier.align(Alignment.End).padding(end = 4.dp)
+            )
+        }
     }
 }

@@ -4,6 +4,8 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.*
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
 import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
@@ -52,9 +54,27 @@ class GameViewModelTest {
 
     @Test
     fun testSubmitInvalidWord() {
-        viewModel.answerBoxTiles.clear()
+        viewModel.tiles.clear()
         val score = viewModel.submitWord()
         assertEquals(0, score)
         assertEquals(0, viewModel.score)
+    }
+
+    @Test
+    fun testSnapping() {
+        // Mock boundaries
+        viewModel.updateBoxBoundaries(BoxType.NEW_LETTERS, Rect(0f, 0f, 1000f, 100f))
+        viewModel.updateBoxBoundaries(BoxType.HOLD_LETTERS, Rect(0f, 200f, 1000f, 300f))
+
+        val tileId = viewModel.tiles[0].id
+        
+        // Drag to Hold Letters (Rect is 0f, 200f, 1000f, 300f)
+        // Tile position + 70f center offset should fall within this.
+        // If pos is 100, 180 -> center is 170, 250 -> Inside!
+        viewModel.onTileMoved(tileId, Offset(100f, 180f))
+        viewModel.onTileDragEnded(tileId)
+
+        val updatedTile = viewModel.tiles.first { it.id == tileId }
+        assertEquals(BoxType.HOLD_LETTERS, updatedTile.currentBox)
     }
 }

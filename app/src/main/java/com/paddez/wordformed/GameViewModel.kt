@@ -12,11 +12,18 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
+enum class BoxType {
+    NEW_LETTERS,
+    HOLD_LETTERS,
+    FORM_WORD
+}
+
 data class TileState(
     val id: Int,
     val letter: Char,
     val value: Int,
     var position: Offset,
+    var currentBox: BoxType = BoxType.NEW_LETTERS,
     var isDragging: Boolean = false,
     var targetPosition: Offset? = null
 )
@@ -36,13 +43,10 @@ class GameViewModel : ViewModel() {
 
     val tiles = mutableStateListOf<TileState>()
     
-    // Boxes (Simplified logic for now)
-    val createBoxTiles = mutableStateListOf<TileState>()
-    val holdBoxTiles = mutableStateListOf<TileState>()
-    val answerBoxTiles = mutableStateListOf<TileState>()
+    // Box boundaries (will be set by UI)
+    private var boxBoundaries = mutableMapOf<BoxType, androidx.compose.ui.geometry.Rect>()
 
     private var timerJob: Job? = null
-    private var animationJob: Job? = null
 
     init {
         startNewGame()
@@ -52,9 +56,6 @@ class GameViewModel : ViewModel() {
         score = 0
         isGameOver = false
         tiles.clear()
-        createBoxTiles.clear()
-        holdBoxTiles.clear()
-        answerBoxTiles.clear()
         TileGenerator.initBag()
 
         // Initialize 7 tiles
@@ -64,10 +65,10 @@ class GameViewModel : ViewModel() {
                 id = i,
                 letter = letter,
                 value = TileGenerator.getValue(letter),
-                position = Offset(i * 60f + 20f, 60f)
+                position = Offset(0f, 0f), // Will be positioned by box logic
+                currentBox = BoxType.NEW_LETTERS
             )
             tiles.add(tile)
-            createBoxTiles.add(tile)
         }
 
         startTimer()
@@ -87,6 +88,37 @@ class GameViewModel : ViewModel() {
         }
     }
 
+    fun updateBoxBoundaries(boxType: BoxType, rect: androidx.compose.ui.geometry.Rect) {
+        boxBoundaries[boxType] = rect
+        reorganizeTilesInBox(boxType)
+    }
+
+    private fun reorganizeTilesInBox(boxType: BoxType) {
+        val rect = boxBoundaries[boxType] ?: return
+        val tilesInBox = tiles.filter { it.currentBox == boxType && !it.isDragging }
+        
+        val tileSize = 140f // Adjust to match UI (approx 50dp * density)
+        val spacing = 20f
+        val totalWidth = tilesInBox.size * tileSize + (tilesInBox.size - 1) * spacing
+        var startX = rect.center.x - totalWidth / 2
+        val centerY = rect.center.y - tileSize / 2
+
+        tilesInBox.sortedBy { it.position.x }.forEachIndexed { index, tile ->
+            val tileIndex = tiles.indexOfFirst { it.id == tile.id }
+            if (tileIndex != -1) {
+                val newPos = Offset(startX + index * (tileSize + spacing), centerY)
+                tiles[tileIndex] = tiles[tileIndex].copy(position = newPos)
+            }
+        }
+    }
+
+    fun onTileDragStarted(tileId: Int) {
+        val index = tiles.indexOfFirst { it.id == tileId }
+        if (index != -1) {
+            tiles[index] = tiles[index].copy(isDragging = true)
+        }
+    }
+
     fun onTileMoved(tileId: Int, newOffset: Offset) {
         val index = tiles.indexOfFirst { it.id == tileId }
         if (index != -1) {
@@ -94,18 +126,63 @@ class GameViewModel : ViewModel() {
         }
     }
 
+    fun onTileDragEnded(tileId: Int) {
+        val index = tiles.indexOfFirst { it.id == tileId }
+        if (index != -1) {
+            val tile = tiles[index]
+            val center = Offset(tile.position.x + 70f, tile.position.y + 70f) // Half of 140f
+
+            var targetBox = tile.currentBox
+            for ((boxType, rect) in boxBoundaries) {
+                if (rect.contains(center)) {
+                    targetBox = boxType
+                    break
+                }
+            }
+
+            val oldBox = tile.currentBox
+            tiles[index] = tiles[index].copy(isDragging = false, currentBox = targetBox)
+            
+            reorganizeTilesInBox(targetBox)
+            if (oldBox != targetBox) {
+                reorganizeTilesInBox(oldBox)
+            }
+        }
+    }
+
     fun submitWord(): Int {
-        val word = answerBoxTiles.joinToString("") { it.letter.toString() }
-        if (Dictionary.isWord(word)) {
-            val wordScore = answerBoxTiles.sumOf { it.value }
+        val answerTiles = tiles.filter { it.currentBox == BoxType.FORM_WORD }.sortedBy { it.position.x }
+        val word = answerTiles.joinToString("") { it.letter.toString() }.lowercase()
+        
+        if (word.isNotEmpty() && Dictionary.isWord(word)) {
+            val wordScore = answerTiles.sumOf { it.value }
             score += wordScore
             
-            // Log for GameOverActivity (legacy static usage for now)
             SinglePlayerGame.wordList.add(Word(word.lowercase().replaceFirstChar { it.uppercase() }, wordScore))
             
-            // Remove tiles and generate new ones or move them
-            // Simplified: just clear answer box for now
-            answerBoxTiles.clear()
+            // Remove submitted tiles
+            val submittedIds = answerTiles.map { it.id }.toSet()
+            val remainingTiles = tiles.filter { it.id !in submittedIds }.toMutableList()
+            
+            // Refill to 7 tiles
+            var nextId = (tiles.maxOfOrNull { it.id } ?: 0) + 1
+            while (remainingTiles.size < 7) {
+                val letter = TileGenerator.nextTile()
+                remainingTiles.add(TileState(
+                    id = nextId++,
+                    letter = letter,
+                    value = TileGenerator.getValue(letter),
+                    position = Offset(0f, 0f),
+                    currentBox = BoxType.NEW_LETTERS
+                ))
+            }
+            
+            tiles.clear()
+            tiles.addAll(remainingTiles)
+            
+            reorganizeTilesInBox(BoxType.NEW_LETTERS)
+            reorganizeTilesInBox(BoxType.FORM_WORD)
+            reorganizeTilesInBox(BoxType.HOLD_LETTERS)
             return wordScore
         }
         return 0
