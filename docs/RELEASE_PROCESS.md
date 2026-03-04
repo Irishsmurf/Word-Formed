@@ -5,10 +5,10 @@ The project is configured with a fully automated CI/CD pipeline using **GitHub A
 ## CI/CD Pipeline (`.github/workflows/android.yml`)
 
 The workflow is triggered by:
-- **Push to `master` branch:** Runs unit tests, builds the debug APK, and signs the release bundle (AAB) as an artifact.
-- **Tag push (`v*`):** Performs all build steps AND automatically deploys the signed AAB to the **Google Play Store**.
+- **Push to `master` branch:** Runs unit tests and builds the debug APK.
+- **Tag push (`v*`):** Performs all build steps, signs the release bundle (AAB), and automatically deploys it to the **Google Play Store**.
 
-### Automated Steps
+### Automated Steps (Tagged Releases Only)
 
 1.  **Validation:** Runs standard Kotlin/Android unit tests via `./gradlew test`.
 2.  **Build:** Compiles the release-ready App Bundle (AAB).
@@ -17,7 +17,7 @@ The workflow is triggered by:
     - Uses `jarsigner` (native JDK tool) to sign the AAB.
     - Sets the `signed_bundle` output for subsequent steps.
 4.  **Artifact Upload:** Uploads the signed AAB to GitHub as a `signed-app-bundle` artifact.
-5.  **Deployment (Tagged Releases only):**
+5.  **Deployment:**
     - Uses `r0adkll/upload-google-play` action.
     - Deploys the AAB to the **Internal Track**.
     - Sets release status to **`draft`** (to accommodate initial app draft limitations).
@@ -39,3 +39,7 @@ To enable the automated deployment, the following **GitHub Secrets** must be con
 
 -   **Version Code:** Must be incremented manually in `app/build.gradle.kts` for every release.
 -   **Version Name:** Follows Semantic Versioning (e.g., `1.1.2`).
+
+---
+
+**For non-automated or troubleshooting scenarios, refer to the [Manual Release Playbook](playbooks/MANUAL_RELEASE.md).**

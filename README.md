@@ -26,6 +26,7 @@ A modern, Scrabble-inspired mobile word game for Android. Form words, score poin
 
 - [Architecture Overview](docs/ARCHITECTURE.md) - Deep dive into the MVVM structure and logic.
 - [Release Process](docs/RELEASE_PROCESS.md) - Automated CI/CD and Play Store deployment guide.
+- [Manual Release Playbook](docs/playbooks/MANUAL_RELEASE.md) - Step-by-step guide for manual releases.
 - [Testing Strategy](docs/TESTING.md) - Unit testing and validation procedures.
 - [Project Roadmap](docs/ROADMAP.md) - Future features and planned improvements.
 
