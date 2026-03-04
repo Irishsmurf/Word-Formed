@@ -43,8 +43,9 @@ class GameViewModelTest {
     @Test
     fun testInitialState() {
         assertEquals(0, viewModel.score)
-        // Time will depend on when it's checked but should start with 3:00 or 2:59
-        assertTrue(viewModel.timeLeft.contains("Time:"))
+        // Initial state should be close to 180,000ms
+        assertTrue(viewModel.millisRemaining > 170000L)
+        assertFalse(viewModel.isTimeDone)
         assertFalse(viewModel.isGameOver)
         assertEquals(7, viewModel.tiles.size)
     }
